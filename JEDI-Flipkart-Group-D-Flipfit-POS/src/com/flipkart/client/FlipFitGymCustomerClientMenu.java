@@ -2,209 +2,153 @@ package com.flipkart.client;
 import java.util.*;
 
 import com.flipkart.bean.*;
-import com.flipkart.business.UserServiceOperations;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import static com.flipkart.constants.ColorConstants.*;
 
-/**
- * This class represents the customer menu for the GymFlipFit application.
- * It provides various functions for customer actions such as viewing gyms, booking slots, and managing bookings.
- */
 public class FlipFitGymCustomerClientMenu {
-    static Scanner obj = new Scanner(System.in);
-    UserServiceOperations userServiceOperation = new UserServiceOperations();
+    static Scanner scanner = new Scanner(System.in);
     User user = new User();
 
-    /**
-     * Perform user login and display the customer menu.
-     *
-     * @param username The username of the customer.
-     * @param pass     The password of the customer.
-     * @return True if login is successful, false otherwise.
-     */
     public boolean userLogin(String username, String pass) {
         if (validateUser(username, pass)) {
             boolean flag = true;
-            System.out.println(ANSI_BLUE+ "Login Successful"+ANSI_RESET);
+            System.out.println("Login Successful!");
             while (flag) {
-                System.out.println("=========CUSTOMER MENU=========");
-                System.out.println("Press 1 to View all Gyms with slots");
-                System.out.println("Press 2 to Book Slot");
-                System.out.println("Press 3 to Cancel Slot");
-                System.out.println("Press 4 to View all Bookings");
-                System.out.println("Press 5 to View all Gyms by Area");
-                System.out.println("Press 6 to Logout");
-                int choice = Integer.parseInt(obj.nextLine());
+                System.out.println("-------------CUSTOMER MENU-------------");
+                System.out.println("Press 1 to view all gyms with slots");
+                System.out.println("Press 2 to book slot");
+                System.out.println("Press 3 to cancel slot");
+                System.out.println("Press 4 to view all bookings");
+                System.out.println("Press 5 to view all gyms by area");
+                System.out.println("Press 6 to logout");
+                int choice = Integer.parseInt(scanner.nextLine());
                 switch (choice) {
                     case 1:
-                        List<Gym> gyms = viewAllGymswithSlots();
-                        printGyms(gyms);
+                        List<Gym> gyms1 = viewAllGymsWithSlots();
+                        printGyms(gyms1);
                         break;
                     case 2:
-                        List<Gym> gyms1 = viewAllGymswithSlots();
-                        printGyms(gyms1);
+                        List<Gym> gyms2 = viewAllGymsWithSlots();
+                        printGyms(gyms2);
                         System.out.println("Enter the following:");
-                        System.out.println("Gym ID");
-                        int gymId = Integer.parseInt(obj.nextLine());
-                        System.out.println("Slot Time");
-                        int time = Integer.parseInt(obj.nextLine());
+                        System.out.println("Gym ID:");
+                        int gymId = Integer.parseInt(scanner.nextLine());
+                        System.out.println("Slot Time:");
+                        int time = Integer.parseInt(scanner.nextLine());
 
                         if (bookSlot(gymId, time, username)) {
-                            System.out.println(ANSI_BLUE+ "Booked Successfully"+ANSI_RESET);
+                            System.out.println("Booked successfully!");
                         } else {
-                            System.out.println(ANSI_YELLOW+ "Booking Unsuccessful"+ ANSI_RESET);
+                            System.out.println("Booking unsuccessful");
                         }
                         break;
                     case 3:
                         Scanner sc = new Scanner(System.in);
-                        System.out.println("My Bookings");
+                        System.out.println("My Bookings:");
                         System.out.println(viewAllBookings(username));
-                        System.out.println("Enter Booking ID");
+                        System.out.println("Enter Booking ID:");
                         int bookingId = sc.nextInt();
                         cancelSlot(bookingId);
                         break;
                     case 4:
-                        System.out.println("My Bookings");
+                        System.out.println("My Bookings:");
                         List<Bookings> bookings = viewAllBookings(username);
                         for (Bookings booking : bookings) {
-                            System.out.println("Booking ID: " + booking.getBookingId() + " Booking Status: " + booking.getStatus() + " Time: " + booking.getTime() + " GymID: " + booking.getGymId());
+                            System.out.println("Booking ID: " + booking.getBookingId() +
+                                    ", Status: " + booking.getStatus() + ", Time: "
+                                    + booking.getTime() + ", Gym ID: " + booking.getGymId());
                         }
                         break;
                     case 5:
-                        String location = "bangalore"; // You can modify this to take user input for location.
-                        List<Gym> gyms2 = viewAllGymsByArea(location);
-                        printGyms(gyms2);
+                        String location = "bangalore"; // can modify this to take user input for location
+                        List<Gym> gyms3 = viewAllGymsByArea(location);
+                        printGyms(gyms3);
                         break;
                     case 6:
                         flag = false;
                         break;
                     default:
-                        System.out.println(ANSI_YELLOW+ "Wrong Choice"+ANSI_RESET);
+                        System.out.println("Wrong choice!");
                 }
             }
-
-        } else return false;
+        } else
+            return false;
         return true;
     }
 
-    /**
-     * Prints the lists of gyms
-     * @param y
-     */
     private void printGyms(List<Gym> y) {
         for (Gym gym : y) {
-            System.out.println("====================");
-            System.out.println("Gym name: " + gym.getGymName() + " Gym ID: " + gym.getGymId() + " Gym Location: " + gym.getLocation() + " Gym Address: " + gym.getGymAddress());
-            System.out.println("Slot List");
+            System.out.println("--------------------------------");
+            System.out.println("Gym Name: " + gym.getGymName() +
+                    ", ID: " + gym.getGymId() +
+                    ", Location: " + gym.getLocation() +
+                    ", Address: " + gym.getGymAddress());
+            System.out.println("Slot List:");
+
             String leftAlignFormat = "| %-15d | %-15d | %-20d |%n";
             System.out.format("+-----------------+-----------------+----------------------+\n");
             System.out.format("| Start Time      |   End Time      | Remaining Seats      |\n");
             System.out.format("+-----------------+-----------------+----------------------+\n");
 
             for (Slots slot : gym.getSlots()) {
-                System.out.format(leftAlignFormat,slot.getStartTime(),(slot.getStartTime() + 1),slot.getSeatCount());
+                System.out.format(leftAlignFormat, slot.getStartTime(), (slot.getStartTime() + 1), slot.getSeatCount());
             }
             System.out.format("+-----------------+-----------------+----------------------+\n");
-
         }
     }
 
-    /**
-     * Validate user credentials.
-     *
-     * @param username The username of the customer.
-     * @param pass     The password of the customer.
-     * @return True if user credentials are valid, false otherwise.
-     */
     public boolean validateUser(String username, String pass) {
-        return userServiceOperation.validateUser(username, pass);
+        return true;
     }
 
-    /**
-     * View all gyms with available slots.
-     *
-     * @return List of gyms with available slots.
-     */
-    List<Gym> viewAllGymswithSlots() {
-        System.out.println("List of Gyms");
-        List<Gym> gymList = userServiceOperation.getAllGymsWithSlots();
+    List<Gym> viewAllGymsWithSlots() {
+        System.out.println("List of gyms:");
+        List<Gym> gymList = new ArrayList<>(); // get list of all gyms from service layer
         return gymList;
     }
 
-    /**
-     * Book a slot for a specific gym.
-     *
-     * @param gymId  The ID of the gym.
-     * @param time   The slot time.
-     * @param email  The email of the user booking the slot.
-     * @return True if the slot is booked successfully, false otherwise.
-     */
     public boolean bookSlot(int gymId, int time, String email) {
-        return userServiceOperation.bookSlots(gymId, time, email);
+        return true;
     }
 
-    /**
-     * Cancel a booked slot.
-     *
-     * @param bookingId The ID of the booking to be canceled.
-     */
     public void cancelSlot(int bookingId) {
-        System.out.println(ANSI_BLUE+ "Slot Cancelled"+ ANSI_RESET);
-        userServiceOperation.cancelSlots(bookingId);
+        System.out.println("Slot Cancelled!");
+        // use service layer to cancel
     }
 
-    /**
-     * View all bookings for a specific user.
-     *
-     * @param userid The ID of the user.
-     * @return List of user's bookings.
-     */
     public List<Bookings> viewAllBookings(String userid) {
-        List<Bookings> myBookings = userServiceOperation.getAllBookings(userid);
+        List<Bookings> myBookings = new ArrayList<>(); // get list of all bookings from service layer
         return myBookings;
     }
 
-    /**
-     * View all gyms in a specific area.
-     *
-     * @param location The location (area) to filter gyms.
-     * @return List of gyms in the specified area.
-     */
     List<Gym> viewAllGymsByArea(String location) {
-        System.out.println("List of Gyms");
-        List<Gym> gymList = userServiceOperation.getAllGymsByArea(location);
+        System.out.println("List of gyms:");
+        List<Gym> gymList = new ArrayList<>(); // get list of all gyms from service layer
         return gymList;
     }
 
-    /**
-     * Create a new customer user.
-     */
     public void createCustomer() {
-        System.out.println("Enter the following info:");
-        System.out.println("\nYour email: ");
-        String ownerEmail = obj.nextLine();
-        System.out.println("\nYour name: ");
-        String ownerName = obj.nextLine();
-        System.out.println("\nEnter a password: ");
-        String password = obj.nextLine();
-        System.out.println("\nPhone number: ");
-        String phoneNo = obj.nextLine();
-        System.out.println("\nEnter Address ");
-        String nationalId = obj.nextLine();
-        System.out.println("\nLocation: ");
-        String GST = obj.nextLine();
+        System.out.println("Your Email: ");
+        String ownerEmail = scanner.nextLine();
+        System.out.println("Your Name: ");
+        String ownerName = scanner.nextLine();
+        System.out.println("Enter password: ");
+        String password = scanner.nextLine();
+        System.out.println("Phone Number: ");
+        String phoneNo = scanner.nextLine();
+        System.out.println("Enter Address: ");
+        String address = scanner.nextLine();
+        System.out.println("Location: ");
+        String location = scanner.nextLine();
 
         User user = new User();
         user.setEmail(ownerEmail);
-        user.setAddress(nationalId);
-        user.setLocation(GST);
+        user.setAddress(address);
+        user.setLocation(location);
         user.setPassword(password);
         user.setUserName(ownerName);
         user.setPhoneNumber(phoneNo);
-
-        userServiceOperation.createUser(user);
     }
 }
