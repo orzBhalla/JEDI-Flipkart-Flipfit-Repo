@@ -12,8 +12,6 @@ public class FlipFitApplicationMainClient {
         boolean inInApp = true;
 
         while (inInApp) {
-
-            System.out.println("-----------------------------");
             System.out.println("Press 1 for Login");
             System.out.println("Press 2 for Registration");
             System.out.println("Press 3 for Update Password");
@@ -23,7 +21,7 @@ public class FlipFitApplicationMainClient {
 
             switch (optionSelected) {
                 case 1 :
-                    System.out.println("-----------Login Page--------------");
+                    System.out.println("------------Login Page--------------");
                     System.out.println("Please enter your email:");
                     String userMail = scanner.nextLine();
                     System.out.println("Please enter your password:");
@@ -35,20 +33,20 @@ public class FlipFitApplicationMainClient {
                     int role = Integer.parseInt(scanner.nextLine());
 
                     switch (role) {
-                        case 1 :
+                        case 1:
                             break;
-                        case 2 :
+                        case 2:
                             break;
-                        case 3 :
+                        case 3:
                             break;
                         default:
-                            System.out.println("You selected an invalid option. Please select a valid option");
+                            System.out.println("You selected an invalid option. Please select a valid option.");
                             break;
 
                     }
                     break;
                 case 2 :
-                    System.out.println("-----------Registration Page--------------");
+                    System.out.println("-------------Registration Page--------------");
                     System.out.println("Select your role:");
                     System.out.println("Press 1 for Gym User");
                     System.out.println("Press 2 for Gym Owner");
@@ -60,13 +58,12 @@ public class FlipFitApplicationMainClient {
                             break;
                         case 2:
                             break;
-
                         default:
                             break;
                     }
                     break;
                 case 3 :
-                    System.out.println("-----------Reset Password Page--------------");
+                    System.out.println("-------------Reset Password Page--------------");
                     System.out.println("Please enter your email:");
                     userMail = scanner.nextLine();
                     System.out.println("Please enter your current password:");
@@ -80,11 +77,11 @@ public class FlipFitApplicationMainClient {
                     role = Integer.parseInt(scanner.nextLine());
 
                     switch (role) {
-                        case 1 :
+                        case 1:
                             break;
-                        case 2 :
+                        case 2:
                             break;
-                        case 3 :
+                        case 3:
                             break;
                     }
                     break;
