@@ -15,11 +15,11 @@ public class User {
     private String email; // User's email address
     private String password; // User's password
 
-    public int getuserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setuserId(int userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
