@@ -1,4 +1,4 @@
-package com.flipkart.application;
+package com.flipkart.client;
 
 public class GymFlipFitCustomerMenu {
 }
