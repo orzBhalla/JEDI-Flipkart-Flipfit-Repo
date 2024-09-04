@@ -1,1 +1,1 @@
-# JEDI-Flipkart-Group-D-Flipfit-POS
+# JEDI-Flipkart-Group-D-Flipfit
