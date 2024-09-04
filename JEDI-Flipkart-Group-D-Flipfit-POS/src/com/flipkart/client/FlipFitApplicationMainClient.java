@@ -69,6 +69,8 @@ public class FlipFitApplicationMainClient {
                     System.out.println("-----------Reset Password Page--------------");
                     System.out.println("Please enter your email:");
                     userMail = scanner.nextLine();
+                    System.out.println("Please enter your current password:");
+                    password = scanner.nextLine();
                     System.out.println("Please enter new password:");
                     String updatedPassword = scanner.nextLine();
                     System.out.println("Select your role:");
