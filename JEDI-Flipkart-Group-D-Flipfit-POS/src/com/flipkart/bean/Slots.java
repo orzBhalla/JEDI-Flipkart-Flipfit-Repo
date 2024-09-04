@@ -13,8 +13,9 @@ public class Slots {
 
     public Slots(int slotsId, int startTime, int seatCount) {
         this.setSlotsId(slotsId);
-        this.setStartTime(startTime);
         this.setSeatCount(seatCount);
+        this.setStartTime(startTime);
+
     }
 
     public int getSlotsId() {
