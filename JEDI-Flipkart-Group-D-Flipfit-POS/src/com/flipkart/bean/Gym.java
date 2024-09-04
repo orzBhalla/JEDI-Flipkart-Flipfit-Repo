@@ -1,7 +1,5 @@
 package com.flipkart.bean;
-
 import java.util.List;
-
 
 public class Gym {
 

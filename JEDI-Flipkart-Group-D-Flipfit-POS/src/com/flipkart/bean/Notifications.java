@@ -1,15 +1,10 @@
 package com.flipkart.bean;
 
-/**
- * This class represents notifications in the GymFlipFit application.
- * It stores information about the notification's category, message, and notification ID.
- */
-
 public class Notifications {
 
-    private String category; // Category of the notification
-    private String message; // Message content of the notification
-    private int notificationId; // Unique identifier for the notification
+    private String category;
+    private String message;
+    private int notificationId;
 
     public int getNotificationId() {
         return notificationId;
