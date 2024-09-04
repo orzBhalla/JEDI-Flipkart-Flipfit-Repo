@@ -4,10 +4,7 @@ import java.util.*;
 import com.flipkart.bean.*;
 import com.flipkart.business.UserServiceOperations;
 
-import java.util.ArrayList;
 import java.util.Scanner;
-
-import static com.flipkart.constants.ColorConstants.*;
 
 /**
  * This class represents the customer menu for the GymFlipFit application.
@@ -28,7 +25,7 @@ public class FlipFitGymCustomerClientMenu {
     public boolean userLogin(String username, String pass) {
         if (validateUser(username, pass)) {
             boolean flag = true;
-            System.out.println(ANSI_BLUE+ "Login Successful"+ANSI_RESET);
+            System.out.println("Login Successful");
             while (flag) {
                 System.out.println("=========CUSTOMER MENU=========");
                 System.out.println("Press 1 to View all Gyms with slots");
@@ -53,9 +50,9 @@ public class FlipFitGymCustomerClientMenu {
                         int time = Integer.parseInt(obj.nextLine());
 
                         if (bookSlot(gymId, time, username)) {
-                            System.out.println(ANSI_BLUE+ "Booked Successfully"+ANSI_RESET);
+                            System.out.println("Booked Successfully");
                         } else {
-                            System.out.println(ANSI_YELLOW+ "Booking Unsuccessful"+ ANSI_RESET);
+                            System.out.println("Booking Unsuccessful");
                         }
                         break;
                     case 3:
@@ -82,7 +79,7 @@ public class FlipFitGymCustomerClientMenu {
                         flag = false;
                         break;
                     default:
-                        System.out.println(ANSI_YELLOW+ "Wrong Choice"+ANSI_RESET);
+                        System.out.println("Wrong Choice");
                 }
             }
 
