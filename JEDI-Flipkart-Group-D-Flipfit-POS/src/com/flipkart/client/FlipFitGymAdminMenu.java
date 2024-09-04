@@ -1,15 +1,10 @@
 package com.flipkart.client;
 
-import com.flipkart.bean.Admin;
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.GymOwner;
-import com.flipkart.bean.Slots;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
 public class FlipFitGymAdminMenu {
     public void viewGyms() {
@@ -41,7 +36,7 @@ public class FlipFitGymAdminMenu {
 
         int counter = 1;
         for (Gym g : gyms) {
-            System.out.format(leftAlignFormat, x, g.getGymName(), g.getGymId(), g.getGymAddress(), g.getLocation(), g.getStatus());
+            System.out.format(leftAlignFormat, counter, g.getGymName(), g.getGymId(), g.getGymAddress(), g.getLocation(), g.getStatus());
             counter++;
         }
         System.out.format("+-------+----------------------+--------+------------------------------------------+----------------------+------------------+\n");

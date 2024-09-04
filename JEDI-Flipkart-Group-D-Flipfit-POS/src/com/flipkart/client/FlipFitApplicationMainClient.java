@@ -4,6 +4,10 @@ import java.util.Scanner;
 public class FlipFitApplicationMainClient {
     static Scanner scanner = new Scanner(System.in);
 
+    static FlipFitGymOwnerClientMenu gymOwnerMenu = new FlipFitGymOwnerClientMenu();
+    static FlipFitGymCustomerClientMenu customerMenu = new FlipFitGymCustomerClientMenu();
+    static FlipFitGymAdminMenu adminMenu = new FlipFitGymAdminMenu();
+
     public static void main(String[] args) {
         System.out.println("-----------------------------------------------------------------------------------");
         System.out.println("-----------------------Welcome to FlipFit: Your Fitness Partner--------------------");
@@ -34,10 +38,69 @@ public class FlipFitApplicationMainClient {
 
                     switch (role) {
                         case 1:
+                            if (!adminMenu.verifyAdminCredentials(userMail,password)) {
+                                System.out.println("Invalid Credentials!! Please enter valid credentials to login.");
+                                break;
+                            }
+
+                            boolean isLoggedIn = true;
+                            while (isLoggedIn) {
+                                System.out.println("-----------------Admin Menu------------------");
+                                System.out.println("Press 1 to View users");
+                                System.out.println("Press 2 to View Gyms");
+                                System.out.println("Press 3 to View Gym Owners");
+                                System.out.println("Press 4 to Verify Gym");
+                                System.out.println("Press 5 to Verify GymOwner");
+                                System.out.println("Press 6 to View pending Gyms");
+                                System.out.println("Press 7 to View pending Gym Owners");
+                                System.out.println("Press 8 to Exit");
+
+                                optionSelected = Integer.parseInt(scanner.nextLine());
+
+                                switch (optionSelected) {
+                                    case 1:
+                                        adminMenu.viewUsers();
+                                        break;
+                                    case 2:
+                                        adminMenu.viewGyms();
+                                        break;
+                                    case 3:
+                                        adminMenu.viewGymOwners();
+                                        break;
+                                    case 4:
+                                        System.out.println("Enter the Gym Id to be verified ");
+                                        int gymId = Integer.parseInt(scanner.nextLine());
+                                        adminMenu.verifyGym(gymId);
+                                        break;
+                                    case 5:
+                                        System.out.println("Enter the Gym Owner Id to be verified ");
+                                        int gymOwnerId = Integer.parseInt(scanner.nextLine());
+                                        adminMenu.verifyGymOwner(gymOwnerId);
+                                        break;
+                                    case 6:
+                                        adminMenu.viewUnverifiedGyms();
+                                        break;
+                                    case 7:
+                                        adminMenu.viewUnverifiedGymOwners();
+                                        break;
+                                    case 8:
+                                        isLoggedIn = false;
+                                        break;
+                                }
+                                if (!isLoggedIn) break;
+                            }
                             break;
                         case 2:
+                            if (!customerMenu.userLogin(userMail,password)) {
+                                System.out.println("Invalid Credentials!! Please enter valid credentials to login.");
+                                break;
+                            }
                             break;
                         case 3:
+                            if(!gymOwnerMenu.gymOwnerLogin(userMail,password)){
+                                System.out.println("Invalid Credentials!! Please enter valid credentials to login.");
+                                break;
+                            }
                             break;
                         default:
                             System.out.println("You selected an invalid option. Please select a valid option.");
@@ -55,8 +118,10 @@ public class FlipFitApplicationMainClient {
 
                     switch (role) {
                         case 1:
+                            customerMenu.createCustomer();
                             break;
                         case 2:
+                            gymOwnerMenu.createGymOwner();
                             break;
                         default:
                             break;
@@ -71,17 +136,35 @@ public class FlipFitApplicationMainClient {
                     System.out.println("Please enter new password:");
                     String updatedPassword = scanner.nextLine();
                     System.out.println("Select your role:");
-                    System.out.println("Press 1 for Admin");
+                    System.out.println("Press 1 for Gym User");
                     System.out.println("Press 2 for Gym Owner");
-                    System.out.println("Press 3 for Gym User");
+                    System.out.println("Press 3 for Gym Admin");
                     role = Integer.parseInt(scanner.nextLine());
 
                     switch (role) {
                         case 1:
+                            if (!customerMenu.validateUser(userMail,password)) {
+                                System.out.println("Invalid credentials! Please enter valid credentials.");
+                            }
+                            else{
+                                // update the password here
+                            }
                             break;
                         case 2:
+                            if (!gymOwnerMenu.verifyGymOwner(userMail,password)) {
+                                System.out.println("Invalid credentials! Please enter valid credentials.");
+                            }
+                            else{
+                                // update the password here
+                            }
                             break;
                         case 3:
+                            if (!adminMenu.verifyAdminCredentials(userMail,password)) {
+                                System.out.println("Invalid credentials! Please enter valid credentials.");
+                            }
+                            else{
+                                // update the password here
+                            }
                             break;
                     }
                     break;
