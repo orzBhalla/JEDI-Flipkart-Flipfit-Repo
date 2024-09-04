@@ -1,19 +1,13 @@
 package com.flipkart.bean;
 
-/**
- * This class represents a User in the GymFlipFit application.
- * It stores user information such as user ID, name, contact details, address, location, email, and password.
- */
-
 public class User {
-    private int userId; // Unique identifier for the user
-
-    private String userName; // User's name
-    private String phoneNumber; // User's phone number
-    private String address; // User's address
-    private String location; // User's location
-    private String email; // User's email address
-    private String password; // User's password
+    private int userId;
+    private String userName;
+    private String phoneNumber;
+    private String address;
+    private String location;
+    private String email;
+    private String password;
 
     public int getUserId() {
         return userId;

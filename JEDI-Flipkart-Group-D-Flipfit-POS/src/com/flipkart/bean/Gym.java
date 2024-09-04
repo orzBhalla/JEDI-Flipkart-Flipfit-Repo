@@ -2,9 +2,7 @@ package com.flipkart.bean;
 
 import java.util.List;
 
-
 public class Gym {
-
     private int gymId;
     private String gymName;
     private String gymAddress;

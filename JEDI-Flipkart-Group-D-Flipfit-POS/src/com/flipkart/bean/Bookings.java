@@ -1,12 +1,5 @@
 package com.flipkart.bean;
 
-
-/**
- * The Bookings class represents a booking made by a user.
- * It contains information such as booking ID, user ID, creation timestamp,
- * booking status, date, time, slot ID, gym ID, and status.
- */
-
 public class Bookings {
     private int bookingId;
     private int userId;
@@ -17,7 +10,6 @@ public class Bookings {
     private int slotId;
     private int gymId;
     private String status;
-
 
     public int getDate() {
         return date;
