@@ -1,5 +1,5 @@
 package com.flipkart.client;
 
-public class AdminView {
+public class FlipFitAdminMenu {
 
 }
