@@ -2,13 +2,17 @@ package com.flipkart.client;
 
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.GymOwner;
+import com.flipkart.business.GymServiceOperations;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class FlipFitGymAdminMenu {
-    public void viewGyms() {
 
+    GymServiceOperations gymService = new GymServiceOperations();
+
+    public void viewGyms() {
+        gymService.listAllGyms();
     }
 
     public void viewUsers() {

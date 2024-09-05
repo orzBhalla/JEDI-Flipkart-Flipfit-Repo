@@ -3,6 +3,8 @@ package com.flipkart.client;
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.GymOwner;
 import com.flipkart.bean.Slots;
+import com.flipkart.business.GymService;
+import com.flipkart.business.GymServiceOperations;
 
 import java.net.StandardSocketOptions;
 import java.util.ArrayList;
@@ -12,6 +14,7 @@ import java.util.Scanner;
 
 public class FlipFitGymOwnerClientMenu {
     static Scanner scanner = new Scanner(System.in);
+    GymServiceOperations gymService = new GymServiceOperations();
 
     boolean verifyGymOwner(String email, String password) {
         return true;
@@ -91,6 +94,7 @@ public class FlipFitGymOwnerClientMenu {
         }
 
         gym.setSlots(slots);
+        gymService.addGym(gym);
     }
     
     void createGymOwner() {
@@ -102,7 +106,7 @@ public class FlipFitGymOwnerClientMenu {
         String password = scanner.nextLine();
         System.out.println("Phone Number: ");
         String phoneNo = scanner.nextLine();
-        System.out.println("Nation ID: ");
+        System.out.println("National ID: ");
         String nationalId = scanner.nextLine();
 
         if (nationalId.length() != 12) {
