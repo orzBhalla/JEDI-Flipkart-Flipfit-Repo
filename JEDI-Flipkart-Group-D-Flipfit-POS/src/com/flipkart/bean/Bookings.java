@@ -11,7 +11,6 @@ public class Bookings {
     private int gymId;
     private String status;
 
-
     public int getDate() {
         return date;
     }

@@ -1,9 +1,7 @@
 package com.flipkart.bean;
 
-
 public class User {
-    private int userId; // Unique identifier for the user
-
+    private int userId;
     private String userName;
     private String phoneNumber;
     private String address;

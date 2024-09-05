@@ -1,16 +1,14 @@
 package com.flipkart.bean;
 
 public class Slots {
-
     private int slotsId;
     private int startTime;
     private int seatCount;
 
     public Slots(int slotsId, int startTime, int seatCount) {
         this.setSlotsId(slotsId);
-        this.setSeatCount(seatCount);
         this.setStartTime(startTime);
-
+        this.setSeatCount(seatCount);
     }
 
     public int getSlotsId() {

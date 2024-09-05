@@ -1,7 +1,6 @@
 package com.flipkart.bean;
 
 public class Notifications {
-
     private String category;
     private String message;
     private int notificationId;
