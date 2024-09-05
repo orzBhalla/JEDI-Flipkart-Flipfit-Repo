@@ -59,7 +59,7 @@ public class FlipFitGymOwnerClientMenu {
         gym.setLocation(location);
         gym.setGymName(gymName);
         gym.setStatus(gymStatus);
-        //LIST OF SLOTS
+
         List<Slots> slots = new ArrayList<>();
         System.out.println("Please enter number of slots:");
         int slotCount = Integer.parseInt(scanner.nextLine());
