@@ -16,8 +16,8 @@ public interface AdminService {
 
     public void verifyGymOwner(int gymOwnerId);
 
-    public List<GymOwner> getUnverifiedGymOwners() ;
+    public List<GymOwner> getUnverifiedGymOwners();
 
-    public List<Gym> getUnverifiedGyms() ;
+    public List<Gym> getUnverifiedGyms();
 
 }
