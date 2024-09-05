@@ -13,8 +13,8 @@ public class FlipFitGymCustomerClientMenu {
     User user = new User();
     UserServiceOperations userServiceOperations = new UserServiceOperations();
 
-    public boolean userLogin(String username, String pass) {
-        if (validateUser(username, pass)) {
+    public boolean userLogin(String email, String pass) {
+        if (validateUser(email, pass)) {
             boolean flag = true;
             System.out.println("Login Successful!");
             while (flag) {
@@ -41,7 +41,7 @@ public class FlipFitGymCustomerClientMenu {
                         System.out.println("Slot Time:");
                         int time = Integer.parseInt(scanner.nextLine());
 
-                        if (bookSlot(gymId, time, username)) {
+                        if (bookSlot(gymId, time, email)) {
                             System.out.println("Booked successfully!");
                         } else {
                             System.out.println("Booking unsuccessful");
@@ -50,14 +50,14 @@ public class FlipFitGymCustomerClientMenu {
                     case 3:
                         Scanner sc = new Scanner(System.in);
                         System.out.println("My Bookings:");
-                        System.out.println(viewAllBookings(username));
+                        System.out.println(viewAllBookings(email));
                         System.out.println("Enter Booking ID:");
                         int bookingId = sc.nextInt();
                         cancelSlot(bookingId);
                         break;
                     case 4:
                         System.out.println("My Bookings:");
-                        List<Bookings> bookings = viewAllBookings(username);
+                        List<Bookings> bookings = viewAllBookings(email);
                         for (Bookings booking : bookings) {
                             System.out.println("Booking ID: " + booking.getBookingId() +
                                     ", Status: " + booking.getStatus() + ", Time: "
@@ -105,8 +105,8 @@ public class FlipFitGymCustomerClientMenu {
         }
     }
 
-    public boolean validateUser(String username, String password) {
-        return userServiceOperations.validateUser(username, password);
+    public boolean validateUser(String email, String password) {
+        return userServiceOperations.validateUser(email, password);
     }
 
     List<Gym> viewAllGymsWithSlots() {

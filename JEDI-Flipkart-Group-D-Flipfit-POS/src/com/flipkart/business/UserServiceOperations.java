@@ -6,16 +6,20 @@ import java.util.*;
 import java.util.*;
 
 public class UserServiceOperations {
-    Map<Integer,User> map=new HashMap<Integer,User>();
+    Map<String,User> map=new HashMap<String,User>();
 
     public void createUser(User user){
-        if(map.containsKey(user.getUserId())){
+        if(map.containsKey(user.getEmail())){
             return;
         }
-        map.put(user.getUserId(), user);
+        map.put(user.getEmail(), user);
     }
 
-    public boolean validateUser(String username, String password){
-
+    public boolean validateUser(String email, String password){
+        if(map.containsKey(email)){
+            if(map.get(email).getPassword().equals(password))
+                return true;
+        }
+        return false;
     }
 }
