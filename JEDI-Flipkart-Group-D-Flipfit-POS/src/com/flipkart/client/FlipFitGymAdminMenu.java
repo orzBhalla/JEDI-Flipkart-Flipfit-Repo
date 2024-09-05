@@ -30,8 +30,7 @@ public class FlipFitGymAdminMenu {
     }
 
     public void viewUnverifiedGyms() {
-        List<Gym> gyms = new ArrayList<>();
-        adminServiceOperations.getUnverifiedGymOwners();
+        List<Gym> gyms = adminServiceOperations.getUnverifiedGyms();
         // get list from service layer
         String leftAlignFormat = "| %-5d | %-20s | %-5d | %-40s | %-20s | %-15s |%n";
         System.out.format("+-------+----------------------+--------+------------------------------------------+----------------------+------------------+");
@@ -48,9 +47,9 @@ public class FlipFitGymAdminMenu {
     }
 
     public void viewUnverifiedGymOwners() {
-        List<GymOwner> g = new ArrayList<>();
+        List<GymOwner> g =  adminServiceOperations.getUnverifiedGymOwners();
         // get list from service layer
-        adminServiceOperations.getUnverifiedGymOwners();
+
         int counter = 1;
         for (GymOwner gymOwner : g) {
             System.out.println("GymOwner " + counter + "-->  Gym Owner ID: "
