@@ -2,16 +2,11 @@ package com.flipkart.client;
 
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.GymOwner;
-import com.flipkart.business.GymServiceOperations;
-
 import com.flipkart.business.AdminServiceOperations;
-import java.util.ArrayList;
+
 import java.util.List;
 
 public class FlipFitGymAdminMenu {
-
-    GymServiceOperations gymService = new GymServiceOperations();
-
     AdminServiceOperations adminServiceOperations = new AdminServiceOperations();
 
     public void viewGyms() {
@@ -54,13 +49,12 @@ public class FlipFitGymAdminMenu {
     public void viewUnverifiedGymOwners() {
         List<GymOwner> g =  adminServiceOperations.getUnverifiedGymOwners();
         // get list from service layer
-
         int counter = 1;
         for (GymOwner gymOwner : g) {
             System.out.println("GymOwner " + counter + "-->  Gym Owner ID: "
-                    + gymOwner.getOwnerId() + ", Email:"
+                    + gymOwner.getOwnerId() + ", Email: "
                     + gymOwner.getOwnerEmail()
-                    + ", Phone Number:"
+                    + ", Phone Number: "
                     + gymOwner.getPhoneNo()
                     + ", Status: "
                     + gymOwner.getStatus());

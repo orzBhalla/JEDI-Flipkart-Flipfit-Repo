@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public class GymServiceOperations implements GymService {
-
     static HashMap<Integer, Gym> gymMap = new HashMap<>();
     int gymIdCounter = 0;
 
@@ -19,7 +18,6 @@ public class GymServiceOperations implements GymService {
         }
         gym.setGymId(++gymIdCounter);
         gymMap.put(gym.getGymId(), gym);
-
     }
 
     @Override
@@ -27,8 +25,8 @@ public class GymServiceOperations implements GymService {
         for (Gym gym : gymMap.values()) {
             System.out.println("Gym ID: " + gym.getGymId());
             System.out.println("Name: " + gym.getGymName());
-            System.out.println("Address " + gym.getGymAddress());
-            System.out.println("Location: " +gym.getLocation());
+            System.out.println("Address: " + gym.getGymAddress());
+            System.out.println("Location: " + gym.getLocation());
             System.out.println("Owner ID: " + gym.getOwnerId());
             System.out.println("Status: " + gym.getStatus());
         }
@@ -40,8 +38,8 @@ public class GymServiceOperations implements GymService {
             if (gym.getGymAddress().contains(areaName)) {
                 System.out.println("Gym ID: " + gym.getGymId());
                 System.out.println("Name: " + gym.getGymName());
-                System.out.println("Address " + gym.getGymAddress());
-                System.out.println("Location: " +gym.getLocation());
+                System.out.println("Address: " + gym.getGymAddress());
+                System.out.println("Location: " + gym.getLocation());
                 System.out.println("Owner ID: " + gym.getOwnerId());
                 System.out.println("Status: " + gym.getStatus());
             }
@@ -60,11 +58,9 @@ public class GymServiceOperations implements GymService {
         }
         gym.setSlots(slots);
         gymMap.put(gymId, gym);
-
     }
 
     public static Map<Integer, Gym> getGymMap() {
         return gymMap;
     }
-
 }

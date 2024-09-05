@@ -3,10 +3,8 @@ package com.flipkart.client;
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.GymOwner;
 import com.flipkart.bean.Slots;
-import com.flipkart.business.GymService;
 import com.flipkart.business.GymServiceOperations;
 
-import java.net.StandardSocketOptions;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
