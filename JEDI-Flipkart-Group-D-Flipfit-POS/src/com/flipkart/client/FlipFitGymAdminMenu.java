@@ -2,29 +2,31 @@ package com.flipkart.client;
 
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.GymOwner;
-
+import com.flipkart.business.AdminServiceOperations;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FlipFitGymAdminMenu {
-    public void viewGyms() {
+    AdminServiceOperations adminServiceOperations = new AdminServiceOperations();
 
+    public void viewGyms() {
+        adminServiceOperations.viewGyms();
     }
 
     public void viewUsers() {
-
+        adminServiceOperations.viewUsers();
     }
 
     public void viewGymOwners() {
-
+        adminServiceOperations.viewGymOwners();
     }
 
     public void verifyGym(int id) {
-
+        adminServiceOperations.verifyGym(id);
     }
 
     public void verifyGymOwner(int id) {
-
+        adminServiceOperations.verifyGymOwner(id);
     }
 
     public void viewUnverifiedGyms() {
