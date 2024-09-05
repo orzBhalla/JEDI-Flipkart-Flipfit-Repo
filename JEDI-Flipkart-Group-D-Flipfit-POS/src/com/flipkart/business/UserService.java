@@ -2,6 +2,7 @@ package com.flipkart.business;
 
 import com.flipkart.bean.Bookings;
 import com.flipkart.bean.Gym;
+import com.flipkart.bean.GymOwner;
 import com.flipkart.bean.User;
 
 import java.util.List;
@@ -29,6 +30,8 @@ public interface UserService {
 
     void updateUserDetails(User user);
 
-    public Map<Integer,User> getUserMap();
+    public static Map<Integer, User> getUserMap() {
+        return Map.of();
+    }
 }
 

@@ -31,6 +31,7 @@ public class UserServiceOperations {
         for(User user : userMap.values()){
             if(user.getEmail().equals(email) && user.getPassword().equals(password)){
                 user.setPassword(updatedPassword);
+                break;
             }
         }
     }

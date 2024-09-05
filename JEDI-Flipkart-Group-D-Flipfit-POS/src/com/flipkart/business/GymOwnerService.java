@@ -12,9 +12,9 @@ public interface GymOwnerService {
 
     List<Gym> viewMyGyms(String userId);
 
-    boolean verifyGymOwnerPassword(String email, String password);
+    boolean validateGymOwner(String email, String password);
 
-    boolean validateLogin(String email, String password);
+    // boolean validateLogin(String email, String password);
 
     void createGymOwner(GymOwner gymOwner);
 

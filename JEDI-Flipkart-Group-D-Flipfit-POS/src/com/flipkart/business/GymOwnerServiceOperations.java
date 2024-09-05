@@ -5,40 +5,27 @@ import java.util.*;
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.GymOwner;
 
-
 public class GymOwnerServiceOperations {
-    HashMap<String,GymOwner>mp=new HashMap<>();
-    HashMap<String,List<Gym>>user=new HashMap<>();
-    HashMap<Integer,Gym>slot=new HashMap<>();
-    HashMap<String,String>update=new HashMap<>();
-    Scanner obj = new Scanner(System.in);
-    int id = 0;
 
     static Map<Integer,GymOwner> gymOwnerMap = new HashMap<Integer,GymOwner>();
     static int counter=0;
+    GymServiceOperations gymServiceOperations = new GymServiceOperations();
 
     public void addGymWithSlots(Gym gym) {
-        if(slot.containsKey(gym.getGymId())){
-            return;
-        }
-        slot.put(gym.getGymId(),gym);
-
+        gymServiceOperations.addGym(gym);
     }
-
 
     public List<Gym> viewMyGyms(String userId){
-        return user.getOrDefault(userId,new ArrayList<>());
-    }
-
-
-    public boolean validateLogin(String email, String password) {
-
-        if(gymOwnerMap.containsKey(email)){
-            return mp.get(email).equals(password);
+        Map<Integer, Gym> gymMap = GymServiceOperations.getGymMap();
+        List<Gym> myGyms = new ArrayList<Gym>();
+        for(Gym gym : gymMap.values()){
+            if(gym.getOwnerId().equals(userId)){
+                myGyms.add(gym);
+                break;
+            }
         }
-        return false;
+        return myGyms;
     }
-
 
     public void createGymOwner(GymOwner gymOwner){
         if(gymOwnerMap.containsKey(gymOwner.getOwnerId())){
@@ -47,30 +34,29 @@ public class GymOwnerServiceOperations {
         gymOwner.setOwnerId(counter);
         counter++;
         gymOwnerMap.put(gymOwner.getOwnerId(), gymOwner);
-
     }
 
-    public boolean verifyGymOwnerPassword(String email, String password) {
-        if(mp.containsKey(email)){
-            if(mp.get(email).getPassword().equals(password))
+    public boolean validateGymOwner(String email, String password) {
+        for(GymOwner gymOwner : gymOwnerMap.values()){
+            if(gymOwner.getOwnerEmail().equals(email) && gymOwner.getPassword().equals(password)){
                 return true;
+            }
         }
         return false;
     }
 
     public void updateGymOwnerPassword(String email, String password, String updatedPassword) {
-        if(update.containsKey(email) && mp.get(email).equals(password)){
-            update.put(email, updatedPassword);
-        }
-        else{
-            return;
+        for(GymOwner gymOwner : gymOwnerMap.values()){
+            if(gymOwner.getOwnerEmail().equals(email) && gymOwner.getPassword().equals(password)){
+                gymOwner.setPassword(updatedPassword);
+                break;
+            }
         }
     }
 
     public static Map<Integer, GymOwner> getGymOwnerMap() {
         return gymOwnerMap;
     }
-
 }
 
 
