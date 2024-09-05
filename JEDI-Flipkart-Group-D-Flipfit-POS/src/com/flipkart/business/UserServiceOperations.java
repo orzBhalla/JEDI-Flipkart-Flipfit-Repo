@@ -43,10 +43,25 @@ public class UserServiceOperations implements UserService {
         return false;
     }
 
-    public void updateUserDetails(User user) {
-        if(userMap.containsKey(user.getUserId())){
-            userMap.replace(user.getUserId(), user);
+    public boolean updateUserDetails(User user) {
+        for(User user1 : userMap.values()){
+            if(user.getEmail().equals(user1.getEmail())){
+                user1.setUserName(user.getUserName());
+                user1.setPhoneNumber(user.getPhoneNumber());
+                userMap.replace(user1.getUserId(), user1);
+                return true;
+            }
         }
+        return false;
+    }
+
+    public int getUserIdByEmail(String email) {
+        for(User user : userMap.values()){
+            if(user.getEmail().equals(email)){
+                return user.getUserId();
+            }
+        }
+        return -1;
     }
 
     public boolean bookSlot(int gymId, int time, String email) {
@@ -95,7 +110,7 @@ public class UserServiceOperations implements UserService {
     }
 
     public List<Gym> viewAllGymsWithSlots() {
-        return gymServiceOperations.getAllGymsWithSlot();
+        return gymServiceOperations.getAllGymsWithSlots();
     }
 
     public List<Gym> viewAllGymsByArea(String area) {

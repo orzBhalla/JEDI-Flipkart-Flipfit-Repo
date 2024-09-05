@@ -16,7 +16,7 @@ public interface GymService {
 
     public List<Bookings> showBookings(int userId);
 
-    public List<Gym> getAllGymsWithSlot();
+    public List<Gym> getAllGymsWithSlots();
 
     public List<Gym> getAllGymsByArea(String areaName);
 

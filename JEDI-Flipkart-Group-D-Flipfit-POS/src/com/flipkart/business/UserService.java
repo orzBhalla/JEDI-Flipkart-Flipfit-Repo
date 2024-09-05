@@ -28,7 +28,9 @@ public interface UserService {
 
     boolean updateGymUserPassword(String email, String password, String updatedPassword);
 
-    void updateUserDetails(User user);
+    boolean updateUserDetails(User user);
+
+    int getUserIdByEmail(String email);
 
     public static Map<Integer, User> getUserMap() {
         return Map.of();
