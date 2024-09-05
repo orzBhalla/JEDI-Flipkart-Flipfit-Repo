@@ -10,13 +10,13 @@ public class GymOwnerServiceOperations {
     static Map<Integer,GymOwner> gymOwnerMap = new HashMap<Integer,GymOwner>();
     static int counter=0;
     GymServiceOperations gymServiceOperations = new GymServiceOperations();
+    Map<Integer, Gym> gymMap = GymServiceOperations.getGymMap();
 
     public void addGymWithSlots(Gym gym) {
         gymServiceOperations.addGym(gym);
     }
 
     public List<Gym> viewMyGyms(String userId){
-        Map<Integer, Gym> gymMap = GymServiceOperations.getGymMap();
         List<Gym> myGyms = new ArrayList<Gym>();
         for(Gym gym : gymMap.values()){
             if(gym.getOwnerId().equals(userId)){

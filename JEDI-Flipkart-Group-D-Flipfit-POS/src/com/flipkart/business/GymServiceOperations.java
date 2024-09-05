@@ -1,15 +1,19 @@
 package com.flipkart.business;
 
+import com.flipkart.bean.Bookings;
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.Slots;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class GymServiceOperations implements GymService {
-    static HashMap<Integer, Gym> gymMap = new HashMap<>();
+    static HashMap<Integer, Gym> gymMap = new HashMap<Integer, Gym>();
+    static HashMap<Integer, Bookings> bookingsMap = new HashMap<Integer, Bookings>();
     int gymIdCounter = 0;
+    int bookingsIdCounter = 0;
 
     @Override
     public void addGym(Gym gym) {
@@ -18,6 +22,37 @@ public class GymServiceOperations implements GymService {
         }
         gym.setGymId(++gymIdCounter);
         gymMap.put(gym.getGymId(), gym);
+    }
+
+    @Override
+    public boolean addBookings(Bookings bookings) {
+        if (bookingsMap.containsKey(bookings.getBookingId())) {
+            return false;
+        }
+        bookings.setBookingStatus(1);
+        bookings.setBookingId(++bookingsIdCounter);
+        bookingsMap.put(bookings.getBookingId(), bookings);
+        return true;
+    }
+
+    public boolean cancelBooking(int bookingId) {
+        if (bookingsMap.containsKey(bookingId)) {
+            Bookings bookings = bookingsMap.get(bookingId);
+            bookings.setBookingStatus(0);
+            bookingsMap.put(bookingId, bookings);
+            return true;
+        }
+        return false;
+    }
+
+    public List<Bookings> showBookings(int userId) {
+        List<Bookings> bookings = new ArrayList<Bookings>();
+        for (Bookings booking : bookingsMap.values()) {
+            if (booking.getUserId() == userId) {
+                bookings.add(booking);
+            }
+        }
+        return bookings;
     }
 
     @Override
@@ -35,7 +70,7 @@ public class GymServiceOperations implements GymService {
     @Override
     public void listAllGymsWithArea(String areaName) {
         for (Gym gym : gymMap.values()) {
-            if (gym.getGymAddress().contains(areaName)) {
+            if (gym.getGymAddress().contains(areaName) || gym.getLocation().contains(areaName)) {
                 System.out.println("Gym ID: " + gym.getGymId());
                 System.out.println("Name: " + gym.getGymName());
                 System.out.println("Address: " + gym.getGymAddress());
@@ -44,6 +79,24 @@ public class GymServiceOperations implements GymService {
                 System.out.println("Status: " + gym.getStatus());
             }
         }
+    }
+
+    @Override
+    public List<Gym> getAllGymsByArea(String areaName) {
+        List<Gym> gyms = new ArrayList<>();
+        for (Gym gym : gymMap.values()) {
+            if (gym.getGymAddress().contains(areaName) || gym.getLocation().contains(areaName)) {
+                gyms.add(gym);
+            }
+        }
+        return gyms;
+    }
+
+    @Override
+    public List<Gym> getAllGymsWithSlot() {
+        List<Gym> gyms = new ArrayList<>();
+        gyms.addAll(gymMap.values())
+        return gyms;
     }
 
     @Override

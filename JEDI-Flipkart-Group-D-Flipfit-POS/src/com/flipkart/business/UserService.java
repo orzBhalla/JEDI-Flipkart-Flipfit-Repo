@@ -12,7 +12,7 @@ public interface UserService {
 
     boolean cancelSlot(int bookingId); // previous it was slot id
 
-    List<Bookings> viewAllBookings(String userId);
+    List<Bookings> viewAllBookings(int userId);
 
     List<Gym> viewAllGymsWithSlots();
 
