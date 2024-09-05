@@ -30,7 +30,7 @@ public class FlipFitApplicationMainClient {
                     String userMail = scanner.nextLine();
                     System.out.println("Please enter your password:");
                     String password = scanner.nextLine();
-                    System.out.println("Select your role:");
+                    System.out.println("Select your role:"); // select choice
                     System.out.println("Press 1 for Admin");
                     System.out.println("Press 2 for Gym Owner");
                     System.out.println("Press 3 for Gym Customer");
