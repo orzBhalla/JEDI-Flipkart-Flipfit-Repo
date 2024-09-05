@@ -17,5 +17,4 @@ public interface GymService {
     public static Map<Integer, Gym> getGymMap() {
         return Map.of();
     }
-
 }
