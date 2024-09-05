@@ -159,4 +159,21 @@ public class FlipFitGymCustomerClientMenu {
 
         userServiceOperations.createUser(user);
     }
+
+    public void updateUserDetails() {
+        System.out.println("Your Email: ");
+        String ownerEmail = scanner.nextLine();
+        System.out.println("Your Name: ");
+        String ownerName = scanner.nextLine();
+        System.out.println("Enter password: ");
+        String password = scanner.nextLine();
+        System.out.println("Phone Number: ");
+        String phoneNo = scanner.nextLine();
+        System.out.println("Enter Address: ");
+        String address = scanner.nextLine();
+        System.out.println("Location: ");
+        String location = scanner.nextLine();
+
+        userServiceOperations.updateUserDetails(user);
+    }
 }

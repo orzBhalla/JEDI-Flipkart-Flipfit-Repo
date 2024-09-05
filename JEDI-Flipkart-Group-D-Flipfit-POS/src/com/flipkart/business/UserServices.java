@@ -22,7 +22,7 @@ public interface UserServices {
 
         void createUser(User user);
 
-        public boolean verifyGymUserPassword(String email, String password, String updatedPassword);
+        // public boolean verifyGymUserPassword(String email, String password, String updatedPassword);
 
         void updateGymUserPassword(String email, String password, String updatedPassword);
 
