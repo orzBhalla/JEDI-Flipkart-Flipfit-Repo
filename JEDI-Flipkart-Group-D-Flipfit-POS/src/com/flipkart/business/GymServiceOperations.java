@@ -1,8 +1,10 @@
 package com.flipkart.business;
 
 import com.flipkart.bean.Gym;
+import com.flipkart.bean.Slots;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class GymServiceOperations implements GymService {
@@ -11,7 +13,7 @@ public class GymServiceOperations implements GymService {
     int gymIdCounter = 0;
 
     @Override
-    public void createGym(Gym gym) {
+    public void addGym(Gym gym) {
         if (gymMap.containsKey(gym.getGymId())) {
             return;
         }
@@ -44,6 +46,21 @@ public class GymServiceOperations implements GymService {
                 System.out.println("Status: " + gym.getStatus());
             }
         }
+    }
+
+    @Override
+    public void updateGymSlots(Integer gymId, Integer slotId, Integer seatCount) {
+        Gym gym = gymMap.get(gymId);
+        List<Slots> slots = gym.getSlots();
+        for (Slots slot : slots) {
+            if (slot.getSlotsId() == slotId) {
+                slot.setSeatCount(seatCount);
+                break;
+            }
+        }
+        gym.setSlots(slots);
+        gymMap.put(gymId, gym);
+
     }
 
     public static Map<Integer, Gym> getGymMap() {
