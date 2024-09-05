@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 
 public class FlipFitGymOwnerClientMenu {
-    static Scanner scanner = new Scanner(System.in);
+    Scanner scanner = new Scanner(System.in);
     GymServiceOperations gymService = new GymServiceOperations();
     GymOwnerServiceOperations gymOwnerServiceOperations = new GymOwnerServiceOperations();
     UserServiceOperations userServiceOperations = new UserServiceOperations();
@@ -36,7 +36,7 @@ public class FlipFitGymOwnerClientMenu {
             System.out.println("Press 5 to update your details");
             System.out.println("Press 6 to logout");
 
-            int y = Integer.parseInt(scanner.nextLine());
+            int y = scanner.nextInt();
 
             switch (y) {
                 case 1:

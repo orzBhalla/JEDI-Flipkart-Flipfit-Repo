@@ -96,7 +96,7 @@ public class GymServiceOperations implements GymService {
     @Override
     public List<Gym> getAllGymsWithSlots() {
         List<Gym> gyms = new ArrayList<>();
-        gyms.addAll(gymMap.values())
+        gyms.addAll(gymMap.values());
         return gyms;
     }
 
