@@ -11,7 +11,7 @@ public class Admin {
 
     public void setAdminId(int adminId) {
 
-          this.adminId = adminId;
+        this.adminId = adminId;
     }
 
     public String getPassword() {
