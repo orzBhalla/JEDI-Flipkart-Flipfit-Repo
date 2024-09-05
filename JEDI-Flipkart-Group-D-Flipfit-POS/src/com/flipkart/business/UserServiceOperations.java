@@ -7,20 +7,21 @@ import com.flipkart.bean.User;
 
 import java.util.*;
 
-public class UserServiceOperations {
+public class UserServiceOperations implements UserService {
     static Map<Integer,User> userMap=new HashMap<Integer,User>();
     static int userIdCounter = 1; // for generating user ID
 
     GymServiceOperations gymServiceOperations = new GymServiceOperations();
     Map<Integer, Gym> gymMap = GymServiceOperations.getGymMap();
 
-    public void createUser(User user){
+    public boolean createUser(User user){
         if (userMap.containsKey(user.getUserId())) {
-            return;
+            return false;
         }
         user.setUserId(userIdCounter);
         userIdCounter++;
         userMap.put(user.getUserId(), user);
+        return true;
     }
 
     public boolean validateUser(String email, String password){
@@ -32,13 +33,14 @@ public class UserServiceOperations {
         return false;
     }
 
-    public void updateGymUserPassword(String email, String password, String updatedPassword) {
+    public boolean updateGymUserPassword(String email, String password, String updatedPassword) {
         for(User user : userMap.values()){
             if(user.getEmail().equals(email) && user.getPassword().equals(password)){
                 user.setPassword(updatedPassword);
-                break;
+                return true;
             }
         }
+        return false;
     }
 
     public void updateUserDetails(User user) {
@@ -88,12 +90,12 @@ public class UserServiceOperations {
         return gymServiceOperations.cancelBooking(bookingId);
     }
 
-    List<Bookings> viewAllBookings(int userId) {
+    public List<Bookings> viewAllBookings(int userId) {
         return gymServiceOperations.showBookings(userId);
     }
 
     public List<Gym> viewAllGymsWithSlots() {
-        return gymServiceOperations.getAllGymsWithSlots();
+        return gymServiceOperations.getAllGymsWithSlot();
     }
 
     public List<Gym> viewAllGymsByArea(String area) {

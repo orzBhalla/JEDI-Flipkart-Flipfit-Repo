@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class AdminServiceOperations {
+public class AdminServiceOperations implements AdminService{
     Map<Integer, User> userMap = UserServiceOperations.getUserMap();
     Map<Integer, GymOwner> gymOwnerMap = GymOwnerServiceOperations.getGymOwnerMap();
     Map<Integer, Gym> gymMap = GymServiceOperations.getGymMap();
@@ -48,20 +48,24 @@ public class AdminServiceOperations {
         }
     }
 
-    public void verifyGym(int gymId) {
+    public boolean verifyGym(int gymId) {
         if(gymMap.containsKey(gymId)) {
             Gym gym = gymMap.get(gymId);
             gym.setStatus("verified");
             gymMap.replace(gymId, gym);
+            return true;
         }
+        return false;
     }
 
-    public void verifyGymOwner(int gymOwnerId) {
+    public boolean verifyGymOwner(int gymOwnerId) {
         if(gymOwnerMap.containsKey(gymOwnerId)) {
             GymOwner gymOwner = gymOwnerMap.get(gymOwnerId);
             gymOwner.setStatus("verified");
             gymOwnerMap.replace(gymOwnerId, gymOwner);
+            return true;
         }
+        return false;
     }
 
     public List<GymOwner> getUnverifiedGymOwners() {

@@ -136,15 +136,16 @@ public class FlipFitGymCustomerClientMenu {
     }
 
     public void createCustomer() {
-        System.out.println("Your Email: ");
+        System.out.println("Enter customer details:");
+        System.out.println("Email: ");
         String ownerEmail = scanner.nextLine();
-        System.out.println("Your Name: ");
+        System.out.println("Name: ");
         String ownerName = scanner.nextLine();
-        System.out.println("Enter password: ");
+        System.out.println("Password: ");
         String password = scanner.nextLine();
         System.out.println("Phone Number: ");
         String phoneNo = scanner.nextLine();
-        System.out.println("Enter Address: ");
+        System.out.println("Address: ");
         String address = scanner.nextLine();
         System.out.println("Location: ");
         String location = scanner.nextLine();
@@ -157,23 +158,31 @@ public class FlipFitGymCustomerClientMenu {
         user.setUserName(ownerName);
         user.setPhoneNumber(phoneNo);
 
-        userServiceOperations.createUser(user);
+        if(userServiceOperations.createUser(user))
+            System.out.println("User created!");
+        else
+            System.out.println("User not created!");
     }
 
     public void updateUserDetails() {
-        System.out.println("Your Email: ");
+        System.out.println("Enter customer details:");
+        System.out.println("Email: ");
         String ownerEmail = scanner.nextLine();
-        System.out.println("Your Name: ");
+        System.out.println("Name: ");
         String ownerName = scanner.nextLine();
-        System.out.println("Enter password: ");
+        System.out.println("Password: ");
         String password = scanner.nextLine();
         System.out.println("Phone Number: ");
         String phoneNo = scanner.nextLine();
-        System.out.println("Enter Address: ");
+        System.out.println("Address: ");
         String address = scanner.nextLine();
         System.out.println("Location: ");
         String location = scanner.nextLine();
 
         userServiceOperations.updateUserDetails(user);
+    }
+
+    public boolean updatePassword(String userMail, String password, String updatedPassword) {
+        return userServiceOperations.updateGymUserPassword(userMail, password, updatedPassword);
     }
 }

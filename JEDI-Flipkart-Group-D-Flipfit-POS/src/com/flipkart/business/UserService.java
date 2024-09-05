@@ -22,11 +22,11 @@ public interface UserService {
 
     boolean validateUser(String email, String password); // using email instead of username
 
-    void createUser(User user);
+    boolean createUser(User user);
 
     // public boolean verifyGymUserPassword(String email, String password, String updatedPassword);
 
-    void updateGymUserPassword(String email, String password, String updatedPassword);
+    boolean updateGymUserPassword(String email, String password, String updatedPassword);
 
     void updateUserDetails(User user);
 

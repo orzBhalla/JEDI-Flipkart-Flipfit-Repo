@@ -3,6 +3,7 @@ package com.flipkart.client;
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.GymOwner;
 import com.flipkart.bean.Slots;
+import com.flipkart.business.GymOwnerServiceOperations;
 import com.flipkart.business.GymServiceOperations;
 
 import java.util.ArrayList;
@@ -13,50 +14,50 @@ import java.util.Scanner;
 public class FlipFitGymOwnerClientMenu {
     static Scanner scanner = new Scanner(System.in);
     GymServiceOperations gymService = new GymServiceOperations();
+    GymOwnerServiceOperations gymOwnerServiceOperations = new GymOwnerServiceOperations();
 
     boolean verifyGymOwner(String email, String password) {
-        return true;
+        return gymOwnerServiceOperations.validateGymOwner(email, password);
     }
 
     boolean gymOwnerLogin(String email, String password) {
-        // first verify with email and password
-        if (true) {
-            System.out.println("Login Successful!");
-            while (true) {
-                System.out.println("-----------------Gym Owner Menu-----------------");
-                System.out.println("Press 1 to add a gym");
-                System.out.println("Press 2 to view all gyms");
-                System.out.println("Press 3 to delete a customer");
-                System.out.println("Press 4 to update gym details");
-                System.out.println("Press 5 to update your details");
-                System.out.println("Press 6 to logout");
-
-                int y = Integer.parseInt(scanner.nextLine());
-
-                switch (y) {
-                    case 1:
-                        addGym(email);
-                        break;
-                    case 2:
-                        displayGyms(email);
-                        break;
-                    case 3:
-                        // delete a customer
-                        break;
-                    case 4:
-                        // update gym details
-                        break;
-                    case 5:
-                        // update gym owner details
-                        break;
-                    case 6:
-                        return true;
-                    default:
-                        System.out.println("Invalid option!");
-                }
-            }
-        } else
+        if(!verifyGymOwner(email, password)) {
             return false;
+        }
+        System.out.println("Login Successful (Gym Owner)");
+        while (true) {
+            System.out.println("-----------------Gym Owner Menu-----------------");
+            System.out.println("Press 1 to add a gym");
+            System.out.println("Press 2 to view all gyms");
+            System.out.println("Press 3 to delete a customer");
+            System.out.println("Press 4 to update gym details");
+            System.out.println("Press 5 to update your details");
+            System.out.println("Press 6 to logout");
+
+            int y = Integer.parseInt(scanner.nextLine());
+
+            switch (y) {
+                case 1:
+                    addGym(email);
+                    break;
+                case 2:
+                    displayGyms(email);
+                    break;
+                case 3:
+                    // delete a customer
+                    break;
+                case 4:
+                    // update gym details
+                    break;
+                case 5:
+                    // update gym owner details
+                    break;
+                case 6:
+                    return true;
+                default:
+                    System.out.println("Invalid option!");
+            }
+        }
     }
 
     void addGym(String userId) {
@@ -96,11 +97,12 @@ public class FlipFitGymOwnerClientMenu {
     }
     
     void createGymOwner() {
-        System.out.println("Your Email: ");
+        System.out.println("Enter gym owner details:");
+        System.out.println("Email: ");
         String ownerEmail = scanner.nextLine();
-        System.out.println("Your Name: ");
+        System.out.println("Name: ");
         String ownerName = scanner.nextLine();
-        System.out.println("Enter password: ");
+        System.out.println("Password: ");
         String password = scanner.nextLine();
         System.out.println("Phone Number: ");
         String phoneNo = scanner.nextLine();
@@ -134,6 +136,16 @@ public class FlipFitGymOwnerClientMenu {
         gymOwner.setPhoneNo(phoneNo);
         gymOwner.setGyms(emptyGymList);
         gymOwner.setStatus(gymOwnerStatus);
+
+        if(gymOwnerServiceOperations.createGymOwner(gymOwner)) {
+            System.out.println("Gym Owner Created!");
+        } else {
+            System.out.println("Gym Owner Creation Failed!");
+        }
+    }
+
+    public boolean updatePassword(String userMail, String password, String updatedPassword) {
+        return gymOwnerServiceOperations.updateGymOwnerPassword(userMail, password, updatedPassword);
     }
 
     void displayGyms(String userId) {

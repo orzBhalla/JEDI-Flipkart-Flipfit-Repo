@@ -5,7 +5,7 @@ import java.util.*;
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.GymOwner;
 
-public class GymOwnerServiceOperations {
+public class GymOwnerServiceOperations implements GymOwnerService {
 
     static Map<Integer,GymOwner> gymOwnerMap = new HashMap<Integer,GymOwner>();
     static int counter=0;
@@ -27,13 +27,14 @@ public class GymOwnerServiceOperations {
         return myGyms;
     }
 
-    public void createGymOwner(GymOwner gymOwner){
+    public boolean createGymOwner(GymOwner gymOwner){
         if(gymOwnerMap.containsKey(gymOwner.getOwnerId())){
-            return;
+            return false;
         }
         gymOwner.setOwnerId(counter);
         counter++;
         gymOwnerMap.put(gymOwner.getOwnerId(), gymOwner);
+        return true;
     }
 
     public boolean validateGymOwner(String email, String password) {
@@ -45,13 +46,14 @@ public class GymOwnerServiceOperations {
         return false;
     }
 
-    public void updateGymOwnerPassword(String email, String password, String updatedPassword) {
+    public boolean updateGymOwnerPassword(String email, String password, String updatedPassword) {
         for(GymOwner gymOwner : gymOwnerMap.values()){
             if(gymOwner.getOwnerEmail().equals(email) && gymOwner.getPassword().equals(password)){
                 gymOwner.setPassword(updatedPassword);
-                break;
+                return true;
             }
         }
+        return false;
     }
 
     public static Map<Integer, GymOwner> getGymOwnerMap() {

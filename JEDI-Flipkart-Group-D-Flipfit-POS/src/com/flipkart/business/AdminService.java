@@ -12,9 +12,9 @@ public interface AdminService {
 
     public void viewUsers();
 
-    public void verifyGym(int gymId);
+    public boolean verifyGym(int gymId);
 
-    public void verifyGymOwner(int gymOwnerId);
+    public boolean verifyGymOwner(int gymOwnerId);
 
     public List<GymOwner> getUnverifiedGymOwners();
 

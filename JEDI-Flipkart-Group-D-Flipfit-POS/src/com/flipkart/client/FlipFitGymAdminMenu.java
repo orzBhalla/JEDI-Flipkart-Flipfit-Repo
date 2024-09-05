@@ -21,44 +21,42 @@ public class FlipFitGymAdminMenu {
         adminServiceOperations.viewGymOwners();
     }
 
-    public void verifyGym(int id) {
-        adminServiceOperations.verifyGym(id);
+    public boolean verifyGym(int id) {
+        return adminServiceOperations.verifyGym(id);
     }
 
-    public void verifyGymOwner(int id) {
-        adminServiceOperations.verifyGymOwner(id);
+    public boolean verifyGymOwner(int id) {
+        return adminServiceOperations.verifyGymOwner(id);
     }
 
     public void viewUnverifiedGyms() {
         List<Gym> gyms = adminServiceOperations.getUnverifiedGyms();
-        // get list from service layer
         String leftAlignFormat = "| %-5d | %-20s | %-5d | %-40s | %-20s | %-15s |%n";
         System.out.format("+-------+----------------------+--------+------------------------------------------+----------------------+------------------+");
         System.out.format("| Gym   |     Name             | Gym ID |           Address                        |   Location           |     Status       |");
         System.out.format("+-------+----------------------+--------+------------------------------------------+----------------------+------------------+");
 
-        int counter = 1;
+        int gymCounter = 1;
         for (Gym g : gyms) {
-            System.out.format(leftAlignFormat, counter, g.getGymName(), g.getGymId(), g.getGymAddress(), g.getLocation(), g.getStatus());
-            counter++;
+            System.out.format(leftAlignFormat, gymCounter, g.getGymName(), g.getGymId(), g.getGymAddress(), g.getLocation(), g.getStatus());
+            gymCounter++;
         }
         System.out.format("+-------+----------------------+--------+------------------------------------------+----------------------+------------------+\n");
-
     }
 
     public void viewUnverifiedGymOwners() {
         List<GymOwner> g =  adminServiceOperations.getUnverifiedGymOwners();
-        // get list from service layer
-        int counter = 1;
+        int gymOwnerCounter = 1;
         for (GymOwner gymOwner : g) {
-            System.out.println("GymOwner " + counter + "-->  Gym Owner ID: "
-                    + gymOwner.getOwnerId() + ", Email: "
+            System.out.println("GymOwner " + gymOwnerCounter + " --> ID: "
+                    + gymOwner.getOwnerId() + ", Name: "
+                    + gymOwner.getOwnerName() + ", Email: "
                     + gymOwner.getOwnerEmail()
                     + ", Phone Number: "
                     + gymOwner.getPhoneNo()
-                    + ", Status: "
-                    + gymOwner.getStatus());
-            counter++;
+                    + ", Verification Status: "
+                    + gymOwner.getVerificationStatus());
+            gymOwnerCounter++;
             System.out.println("-------------------------------------------------------------");
         }
     }

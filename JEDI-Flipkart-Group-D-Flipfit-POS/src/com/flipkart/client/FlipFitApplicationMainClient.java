@@ -68,14 +68,20 @@ public class FlipFitApplicationMainClient {
                                         adminMenu.viewGymOwners();
                                         break;
                                     case 4:
-                                        System.out.println("Enter the Gym ID to be verified");
+                                        System.out.println("Enter the gym ID to be verified:");
                                         int gymId = Integer.parseInt(scanner.nextLine());
-                                        adminMenu.verifyGym(gymId);
+                                        if(adminMenu.verifyGym(gymId))
+                                            System.out.println("Gym verified");
+                                        else
+                                            System.out.println("Gym not verified");
                                         break;
                                     case 5:
-                                        System.out.println("Enter the Gym Owner ID to be verified");
+                                        System.out.println("Enter the gym owner ID to be verified:");
                                         int gymOwnerId = Integer.parseInt(scanner.nextLine());
-                                        adminMenu.verifyGymOwner(gymOwnerId);
+                                        if(adminMenu.verifyGymOwner(gymOwnerId))
+                                            System.out.println("Gym owner verified");
+                                        else
+                                            System.out.println("Gym owner not verified");
                                         break;
                                     case 6:
                                         adminMenu.viewUnverifiedGyms();
@@ -105,7 +111,6 @@ public class FlipFitApplicationMainClient {
                         default:
                             System.out.println("You selected an invalid option. Please select a valid option");
                             break;
-
                     }
                     break;
                 case 2:
@@ -147,7 +152,10 @@ public class FlipFitApplicationMainClient {
                                 System.out.println("Invalid credentials! Please enter valid credentials");
                             }
                             else {
-                                // update the password here
+                                if(customerMenu.updatePassword(userMail, password, updatedPassword))
+                                    System.out.println("Password updated successfully!");
+                                else
+                                    System.out.println("Password doesn't match!");
                             }
                             break;
                         case 2:
@@ -155,7 +163,10 @@ public class FlipFitApplicationMainClient {
                                 System.out.println("Invalid credentials! Please enter valid credentials");
                             }
                             else{
-                                // update the password here
+                                if(gymOwnerMenu.updatePassword(userMail, password, updatedPassword))
+                                    System.out.println("Password updated successfully!");
+                                else
+                                    System.out.println("Password doesn't match!");
                             }
                             break;
                         case 3:
