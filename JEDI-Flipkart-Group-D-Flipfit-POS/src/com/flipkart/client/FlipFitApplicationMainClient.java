@@ -20,7 +20,6 @@ public class FlipFitApplicationMainClient {
             System.out.println("Press 2 for Registration");
             System.out.println("Press 3 for Update Password");
             System.out.println("Press 4 for Exit");
-
             int optionSelected = Integer.parseInt(scanner.nextLine());
 
             switch (optionSelected) {
@@ -33,7 +32,7 @@ public class FlipFitApplicationMainClient {
                     System.out.println("Select your role:");
                     System.out.println("Press 1 for Admin");
                     System.out.println("Press 2 for Gym Owner");
-                    System.out.println("Press 3 for Gym User");
+                    System.out.println("Press 3 for Gym Customer");
                     int role = Integer.parseInt(scanner.nextLine());
 
                     switch (role) {
