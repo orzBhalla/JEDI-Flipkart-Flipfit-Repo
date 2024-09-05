@@ -10,7 +10,7 @@ public interface GymOwnerService {
 
     void addGymWithSlots(Gym gym);
 
-    List<Gym> viewMyGyms(String userId);
+    List<Gym> viewMyGyms(int userId);
 
     boolean validateGymOwner(String email, String password);
 

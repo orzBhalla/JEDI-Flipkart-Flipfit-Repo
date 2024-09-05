@@ -8,7 +8,7 @@ import java.util.Map;
 
 public interface GymService {
 
-    void addGym(Gym gym);
+    boolean addGym(Gym gym);
 
     public boolean addBookings(Bookings bookings);
 
@@ -24,7 +24,7 @@ public interface GymService {
 
     void listAllGymsWithArea(String areaName);
 
-    void updateGymSlots(Integer gymId, Integer slotId, Integer seatCount);
+    boolean updateSeatCount(int gymId, int slotId, int seatCount);
 
     public static Map<Integer, Gym> getGymMap() {
         return Map.of();

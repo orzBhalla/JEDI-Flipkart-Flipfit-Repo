@@ -5,6 +5,7 @@ import com.flipkart.bean.GymOwner;
 import com.flipkart.bean.Slots;
 import com.flipkart.business.GymOwnerServiceOperations;
 import com.flipkart.business.GymServiceOperations;
+import com.flipkart.business.UserServiceOperations;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,7 @@ public class FlipFitGymOwnerClientMenu {
     static Scanner scanner = new Scanner(System.in);
     GymServiceOperations gymService = new GymServiceOperations();
     GymOwnerServiceOperations gymOwnerServiceOperations = new GymOwnerServiceOperations();
+    UserServiceOperations userServiceOperations = new UserServiceOperations();
 
     boolean verifyGymOwner(String email, String password) {
         return gymOwnerServiceOperations.validateGymOwner(email, password);
@@ -30,7 +32,7 @@ public class FlipFitGymOwnerClientMenu {
             System.out.println("Press 1 to add a gym");
             System.out.println("Press 2 to view all gyms");
             System.out.println("Press 3 to delete a customer");
-            System.out.println("Press 4 to update gym details");
+            System.out.println("Press 4 to update seat count");
             System.out.println("Press 5 to update your details");
             System.out.println("Press 6 to logout");
 
@@ -47,7 +49,16 @@ public class FlipFitGymOwnerClientMenu {
                     // delete a customer
                     break;
                 case 4:
-                    // update gym details
+                    System.out.println("Enter gym ID: ");
+                    int gymId = scanner.nextInt();
+                    System.out.println("Enter slot ID: ");
+                    int slotId = scanner.nextInt();
+                    System.out.println("Enter updated seat count: ");
+                    int seatCount = scanner.nextInt();
+                    if(gymService.updateSeatCount(gymId, slotId, seatCount))
+                        System.out.println("Seat count updated!");
+                    else
+                        System.out.println("Seat count not updated");
                     break;
                 case 5:
                     // update gym owner details
@@ -60,15 +71,17 @@ public class FlipFitGymOwnerClientMenu {
         }
     }
 
-    void addGym(String userId) {
+    void addGym(String email) {
         Gym gym = new Gym();
+        int userId = userServiceOperations.getUserIdByEmail(email);
         gym.setOwnerId(userId);
 
-        System.out.println("Gym Name:");
+        System.out.println("Enter details of the gym: ");
+        System.out.println("Name: ");
         String gymName = scanner.nextLine();
-        System.out.println("Gym Address:");
+        System.out.println("Address: ");
         String address = scanner.nextLine();
-        System.out.println("Gym Location:");
+        System.out.println("Location: ");
         String location = scanner.nextLine();
         String gymStatus = "unverified";
 
@@ -78,14 +91,14 @@ public class FlipFitGymOwnerClientMenu {
         gym.setStatus(gymStatus);
 
         List<Slots> slots = new ArrayList<>();
-        System.out.println("Please enter number of slots:");
+        System.out.println("Please enter number of slots: ");
         int slotCount = Integer.parseInt(scanner.nextLine());
         int currentCount = 1;
         while (currentCount <= slotCount) {
             System.out.println("Add for slot number " + currentCount + ": ");
-            System.out.println("Enter start time:");
+            System.out.println("Enter start time: ");
             int startTime = Integer.parseInt(scanner.nextLine());
-            System.out.println("Enter available seats:");
+            System.out.println("Enter available seats: ");
             int seatCount = Integer.parseInt(scanner.nextLine());
             Slots slot = new Slots(currentCount - 1, startTime, seatCount);
             slots.add(slot);
@@ -93,7 +106,10 @@ public class FlipFitGymOwnerClientMenu {
         }
 
         gym.setSlots(slots);
-        gymService.addGym(gym);
+        if(gymService.addGym(gym))
+            System.out.println("Gym added successfully!");
+        else
+            System.out.println("Gym already exists!");
     }
     
     void createGymOwner() {
@@ -148,8 +164,9 @@ public class FlipFitGymOwnerClientMenu {
         return gymOwnerServiceOperations.updateGymOwnerPassword(userMail, password, updatedPassword);
     }
 
-    void displayGyms(String userId) {
-        List<Gym> gymsList = new ArrayList<>(); // get all gyms from GymOwnerService
+    void displayGyms(String email) {
+        int userId = userServiceOperations.getUserIdByEmail(email);
+        List<Gym> gymsList = gymOwnerServiceOperations.viewMyGyms(userId); // get all gyms from GymOwnerService
         int counter = 1;
         for (Gym gym : gymsList) {
             System.out.println("Gym " + counter + ": ");

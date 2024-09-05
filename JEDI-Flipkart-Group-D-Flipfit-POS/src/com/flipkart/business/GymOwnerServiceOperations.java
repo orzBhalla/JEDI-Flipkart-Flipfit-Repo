@@ -16,10 +16,10 @@ public class GymOwnerServiceOperations implements GymOwnerService {
         gymServiceOperations.addGym(gym);
     }
 
-    public List<Gym> viewMyGyms(String userId){
+    public List<Gym> viewMyGyms(int userId){
         List<Gym> myGyms = new ArrayList<Gym>();
         for(Gym gym : gymMap.values()){
-            if(gym.getOwnerId().equals(userId)){
+            if(gym.getOwnerId() == userId){
                 myGyms.add(gym);
                 break;
             }

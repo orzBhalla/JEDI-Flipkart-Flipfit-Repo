@@ -16,12 +16,13 @@ public class GymServiceOperations implements GymService {
     int bookingsIdCounter = 0;
 
     @Override
-    public void addGym(Gym gym) {
+    public boolean addGym(Gym gym) {
         if (gymMap.containsKey(gym.getGymId())) {
-            return;
+            return false;
         }
         gym.setGymId(++gymIdCounter);
         gymMap.put(gym.getGymId(), gym);
+        return true;
     }
 
     @Override
@@ -100,7 +101,10 @@ public class GymServiceOperations implements GymService {
     }
 
     @Override
-    public void updateGymSlots(Integer gymId, Integer slotId, Integer seatCount) {
+    public boolean updateSeatCount(int gymId, int slotId, int seatCount) {
+        if(!gymMap.containsKey(gymId)) {
+            return false;
+        }
         Gym gym = gymMap.get(gymId);
         List<Slots> slots = gym.getSlots();
         for (Slots slot : slots) {
@@ -111,6 +115,7 @@ public class GymServiceOperations implements GymService {
         }
         gym.setSlots(slots);
         gymMap.put(gymId, gym);
+        return true;
     }
 
     public static Map<Integer, Gym> getGymMap() {

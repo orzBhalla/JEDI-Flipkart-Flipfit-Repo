@@ -7,14 +7,14 @@ public class Gym {
     private String gymAddress;
     private String location;
     private List<Slots> slots;
-    private String ownerId;
+    private int ownerId;
     private String Status;
 
-    public String getOwnerId() {
+    public int getOwnerId() {
         return ownerId;
     }
 
-    public void setOwnerId(String ownerId) {
+    public void setOwnerId(int ownerId) {
         this.ownerId = ownerId;
     }
 
