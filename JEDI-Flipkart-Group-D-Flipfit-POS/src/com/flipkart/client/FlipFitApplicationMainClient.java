@@ -91,13 +91,13 @@ public class FlipFitApplicationMainClient {
                             }
                             break;
                         case 2:
-                            if (!customerMenu.userLogin(userMail,password)) {
+                            if (!gymOwnerMenu.gymOwnerLogin(userMail,password)) {
                                 System.out.println("Invalid Credentials! Please enter valid credentials to login");
                                 break;
                             }
                             break;
                         case 3:
-                            if(!gymOwnerMenu.gymOwnerLogin(userMail,password)){
+                            if(!customerMenu.userLogin(userMail,password)){
                                 System.out.println("Invalid Credentials! Please enter valid credentials to login");
                                 break;
                             }

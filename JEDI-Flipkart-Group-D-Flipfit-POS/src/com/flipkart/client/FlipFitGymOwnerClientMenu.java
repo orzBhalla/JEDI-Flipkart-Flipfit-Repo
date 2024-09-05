@@ -25,7 +25,11 @@ public class FlipFitGymOwnerClientMenu {
                 System.out.println("-----------------Gym Owner Menu-----------------");
                 System.out.println("Press 1 to add a gym");
                 System.out.println("Press 2 to view all gyms");
-                System.out.println("Press 3 to logout");
+                System.out.println("Press 3 to delete a customer");
+                System.out.println("Press 4 to update gym details");
+                System.out.println("Press 5 to update your details");
+                System.out.println("Press 6 to logout");
+
                 int y = Integer.parseInt(scanner.nextLine());
 
                 switch (y) {
@@ -36,7 +40,18 @@ public class FlipFitGymOwnerClientMenu {
                         displayGyms(email);
                         break;
                     case 3:
+                        // delete a customer
+                        break;
+                    case 4:
+                        // update gym details
+                        break;
+                    case 5:
+                        // update gym owner details
+                        break;
+                    case 6:
                         return true;
+                    default:
+                        System.out.println("Invalid option!");
                 }
             }
         } else

@@ -22,7 +22,8 @@ public class FlipFitGymCustomerClientMenu {
                 System.out.println("Press 3 to cancel slot");
                 System.out.println("Press 4 to view all bookings");
                 System.out.println("Press 5 to view all gyms by area");
-                System.out.println("Press 6 to logout");
+                System.out.println("Press 6 to update your details");
+                System.out.println("Press 7 to logout");
                 int choice = Integer.parseInt(scanner.nextLine());
                 switch (choice) {
                     case 1:
@@ -67,6 +68,9 @@ public class FlipFitGymCustomerClientMenu {
                         printGyms(gyms3);
                         break;
                     case 6:
+                        // update user details
+                        break;
+                    case 7:
                         flag = false;
                         break;
                     default:
