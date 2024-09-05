@@ -2,6 +2,7 @@ package com.flipkart.client;
 import java.util.*;
 
 import com.flipkart.bean.*;
+import com.flipkart.business.UserServiceOperations;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -10,6 +11,7 @@ import java.util.Scanner;
 public class FlipFitGymCustomerClientMenu {
     static Scanner scanner = new Scanner(System.in);
     User user = new User();
+    UserServiceOperations userServiceOperations = new UserServiceOperations();
 
     public boolean userLogin(String username, String pass) {
         if (validateUser(username, pass)) {
@@ -103,8 +105,8 @@ public class FlipFitGymCustomerClientMenu {
         }
     }
 
-    public boolean validateUser(String username, String pass) {
-        return true;
+    public boolean validateUser(String username, String password) {
+        return userServiceOperations.validateUser(username, password);
     }
 
     List<Gym> viewAllGymsWithSlots() {
@@ -154,5 +156,7 @@ public class FlipFitGymCustomerClientMenu {
         user.setPassword(password);
         user.setUserName(ownerName);
         user.setPhoneNumber(phoneNo);
+
+        userServiceOperations.createUser(user);
     }
 }
