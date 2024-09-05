@@ -12,8 +12,9 @@ public class GymOwner {
     private List<Gym> gyms;
     private String PAN;
     private String ownerName;
-    private String status;
+   // private String status; //what is the use?
     private String verificationStatus;
+    private String status;
 
     public int getOwnerId() {
         return ownerId;
@@ -88,11 +89,11 @@ public class GymOwner {
     }
 
     public String getStatus() {
-        return status;
-    }
+     return status;
+   }
 
-    public void setStatus(String status) {
-        this.status = status;
+   public void setStatus(String status) {
+       this.status = status;
     }
 
     public String getVerificationStatus() {
@@ -102,4 +103,6 @@ public class GymOwner {
     public void setVerificationStatus(String verificationStatus) {
         this.verificationStatus = verificationStatus;
     }
+
+   
 }
