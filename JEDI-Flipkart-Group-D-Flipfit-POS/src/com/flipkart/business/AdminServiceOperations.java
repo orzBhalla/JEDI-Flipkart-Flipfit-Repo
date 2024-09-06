@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static com.flipkart.constants.ColorConstants.*;
+
 public class AdminServiceOperations implements AdminService{
     Map<Integer, User> userMap = UserServiceOperations.getUserMap();
     Map<Integer, GymOwner> gymOwnerMap = GymOwnerServiceOperations.getGymOwnerMap();
@@ -15,9 +17,9 @@ public class AdminServiceOperations implements AdminService{
 
     public void viewUsers() {
         String leftAlignFormat = "| %-8s | %-20s | %-30s | %-15s | %-20s | %-40s |%n";
-        System.out.format("+----------+----------------------+-------------------------------+---------------+--------------------+----------------------------------------+%n");
+        System.out.format(ANSI_CYAN + "+----------+----------------------+-------------------------------+---------------+--------------------+----------------------------------------+%n");
         System.out.format("| User ID  |     Name              | Email                         | Phone Number  | Location           | Address                              |%n");
-        System.out.format("+----------+----------------------+-------------------------------+---------------+--------------------+----------------------------------------+%n");
+        System.out.format("+----------+----------------------+-------------------------------+---------------+--------------------+----------------------------------------+%n" + ANSI_RESET);
 
         // Assuming 'entries' is a collection of user entries
         for (Map.Entry<Integer, User> entry : userMap.entrySet()) {
@@ -29,9 +31,9 @@ public class AdminServiceOperations implements AdminService{
 
     public void viewGymOwners() {
         String leftAlignFormat = "| %-13s | %-20s | %-30s | %-15s | %-10s | %-20s | %-20s | %-20s |%n";
-        System.out.format("+---------------+----------------------+-------------------------------+---------------+------------+----------------------+----------------------+----------------------+%n");
+        System.out.format(ANSI_CYAN + "+---------------+----------------------+-------------------------------+---------------+------------+----------------------+----------------------+----------------------+%n");
         System.out.format("| Gym Owner ID  |     Name              | Email                         | Phone Number  | GST        | National ID          | Verification Status  | PAN                  |%n");
-        System.out.format("+---------------+----------------------+-------------------------------+---------------+------------+----------------------+----------------------+----------------------+%n");
+        System.out.format("+---------------+----------------------+-------------------------------+---------------+------------+----------------------+----------------------+----------------------+%n" + ANSI_RESET);
 
         for (Map.Entry<Integer, GymOwner> entry : gymOwnerMap.entrySet()) {
             GymOwner gymOwner = entry.getValue();
@@ -42,9 +44,9 @@ public class AdminServiceOperations implements AdminService{
 
     public void viewGyms() {
         String leftAlignFormat = "| %-6s | %-20s | %-40s | %-20s | %-10s | %-10s |%n";
-        System.out.format("+--------+----------------------+----------------------------------------+----------------------+----------+----------+%n");
+        System.out.format(ANSI_CYAN + "+--------+----------------------+----------------------------------------+----------------------+----------+----------+%n");
         System.out.format("| Gym ID |     Name              | Address                                | Location             | Owner ID | Status   |%n");
-        System.out.format("+--------+----------------------+----------------------------------------+----------------------+----------+----------+%n");
+        System.out.format("+--------+----------------------+----------------------------------------+----------------------+----------+----------+%n" + ANSI_RESET);
 
         for (Map.Entry<Integer, Gym> entry : gymMap.entrySet()) {
             Gym gym = entry.getValue();
