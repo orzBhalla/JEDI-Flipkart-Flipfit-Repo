@@ -20,8 +20,12 @@ public interface GymOwnerService {
 
     boolean updateGymOwnerPassword(String email, String password, String updatedPassword);
 
+    boolean updateGymOwner(GymOwner gymOwner);
+
     public static Map<Integer, GymOwner> getGymOwnerMap() {
         return Map.of();
     }
+
+
 }
 

@@ -65,6 +65,7 @@ public class GymServiceOperations implements GymService {
             System.out.println("Location: " + gym.getLocation());
             System.out.println("Owner ID: " + gym.getOwnerId());
             System.out.println("Status: " + gym.getStatus());
+            System.out.println("-------------------------------------------------------------");
         }
     }
 
@@ -78,6 +79,7 @@ public class GymServiceOperations implements GymService {
                 System.out.println("Location: " + gym.getLocation());
                 System.out.println("Owner ID: " + gym.getOwnerId());
                 System.out.println("Status: " + gym.getStatus());
+                System.out.println("-------------------------------------------------------------");
             }
         }
     }

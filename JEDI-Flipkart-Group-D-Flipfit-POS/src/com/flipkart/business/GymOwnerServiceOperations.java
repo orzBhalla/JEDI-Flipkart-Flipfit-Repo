@@ -56,6 +56,18 @@ public class GymOwnerServiceOperations implements GymOwnerService {
         return false;
     }
 
+    public boolean updateGymOwner(GymOwner gymOwner) {
+        for(GymOwner gymOwner1 : gymOwnerMap.values()){
+            if(gymOwner1.getOwnerEmail().equals(gymOwner.getOwnerEmail())){
+                gymOwner1.setOwnerName(gymOwner.getOwnerName());
+                gymOwner1.setPhoneNo(gymOwner.getPhoneNo());
+                gymOwnerMap.replace(gymOwner1.getOwnerId(), gymOwner1);
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static Map<Integer, GymOwner> getGymOwnerMap() {
         return gymOwnerMap;
     }

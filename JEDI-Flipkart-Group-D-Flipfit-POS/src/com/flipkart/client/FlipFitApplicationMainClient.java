@@ -31,18 +31,18 @@ public class FlipFitApplicationMainClient {
                     System.out.println("Please enter your password:");
                     String password = scanner.nextLine();
                     System.out.println("Select your role:"); // select choice
-                    System.out.println("Press 1 for Admin");
-                    System.out.println("Press 2 for Gym Owner");
-                    System.out.println("Press 3 for Gym Customer");
+                    System.out.println("Press 1 for admin");
+                    System.out.println("Press 2 for gym owner");
+                    System.out.println("Press 3 for gym customer");
                     int role = Integer.parseInt(scanner.nextLine());
 
                     switch (role) {
                         case 1:
                             if (!adminMenu.verifyAdminCredentials(userMail,password)) {
-                                System.out.println("Invalid Credentials! Please enter valid credentials to login");
+                                System.out.println("Invalid credentials! Please enter valid credentials to login");
                                 break;
                             }
-
+                            System.out.println("Login successful! (Admin)");
                             boolean isLoggedIn = true;
                             while (isLoggedIn) {
                                 System.out.println("-----------------Admin Menu------------------");
@@ -98,13 +98,13 @@ public class FlipFitApplicationMainClient {
                             break;
                         case 2:
                             if (!gymOwnerMenu.gymOwnerLogin(userMail,password)) {
-                                System.out.println("Invalid Credentials! Please enter valid credentials to login");
+                                System.out.println("Invalid credentials! Please enter valid credentials to login");
                                 break;
                             }
                             break;
                         case 3:
                             if(!customerMenu.userLogin(userMail,password)){
-                                System.out.println("Invalid Credentials! Please enter valid credentials to login");
+                                System.out.println("Invalid credentials! Please enter valid credentials to login");
                                 break;
                             }
                             break;

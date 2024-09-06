@@ -18,7 +18,7 @@ public class FlipFitGymCustomerClientMenu {
     public boolean userLogin(String email, String pass) {
         if (validateUser(email, pass)) {
             boolean flag = true;
-            System.out.println("Login Successful!");
+            System.out.println("Login Successful! (Customer)");
             while (flag) {
                 System.out.println("-------------CUSTOMER MENU-------------");
                 System.out.println("Press 1 to view all gyms with slots");
@@ -39,9 +39,9 @@ public class FlipFitGymCustomerClientMenu {
                         printGyms(gyms2);
                         System.out.println("Enter the following: ");
                         System.out.println("Gym ID: ");
-                        int gymId = Integer.parseInt(scanner.nextLine());
+                        int gymId = scanner.nextInt();
                         System.out.println("Slot Time: ");
-                        int time = Integer.parseInt(scanner.nextLine());
+                        int time = scanner.nextInt();
 
                         if (bookSlot(gymId, time, email)) {
                             System.out.println("Booked successfully!");
@@ -67,6 +67,7 @@ public class FlipFitGymCustomerClientMenu {
                             System.out.println("Booking ID: " + booking.getBookingId() +
                                     ", Status: " + booking.getBookingStatus() + ", Time: "
                                     + booking.getTime() + ", Gym ID: " + booking.getGymId());
+                            System.out.println("-------------------------------------------------------------");
                         }
                         break;
                     case 5:
@@ -94,7 +95,7 @@ public class FlipFitGymCustomerClientMenu {
 
     private void printGyms(List<Gym> y) {
         for (Gym gym : y) {
-            System.out.println("--------------------------------");
+            System.out.println("-------------------------------------------------------------");
             System.out.println("Gym ID: " + gym.getGymId() +
                     ", Name: " + gym.getGymName() +
                     ", Location: " + gym.getLocation() +
@@ -143,7 +144,7 @@ public class FlipFitGymCustomerClientMenu {
     }
 
     public void createCustomer() {
-        System.out.println("Enter customer details:");
+        System.out.println("Enter customer details: ");
         System.out.println("Email: ");
         String ownerEmail = scanner.nextLine();
         System.out.println("Name: ");

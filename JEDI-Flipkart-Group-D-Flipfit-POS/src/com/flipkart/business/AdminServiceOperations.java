@@ -20,7 +20,8 @@ public class AdminServiceOperations implements AdminService{
             System.out.println("Email: " + entry.getValue().getEmail());
             System.out.println("Phone Number: " + entry.getValue().getPhoneNumber());
             System.out.println("Location: " + entry.getValue().getLocation());
-            System.out.println("Address: " + entry.getValue().getAddress() + "\n");
+            System.out.println("Address: " + entry.getValue().getAddress());
+            System.out.println("-------------------------------------------------------------");
         }
     }
 
@@ -33,7 +34,8 @@ public class AdminServiceOperations implements AdminService{
             System.out.println("GST: " + entry.getValue().getGST());
             System.out.println("National ID: " + entry.getValue().getNationalId());
             System.out.println("Verification Status: " + entry.getValue().getVerificationStatus());
-            System.out.println("PAN: " + entry.getValue().getPAN() + "\n");
+            System.out.println("PAN: " + entry.getValue().getPAN());
+            System.out.println("-------------------------------------------------------------");
         }
     }
 
@@ -45,6 +47,7 @@ public class AdminServiceOperations implements AdminService{
             System.out.println("Location: " + entry.getValue().getLocation());
             System.out.println("Owner ID: " + entry.getValue().getOwnerId());
             System.out.println("Status: " + entry.getValue().getStatus());
+            System.out.println("-------------------------------------------------------------");
         }
     }
 

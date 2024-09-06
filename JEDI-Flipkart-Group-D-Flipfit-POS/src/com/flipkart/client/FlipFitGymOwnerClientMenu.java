@@ -26,7 +26,7 @@ public class FlipFitGymOwnerClientMenu {
         if(!verifyGymOwner(email, password)) {
             return false;
         }
-        System.out.println("Login Successful (Gym Owner)");
+        System.out.println("Login Successful! (Gym Owner)");
         while (true) {
             System.out.println("-----------------Gym Owner Menu-----------------");
             System.out.println("Press 1 to add a gym");
@@ -61,7 +61,10 @@ public class FlipFitGymOwnerClientMenu {
                         System.out.println("Seat count not updated");
                     break;
                 case 5:
-                    // update gym owner details
+                    if(updateGymOwnerDetails())
+                        System.out.println("Gym owner updated successfully!");
+                    else
+                        System.out.println("Update was unsuccessful");
                     break;
                 case 6:
                     return true;
@@ -160,6 +163,50 @@ public class FlipFitGymOwnerClientMenu {
         }
     }
 
+    boolean updateGymOwnerDetails() {
+        System.out.println("Enter gym owner details:");
+        System.out.println("Email: ");
+        String ownerEmail = scanner.nextLine();
+        System.out.println("Name: ");
+        String ownerName = scanner.nextLine();
+        // System.out.println("Password: ");
+        // String password = scanner.nextLine();
+        System.out.println("Phone Number: ");
+        String phoneNo = scanner.nextLine();
+        // System.out.println("National ID: ");
+        // String nationalId = scanner.nextLine();
+
+        // if (nationalId.length() != 12) {
+            // System.out.println("Invalid national ID! Length must be 12");
+            // return;
+        // }
+
+        // System.out.println("GST: ");
+        // String GST = scanner.nextLine();
+        // System.out.println("PAN Number: ");
+        // String PAN = scanner.nextLine();
+        // String gymOwnerStatus = "unverified";
+
+        // if (PAN.length() != 10) {
+            // System.out.println("Invalid PAN Card Number. Length must be 10");
+            // return;
+        // }
+
+        GymOwner gymOwner = new GymOwner();
+        // List<Gym> emptyGymList = new ArrayList<>();
+        gymOwner.setOwnerEmail(ownerEmail);
+        // gymOwner.setPAN(PAN);
+        gymOwner.setOwnerName(ownerName);
+        // gymOwner.setGST(GST);
+        // gymOwner.setPassword(password);
+        // gymOwner.setNationalId(nationalId);
+        gymOwner.setPhoneNo(phoneNo);
+        // gymOwner.setGyms(emptyGymList);
+        // gymOwner.setStatus(gymOwnerStatus);
+
+        return gymOwnerServiceOperations.updateGymOwner(gymOwner);
+    }
+
     public boolean updatePassword(String userMail, String password, String updatedPassword) {
         return gymOwnerServiceOperations.updateGymOwnerPassword(userMail, password, updatedPassword);
     }
@@ -167,15 +214,14 @@ public class FlipFitGymOwnerClientMenu {
     void displayGyms(String email) {
         int userId = userServiceOperations.getUserIdByEmail(email);
         List<Gym> gymsList = gymOwnerServiceOperations.viewMyGyms(userId); // get all gyms from GymOwnerService
-        int counter = 1;
         for (Gym gym : gymsList) {
-            System.out.println("Gym " + counter + ": ");
+            System.out.println("Gym " + gym.getGymId() + ": ");
             System.out.println("Name: " + gym.getGymName() + "\nAddress: " + gym.getGymAddress() + "\nLocation: " + gym.getLocation());
             System.out.println("Slots: ");
             for (Slots slot : gym.getSlots()) {
                 System.out.println("Slot: " + slot.getSlotsId() + "\nSlot Time: " + slot.getStartTime() + " - " + (slot.getStartTime() + 1) + "\nSeats: " + slot.getSeatCount());
             }
-            counter++;
+            System.out.println("-------------------------------------------------------------");
         }
     }
 }
