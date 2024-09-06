@@ -4,6 +4,7 @@ import java.util.*;
 import com.flipkart.bean.*;
 import com.flipkart.business.GymServiceOperations;
 import com.flipkart.business.UserServiceOperations;
+import static com.flipkart.constants.ColorConstants.*;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -20,14 +21,14 @@ public class FlipFitGymCustomerClientMenu {
             boolean isLoggedIn = true;
             System.out.println("Login Successful! (Customer)");
             while (isLoggedIn) {
-                System.out.println("-------------CUSTOMER MENU-------------");
+                System.out.println(ANSI_RED+"-------------CUSTOMER MENU-------------");
                 System.out.println("Press 1 to view all gyms with slots");
                 System.out.println("Press 2 to book slot");
                 System.out.println("Press 3 to cancel slot");
                 System.out.println("Press 4 to view all bookings");
                 System.out.println("Press 5 to view all gyms by area");
                 System.out.println("Press 6 to update your details");
-                System.out.println("Press 7 to logout");
+                System.out.println("Press 7 to logout" + ANSI_RESET);
                 int choice = Integer.parseInt(scanner.nextLine());
                 switch (choice) {
                     case 1:

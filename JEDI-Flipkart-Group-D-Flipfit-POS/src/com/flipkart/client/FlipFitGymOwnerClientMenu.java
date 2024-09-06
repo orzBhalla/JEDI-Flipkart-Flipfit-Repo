@@ -10,6 +10,7 @@ import com.flipkart.business.UserServiceOperations;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import static com.flipkart.constants.ColorConstants.*;
 
 
 public class FlipFitGymOwnerClientMenu {
@@ -28,13 +29,13 @@ public class FlipFitGymOwnerClientMenu {
         }
         System.out.println("Login Successful! (Gym Owner)");
         while (true) {
-            System.out.println("-----------------Gym Owner Menu-----------------");
-            System.out.println("Press 1 to add a gym");
+            System.out.println(ANSI_BOLD+"-----------------Gym Owner Menu-----------------"+ANSI_RESET);
+            System.out.println(ANSI_YELLOW+"Press 1 to add a gym");
             System.out.println("Press 2 to view all gyms");
             System.out.println("Press 3 to delete a customer");
             System.out.println("Press 4 to update seat count");
             System.out.println("Press 5 to update your details");
-            System.out.println("Press 6 to logout");
+            System.out.println("Press 6 to logout" +ANSI_RESET);
 
             int y = Integer.parseInt(scanner.nextLine());
 
