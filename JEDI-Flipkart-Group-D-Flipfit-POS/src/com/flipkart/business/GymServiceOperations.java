@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.flipkart.constants.ColorConstants.*;
+
 public class GymServiceOperations implements GymService {
     static HashMap<Integer, Gym> gymMap = new HashMap<Integer, Gym>();
     static HashMap<Integer, Bookings> bookingsMap = new HashMap<Integer, Bookings>();
@@ -58,28 +60,28 @@ public class GymServiceOperations implements GymService {
 
     @Override
     public void listAllGyms() {
+        String leftAlignFormat = "| %-6s | %-20s | %-40s | %-20s | %-10s | %-10s |%n";
+        System.out.format(ANSI_PURPLE + "+--------+----------------------+----------------------------------------+----------------------+----------+----------+%n");
+        System.out.format("| Gym ID |     Name              | Address                                | Location             | Owner ID | Status   |%n");
+        System.out.format("+--------+----------------------+----------------------------------------+----------------------+----------+----------+%n" + ANSI_RESET);
+
         for (Gym gym : gymMap.values()) {
-            System.out.println("Gym ID: " + gym.getGymId());
-            System.out.println("Name: " + gym.getGymName());
-            System.out.println("Address: " + gym.getGymAddress());
-            System.out.println("Location: " + gym.getLocation());
-            System.out.println("Owner ID: " + gym.getOwnerId());
-            System.out.println("Status: " + gym.getStatus());
-            System.out.println("-------------------------------------------------------------");
+            System.out.format(leftAlignFormat, gym.getGymId(), gym.getGymName(), gym.getGymAddress(), gym.getLocation(), gym.getOwnerId(), gym.getStatus());
         }
+        System.out.format("+--------+----------------------+----------------------------------------+----------------------+----------+----------+%n");
     }
 
     @Override
     public void listAllGymsWithArea(String areaName) {
+        String leftAlignFormat = "| %-6s | %-20s | %-40s | %-20s | %-10s | %-10s |%n";
+        System.out.format(ANSI_PURPLE + "+--------+----------------------+----------------------------------------+----------------------+----------+----------+%n");
+        System.out.format("| Gym ID |     Name              | Address                                | Location             | Owner ID | Status   |%n");
+        System.out.format("+--------+----------------------+----------------------------------------+----------------------+----------+----------+%n" + ANSI_RESET);
+
         for (Gym gym : gymMap.values()) {
             if (gym.getGymAddress().contains(areaName) || gym.getLocation().contains(areaName)) {
-                System.out.println("Gym ID: " + gym.getGymId());
-                System.out.println("Name: " + gym.getGymName());
-                System.out.println("Address: " + gym.getGymAddress());
-                System.out.println("Location: " + gym.getLocation());
-                System.out.println("Owner ID: " + gym.getOwnerId());
-                System.out.println("Status: " + gym.getStatus());
-                System.out.println("-------------------------------------------------------------");
+                System.out.format(leftAlignFormat, gym.getGymId(), gym.getGymName(), gym.getGymAddress(), gym.getLocation(), gym.getOwnerId(), gym.getStatus());
+                System.out.format("+--------+----------------------+----------------------------------------+----------------------+----------+----------+%n");
             }
         }
     }

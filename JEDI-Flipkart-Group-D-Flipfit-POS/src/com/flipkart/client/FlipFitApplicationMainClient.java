@@ -1,6 +1,7 @@
 
 package com.flipkart.client;
 import java.util.Scanner;
+import static com.flipkart.constants.ColorConstants.*;
 
 public class FlipFitApplicationMainClient {
     static Scanner scanner = new Scanner(System.in);
@@ -10,27 +11,27 @@ public class FlipFitApplicationMainClient {
     static FlipFitGymAdminMenu adminMenu = new FlipFitGymAdminMenu();
 
     public static void main(String[] args) {
-        System.out.println("-----------------------------------------------------------------------------------");
+        System.out.println(ANSI_BOLD + ANSI_CYAN + "-----------------------------------------------------------------------------------");
         System.out.println("-----------------------Welcome to FlipFit: Your Fitness Partner--------------------");
-        System.out.println("-----------------------------------------------------------------------------------");
+        System.out.println("-----------------------------------------------------------------------------------"+  ANSI_RESET);
 
         boolean inInApp = true;
 
         while (inInApp) {
-            System.out.println("Press 1 for Login");
+            System.out.println(ANSI_BLUE+ "Press 1 for Login");
             System.out.println("Press 2 for Registration");
             System.out.println("Press 3 for Update Password");
-            System.out.println("Press 4 for Exit");
+            System.out.println("Press 4 for Exit" + ANSI_RESET);
             int optionSelected = Integer.parseInt(scanner.nextLine());
 
             switch (optionSelected) {
                 case 1:
-                    System.out.println("------------Login Page--------------");
+                    System.out.println(ANSI_BOLD+ ANSI_GREEN + "------------Login Page--------------" + ANSI_RESET);
                     System.out.println("Please enter your email:");
                     String userMail = scanner.nextLine();
                     System.out.println("Please enter your password:");
                     String password = scanner.nextLine();
-                    System.out.println("Select your role:");
+                    System.out.println(ANSI_GREEN + "Select your role:" + ANSI_RESET); // select choice
                     System.out.println("Press 1 for admin");
                     System.out.println("Press 2 for gym owner");
                     System.out.println("Press 3 for gym customer");
@@ -39,13 +40,13 @@ public class FlipFitApplicationMainClient {
                     switch (role) {
                         case 1:
                             if (!adminMenu.verifyAdminCredentials(userMail,password)) {
-                                System.out.println("Invalid credentials! Please enter valid credentials to login");
+                                System.out.println(ANSI_RED + "Invalid credentials! Please enter valid credentials to login"+ANSI_RESET);
                                 break;
                             }
-                            System.out.println("Login successful! (Admin)");
+                            System.out.println(ANSI_CYAN+ "Login successful! (Admin)" + ANSI_RESET);
                             boolean isLoggedIn = true;
                             while (isLoggedIn) {
-                                System.out.println("-----------------Admin Menu------------------");
+                                System.out.println(ANSI_BOLD + ANSI_GREEN+ "-----------------Admin Menu------------------" + ANSI_RESET);
                                 System.out.println("Press 1 to view users");
                                 System.out.println("Press 2 to view gyms");
                                 System.out.println("Press 3 to view gym owners");
@@ -98,23 +99,23 @@ public class FlipFitApplicationMainClient {
                             break;
                         case 2:
                             if (!gymOwnerMenu.gymOwnerLogin(userMail,password)) {
-                                System.out.println("Invalid credentials! Please enter valid credentials to login");
+                                System.out.println(ANSI_RED + "Invalid credentials! Please enter valid credentials to login"+ ANSI_RESET);
                                 break;
                             }
                             break;
                         case 3:
                             if(!customerMenu.userLogin(userMail,password)){
-                                System.out.println("Invalid credentials! Please enter valid credentials to login");
+                                System.out.println(ANSI_RED+"Invalid credentials! Please enter valid credentials to login"+ANSI_RESET);
                                 break;
                             }
                             break;
                         default:
-                            System.out.println("You selected an invalid option. Please select a valid option");
+                            System.out.println(ANSI_RED+ "You selected an invalid option. Please select a valid option"+ ANSI_RESET);
                             break;
                     }
                     break;
                 case 2:
-                    System.out.println("-------------Registration Page--------------");
+                    System.out.println(ANSI_BOLD + ANSI_GREEN+ "-------------Registration Page--------------"+ ANSI_RESET);
                     System.out.println("Select your Choice:");
                     System.out.println("Press 1 for gym user");
                     System.out.println("Press 2 for gym owner");
@@ -133,7 +134,7 @@ public class FlipFitApplicationMainClient {
                     }
                     break;
                 case 3 :
-                    System.out.println("-------------Reset Password Page--------------");
+                    System.out.println(ANSI_BOLD + ANSI_GREEN+ "-------------Reset Password Page--------------"+ ANSI_RESET);
                     System.out.println("Please enter your email:");
                     userMail = scanner.nextLine();
                     System.out.println("Please enter your current password:");
@@ -149,29 +150,29 @@ public class FlipFitApplicationMainClient {
                     switch (role) {
                         case 1:
                             if (!customerMenu.validateUser(userMail,password)) {
-                                System.out.println("Invalid credentials! Please enter valid credentials");
+                                System.out.println(ANSI_RED+ "Invalid credentials! Please enter valid credentials"+ ANSI_RESET);
                             }
                             else {
                                 if(customerMenu.updatePassword(userMail, password, updatedPassword))
-                                    System.out.println("Password updated successfully!");
+                                    System.out.println(ANSI_CYAN + "Password updated successfully!"+ ANSI_RESET);
                                 else
-                                    System.out.println("Password doesn't match!");
+                                    System.out.println(ANSI_RED+ "Password doesn't match!" + ANSI_RESET);
                             }
                             break;
                         case 2:
                             if (!gymOwnerMenu.verifyGymOwner(userMail,password)) {
-                                System.out.println("Invalid credentials! Please enter valid credentials");
+                                System.out.println(ANSI_RED + "Invalid credentials! Please enter valid credentials" + ANSI_RESET);
                             }
                             else{
                                 if(gymOwnerMenu.updatePassword(userMail, password, updatedPassword))
-                                    System.out.println("Password updated successfully!");
+                                    System.out.println(ANSI_CYAN + "Password updated successfully!" + ANSI_RESET);
                                 else
-                                    System.out.println("Password doesn't match!");
+                                    System.out.println(ANSI_RED + "Password doesn't match!" + ANSI_RESET);
                             }
                             break;
                         case 3:
                             if (!adminMenu.verifyAdminCredentials(userMail,password)) {
-                                System.out.println("Invalid credentials! Please enter valid credentials");
+                                System.out.println(ANSI_RED + "Invalid credentials! Please enter valid credentials" + ANSI_RESET);
                             }
                             else{
                                 // update the password here
@@ -181,7 +182,7 @@ public class FlipFitApplicationMainClient {
                     break;
                 case 4 :
                     inInApp = false;
-                    System.out.println("Thank you for using FLipFit!");
+                    System.out.println(ANSI_PURPLE + "Thank you for using FLipFit!" + ANSI_RESET);
                     break;
                 default:
                     break;
