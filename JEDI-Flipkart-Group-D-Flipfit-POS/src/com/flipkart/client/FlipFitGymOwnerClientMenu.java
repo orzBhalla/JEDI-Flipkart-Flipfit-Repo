@@ -236,12 +236,13 @@ public class FlipFitGymOwnerClientMenu {
 
         String gymLeftAlignFormat = "| %-5d | %-20s | %-40s | %-20s |%n";
         String slotLeftAlignFormat = "| %-5d | %-15s | %-5d |%n";
-        System.out.format("+-------+----------------------+------------------------------------------+----------------------+\n");
-        System.out.format("| Gym ID|     Name             |           Address                        |     Location         |\n");
-        System.out.format("+-------+----------------------+------------------------------------------+----------------------+\n");
 
         for (Gym gym : gymsList) {
+            System.out.format("+-------+----------------------+------------------------------------------+----------------------+\n");
+            System.out.format("| Gym ID|     Name             |           Address                        |     Location         |\n");
+            System.out.format("+-------+----------------------+------------------------------------------+----------------------+\n");
             System.out.format(gymLeftAlignFormat, gym.getGymId(), gym.getGymName(), gym.getGymAddress(), gym.getLocation());
+            System.out.format("+-------+----------------------+------------------------------------------+----------------------+\n");
             System.out.println("Slots: ");
             System.out.format("+-------+---------------+-------+\n");
             System.out.format("|Slot ID|     Time      | Seats |\n");
@@ -252,6 +253,7 @@ public class FlipFitGymOwnerClientMenu {
                 System.out.format(slotLeftAlignFormat, slot.getSlotsId(), slot.getStartTime() + " - " + (slot.getStartTime() + 1), slot.getSeatCount());
             }
             System.out.format("+-------+---------------+-------+\n");
+            System.out.println();
         }
     }
 }
