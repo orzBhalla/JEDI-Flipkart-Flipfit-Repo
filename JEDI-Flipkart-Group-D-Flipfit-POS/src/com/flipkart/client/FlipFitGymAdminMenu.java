@@ -25,8 +25,8 @@ public class FlipFitGymAdminMenu {
         return adminServiceOperations.verifyGym(id);
     }
 
-    public boolean verifyGymOwner(int id) {
-        return adminServiceOperations.verifyGymOwner(id);
+    public boolean verifyGymOwner(int gymOwnerId) {
+        return adminServiceOperations.verifyGymOwner(gymOwnerId);
     }
 
     public void viewUnverifiedGyms() {
@@ -48,9 +48,9 @@ public class FlipFitGymAdminMenu {
     }
 
     public void viewUnverifiedGymOwners() {
-        List<GymOwner> g =  adminServiceOperations.getUnverifiedGymOwners();
+        List<GymOwner> gymOwnerList =  adminServiceOperations.getUnverifiedGymOwners();
         int gymOwnerCounter = 1;
-        for (GymOwner gymOwner : g) {
+        for (GymOwner gymOwner : gymOwnerList) {
             System.out.println("GymOwner " + gymOwnerCounter + " --> ID: "
                     + gymOwner.getOwnerId() + ", Name: "
                     + gymOwner.getOwnerName() + ", Email: "
@@ -64,7 +64,7 @@ public class FlipFitGymAdminMenu {
         }
     }
 
-    public boolean verifyAdminCredentials(String id, String pass) {
+    public boolean verifyAdminCredentials(String userId, String password) {
         try {
             // verify from database
             return true;
