@@ -47,7 +47,7 @@ public class FlipFitGymOwnerClientMenu {
                     displayGyms(email);
                     break;
                 case 3:
-                    // delete a customer
+                    // delete a Customer
                     break;
                 case 4:
                     System.out.println(ANSI_BLUE+"Enter gym ID: "+ANSI_RESET);
