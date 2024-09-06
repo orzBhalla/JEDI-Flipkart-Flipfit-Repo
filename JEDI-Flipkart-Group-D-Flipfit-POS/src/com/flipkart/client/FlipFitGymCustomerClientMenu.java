@@ -10,16 +10,16 @@ import java.util.Scanner;
 
 
 public class FlipFitGymCustomerClientMenu {
-    static Scanner scanner = new Scanner(System.in);
+    Scanner scanner = new Scanner(System.in);
     User user = new User();
     UserServiceOperations userServiceOperations = new UserServiceOperations();
     GymServiceOperations gymServiceOperations = new GymServiceOperations();
 
     public boolean userLogin(String email, String pass) {
         if (validateUser(email, pass)) {
-            boolean flag = true;
+            boolean isLoggedIn = true;
             System.out.println("Login Successful! (Customer)");
-            while (flag) {
+            while (isLoggedIn) {
                 System.out.println("-------------CUSTOMER MENU-------------");
                 System.out.println("Press 1 to view all gyms with slots");
                 System.out.println("Press 2 to book slot");
@@ -50,11 +50,10 @@ public class FlipFitGymCustomerClientMenu {
                         }
                         break;
                     case 3:
-                        Scanner sc = new Scanner(System.in);
                         System.out.println("My Bookings: ");
                         System.out.println(viewAllBookings(email));
                         System.out.println("Enter Booking ID: ");
-                        int bookingId = sc.nextInt();
+                        int bookingId = Integer.parseInt(scanner.nextLine());
                         if(cancelSlot(bookingId))
                             System.out.println("Booking cancelled!");
                         else
@@ -82,7 +81,7 @@ public class FlipFitGymCustomerClientMenu {
                             System.out.println("Update was unsuccessful");
                         break;
                     case 7:
-                        flag = false;
+                        isLoggedIn = false;
                         break;
                     default:
                         System.out.println("Wrong choice!");
