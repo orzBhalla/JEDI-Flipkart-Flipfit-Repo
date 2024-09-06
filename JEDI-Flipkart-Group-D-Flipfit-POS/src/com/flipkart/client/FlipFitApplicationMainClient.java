@@ -1,6 +1,7 @@
 
 package com.flipkart.client;
 import java.util.Scanner;
+import static com.flipkart.constants.ColorConstants.*;
 
 public class FlipFitApplicationMainClient {
     static Scanner scanner = new Scanner(System.in);
@@ -10,17 +11,17 @@ public class FlipFitApplicationMainClient {
     static FlipFitGymAdminMenu adminMenu = new FlipFitGymAdminMenu();
 
     public static void main(String[] args) {
-        System.out.println("-----------------------------------------------------------------------------------");
+        System.out.println(ANSI_CYAN + "-----------------------------------------------------------------------------------");
         System.out.println("-----------------------Welcome to FlipFit: Your Fitness Partner--------------------");
-        System.out.println("-----------------------------------------------------------------------------------");
+        System.out.println("-----------------------------------------------------------------------------------"+  ANSI_RESET);
 
         boolean inInApp = true;
 
         while (inInApp) {
-            System.out.println("Press 1 for Login");
+            System.out.println(ANSI_BLUE+ "Press 1 for Login");
             System.out.println("Press 2 for Registration");
             System.out.println("Press 3 for Update Password");
-            System.out.println("Press 4 for Exit");
+            System.out.println("Press 4 for Exit" + ANSI_RESET);
             int optionSelected = Integer.parseInt(scanner.nextLine());
 
             switch (optionSelected) {
@@ -39,7 +40,7 @@ public class FlipFitApplicationMainClient {
                     switch (role) {
                         case 1:
                             if (!adminMenu.verifyAdminCredentials(userMail,password)) {
-                                System.out.println("Invalid credentials! Please enter valid credentials to login");
+                                System.out.println(ANSI_YELLOW+ "Invalid credentials! Please enter valid credentials to login"+ANSI_RESET);
                                 break;
                             }
                             System.out.println("Login successful! (Admin)");
