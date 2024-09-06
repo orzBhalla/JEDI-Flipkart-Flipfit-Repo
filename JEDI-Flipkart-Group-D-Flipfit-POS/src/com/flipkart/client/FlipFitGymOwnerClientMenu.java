@@ -211,17 +211,46 @@ public class FlipFitGymOwnerClientMenu {
         return gymOwnerServiceOperations.updateGymOwnerPassword(userMail, password, updatedPassword);
     }
 
+//    void displayGyms(String email) {
+//        int userId = gymOwnerServiceOperations.getGymOwnerIdByEmail(email);
+//        List<Gym> gymsList = gymOwnerServiceOperations.viewMyGyms(userId); // get all gyms from GymOwnerService
+//        for (Gym gym : gymsList) {
+//            System.out.println("Gym " + gym.getGymId() + ": ");
+//            System.out.println("Name: " + gym.getGymName() + "\nAddress: " + gym.getGymAddress() + "\nLocation: " + gym.getLocation());
+//            System.out.println("Slots: ");
+//            for (Slots slot : gym.getSlots()) {
+//                System.out.println("Slot: " + slot.getSlotsId() + "\nSlot Time: " + slot.getStartTime() + " - " + (slot.getStartTime() + 1) + "\nSeats: " + slot.getSeatCount());
+//            }
+//            System.out.println("-------------------------------------------------------------");
+//        }
+//    }
+
     void displayGyms(String email) {
         int userId = gymOwnerServiceOperations.getGymOwnerIdByEmail(email);
         List<Gym> gymsList = gymOwnerServiceOperations.viewMyGyms(userId); // get all gyms from GymOwnerService
+        if(gymsList.isEmpty()) {
+            System.out.println("No gyms found for the user with email: " + email);
+            return;
+        }
+
+        String gymLeftAlignFormat = "| %-5d | %-20s | %-40s | %-20s |%n";
+        String slotLeftAlignFormat = "| %-5d | %-15s | %-5d |%n";
+        System.out.format("+-------+----------------------+------------------------------------------+----------------------+\n");
+        System.out.format("| Gym ID|     Name             |           Address                        |     Location         |\n");
+        System.out.format("+-------+----------------------+------------------------------------------+----------------------+\n");
+
         for (Gym gym : gymsList) {
-            System.out.println("Gym " + gym.getGymId() + ": ");
-            System.out.println("Name: " + gym.getGymName() + "\nAddress: " + gym.getGymAddress() + "\nLocation: " + gym.getLocation());
+            System.out.format(gymLeftAlignFormat, gym.getGymId(), gym.getGymName(), gym.getGymAddress(), gym.getLocation());
             System.out.println("Slots: ");
+            System.out.format("+-------+---------------+-------+\n");
+            System.out.format("|Slot ID|     Time      | Seats |\n");
+            System.out.format("+-------+---------------+-------+\n");
+
             for (Slots slot : gym.getSlots()) {
-                System.out.println("Slot: " + slot.getSlotsId() + "\nSlot Time: " + slot.getStartTime() + " - " + (slot.getStartTime() + 1) + "\nSeats: " + slot.getSeatCount());
+                // String slotTime = String.format("%02d:%02d - %02d:%02d", slot.getStartTime() / 60, slot.getStartTime() % 60, (slot.getStartTime() + 1) / 60, (slot.getStartTime() + 1) % 60);
+                System.out.format(slotLeftAlignFormat, slot.getSlotsId(), slot.getStartTime() + " - " + (slot.getStartTime() + 1), slot.getSeatCount());
             }
-            System.out.println("-------------------------------------------------------------");
+            System.out.format("+-------+---------------+-------+\n");
         }
     }
 }
