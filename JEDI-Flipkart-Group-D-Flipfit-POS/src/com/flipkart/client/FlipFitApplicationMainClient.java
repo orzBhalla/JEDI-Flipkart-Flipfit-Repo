@@ -115,7 +115,7 @@ public class FlipFitApplicationMainClient {
                     break;
                 case 2:
                     System.out.println("-------------Registration Page--------------");
-                    System.out.println("Select your role:");
+                    System.out.println("Select your Choice:");
                     System.out.println("Press 1 for gym user");
                     System.out.println("Press 2 for gym owner");
                     System.out.println("Press 3 to go back");
