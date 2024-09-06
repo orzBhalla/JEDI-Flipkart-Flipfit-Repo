@@ -197,3 +197,5 @@ public class FlipFitGymCustomerClientMenu {
         return userServiceOperations.updateGymUserPassword(userMail, password, updatedPassword);
     }
 }
+
+

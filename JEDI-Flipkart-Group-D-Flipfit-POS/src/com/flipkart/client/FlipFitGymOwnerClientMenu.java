@@ -103,7 +103,7 @@ public class FlipFitGymOwnerClientMenu {
             int startTime = Integer.parseInt(scanner.nextLine());
             System.out.println("Enter available seats: ");
             int seatCount = Integer.parseInt(scanner.nextLine());
-            Slots slot = new Slots(currentCount - 1, startTime, seatCount);
+            Slots slot = new Slots(currentCount, startTime, seatCount);
             slots.add(slot);
             currentCount++;
         }
