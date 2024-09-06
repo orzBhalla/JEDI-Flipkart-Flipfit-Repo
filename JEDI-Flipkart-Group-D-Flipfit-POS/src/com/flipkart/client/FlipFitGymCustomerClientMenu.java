@@ -136,14 +136,15 @@ private void printGyms(List<Gym> gyms) {
 
     String gymLeftAlignFormat = "| %-5d | %-20s | %-20s | %-40s | %-15s |%n";
     System.out.println("Gym List:");
-    System.out.format("+-------+----------------------+----------------------+------------------------------------------+------------------+\n");
-    System.out.format("| Gym ID|     Name             |     Location         |           Address                         |     Status       |\n");
-    System.out.format("+-------+----------------------+----------------------+------------------------------------------+------------------+\n");
 
     for (Gym gym : gyms) {
+        System.out.format("+-------+----------------------+----------------------+------------------------------------------+------------------+\n");
+        System.out.format("| Gym ID|     Name             |     Location         |           Address                         |     Status       |\n");
+        System.out.format("+-------+----------------------+----------------------+------------------------------------------+------------------+\n");
         System.out.format(gymLeftAlignFormat, gym.getGymId(), gym.getGymName(), gym.getLocation(), gym.getGymAddress(), gym.getStatus());
-        System.out.println("Slot List:");
+        System.out.format("+-------+----------------------+----------------------+------------------------------------------+------------------+\n");
 
+        System.out.println("Slot List:");
         String slotLeftAlignFormat = "| %-15s | %-15s | %-15d |%n";
         System.out.format("+-----------------+-----------------+-----------------+\n");
         System.out.format("| Start Time      |   End Time      | Remaining Seats |\n");
