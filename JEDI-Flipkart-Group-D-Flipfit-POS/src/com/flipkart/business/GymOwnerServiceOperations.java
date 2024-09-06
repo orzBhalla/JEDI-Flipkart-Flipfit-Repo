@@ -4,11 +4,12 @@ import java.util.*;
 
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.GymOwner;
+import com.flipkart.bean.User;
 
 public class GymOwnerServiceOperations implements GymOwnerService {
 
     static Map<Integer,GymOwner> gymOwnerMap = new HashMap<Integer,GymOwner>();
-    static int counter=0;
+    static int counter = 1;
     GymServiceOperations gymServiceOperations = new GymServiceOperations();
     Map<Integer, Gym> gymMap = GymServiceOperations.getGymMap();
 
@@ -21,7 +22,6 @@ public class GymOwnerServiceOperations implements GymOwnerService {
         for(Gym gym : gymMap.values()){
             if(gym.getOwnerId() == userId){
                 myGyms.add(gym);
-                break;
             }
         }
         return myGyms;
@@ -70,6 +70,15 @@ public class GymOwnerServiceOperations implements GymOwnerService {
 
     public static Map<Integer, GymOwner> getGymOwnerMap() {
         return gymOwnerMap;
+    }
+
+    public int getGymOwnerIdByEmail(String email) {
+        for(GymOwner gymOwner : gymOwnerMap.values()){
+            if(gymOwner.getOwnerEmail().equals(email)){
+                return gymOwner.getOwnerId();
+            }
+        }
+        return -1;
     }
 }
 

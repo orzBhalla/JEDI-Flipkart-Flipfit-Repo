@@ -31,6 +31,9 @@ public class FlipFitGymAdminMenu {
 
     public void viewUnverifiedGyms() {
         List<Gym> gyms = adminServiceOperations.getUnverifiedGyms();
+        if(gyms.isEmpty()) {
+            return;
+        }
         String leftAlignFormat = "| %-5d | %-20s | %-5d | %-40s | %-20s | %-15s |%n";
         System.out.format("+-------+----------------------+--------+------------------------------------------+----------------------+------------------+");
         System.out.format("| Gym   |     Name             | Gym ID |           Address                        |   Location           |     Status       |");

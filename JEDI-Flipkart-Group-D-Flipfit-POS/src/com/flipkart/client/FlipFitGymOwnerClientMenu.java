@@ -76,7 +76,7 @@ public class FlipFitGymOwnerClientMenu {
 
     void addGym(String email) {
         Gym gym = new Gym();
-        int userId = userServiceOperations.getUserIdByEmail(email);
+        int userId = gymOwnerServiceOperations.getGymOwnerIdByEmail(email);
         gym.setOwnerId(userId);
 
         System.out.println("Enter details of the gym: ");
@@ -212,7 +212,7 @@ public class FlipFitGymOwnerClientMenu {
     }
 
     void displayGyms(String email) {
-        int userId = userServiceOperations.getUserIdByEmail(email);
+        int userId = gymOwnerServiceOperations.getGymOwnerIdByEmail(email);
         List<Gym> gymsList = gymOwnerServiceOperations.viewMyGyms(userId); // get all gyms from GymOwnerService
         for (Gym gym : gymsList) {
             System.out.println("Gym " + gym.getGymId() + ": ");

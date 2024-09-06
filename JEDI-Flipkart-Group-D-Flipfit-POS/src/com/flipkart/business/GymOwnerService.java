@@ -22,6 +22,8 @@ public interface GymOwnerService {
 
     boolean updateGymOwner(GymOwner gymOwner);
 
+    public int getGymOwnerIdByEmail(String email);
+
     public static Map<Integer, GymOwner> getGymOwnerMap() {
         return Map.of();
     }
