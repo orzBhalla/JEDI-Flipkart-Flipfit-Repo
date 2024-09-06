@@ -14,41 +14,43 @@ public class AdminServiceOperations implements AdminService{
     Map<Integer, Gym> gymMap = GymServiceOperations.getGymMap();
 
     public void viewUsers() {
-        for(Map.Entry<Integer, User> entry : userMap.entrySet()) {
-            System.out.println("User ID: " + entry.getValue().getUserId());
-            System.out.println("Name: " + entry.getValue().getUserName());
-            System.out.println("Email: " + entry.getValue().getEmail());
-            System.out.println("Phone Number: " + entry.getValue().getPhoneNumber());
-            System.out.println("Location: " + entry.getValue().getLocation());
-            System.out.println("Address: " + entry.getValue().getAddress());
-            System.out.println("-------------------------------------------------------------");
+        String leftAlignFormat = "| %-8s | %-20s | %-30s | %-15s | %-20s | %-40s |%n";
+        System.out.format("+----------+----------------------+-------------------------------+---------------+--------------------+----------------------------------------+%n");
+        System.out.format("| User ID  |     Name              | Email                         | Phone Number  | Location           | Address                              |%n");
+        System.out.format("+----------+----------------------+-------------------------------+---------------+--------------------+----------------------------------------+%n");
+
+        // Assuming 'entries' is a collection of user entries
+        for (Map.Entry<Integer, User> entry : userMap.entrySet()) {
+            User user = entry.getValue();
+            System.out.format(leftAlignFormat, user.getUserId(), user.getUserName(), user.getEmail(), user.getPhoneNumber(), user.getLocation(), user.getAddress());
         }
+        System.out.format("+----------+----------------------+-------------------------------+---------------+--------------------+----------------------------------------+%n");
     }
 
     public void viewGymOwners() {
-        for(Map.Entry<Integer, GymOwner> entry : gymOwnerMap.entrySet()) {
-            System.out.println("Gym Owner ID: " + entry.getValue().getOwnerId());
-            System.out.println("Name: " + entry.getValue().getOwnerName());
-            System.out.println("Email: " + entry.getValue().getOwnerEmail());
-            System.out.println("Phone Number: " + entry.getValue().getPhoneNo());
-            System.out.println("GST: " + entry.getValue().getGST());
-            System.out.println("National ID: " + entry.getValue().getNationalId());
-            System.out.println("Verification Status: " + entry.getValue().getVerificationStatus());
-            System.out.println("PAN: " + entry.getValue().getPAN());
-            System.out.println("-------------------------------------------------------------");
+        String leftAlignFormat = "| %-13s | %-20s | %-30s | %-15s | %-10s | %-20s | %-20s | %-20s |%n";
+        System.out.format("+---------------+----------------------+-------------------------------+---------------+------------+----------------------+----------------------+----------------------+%n");
+        System.out.format("| Gym Owner ID  |     Name              | Email                         | Phone Number  | GST        | National ID          | Verification Status  | PAN                  |%n");
+        System.out.format("+---------------+----------------------+-------------------------------+---------------+------------+----------------------+----------------------+----------------------+%n");
+
+        for (Map.Entry<Integer, GymOwner> entry : gymOwnerMap.entrySet()) {
+            GymOwner gymOwner = entry.getValue();
+            System.out.format(leftAlignFormat, gymOwner.getOwnerId(), gymOwner.getOwnerName(), gymOwner.getOwnerEmail(), gymOwner.getPhoneNo(), gymOwner.getGST(), gymOwner.getNationalId(), gymOwner.getVerificationStatus(), gymOwner.getPAN());
         }
+        System.out.format("+----------+----------------------+-------------------------------+---------------+--------------------+----------------------------------------+%n");
     }
 
     public void viewGyms() {
-        for(Map.Entry<Integer, Gym> entry : gymMap.entrySet()) {
-            System.out.println("Gym ID: " + entry.getValue().getGymId());
-            System.out.println("Name: " + entry.getValue().getGymName());
-            System.out.println("Address " + entry.getValue().getGymAddress());
-            System.out.println("Location: " + entry.getValue().getLocation());
-            System.out.println("Owner ID: " + entry.getValue().getOwnerId());
-            System.out.println("Status: " + entry.getValue().getStatus());
-            System.out.println("-------------------------------------------------------------");
+        String leftAlignFormat = "| %-6s | %-20s | %-40s | %-20s | %-10s | %-10s |%n";
+        System.out.format("+--------+----------------------+----------------------------------------+----------------------+----------+----------+%n");
+        System.out.format("| Gym ID |     Name              | Address                                | Location             | Owner ID | Status   |%n");
+        System.out.format("+--------+----------------------+----------------------------------------+----------------------+----------+----------+%n");
+
+        for (Map.Entry<Integer, Gym> entry : gymMap.entrySet()) {
+            Gym gym = entry.getValue();
+            System.out.format(leftAlignFormat, gym.getGymId(), gym.getGymName(), gym.getGymAddress(), gym.getLocation(), gym.getOwnerId(), gym.getStatus());
         }
+        System.out.format("+--------+----------------------+----------------------------------------+----------------------+----------+----------+%n");
     }
 
     public boolean verifyGym(int gymId) {
