@@ -102,22 +102,27 @@ public class UserServiceOperations implements UserService {
     }
 
     public boolean cancelSlot(int bookingId) {
+
         return gymServiceOperations.cancelBooking(bookingId);
     }
 
     public List<Bookings> viewAllBookings(int userId) {
+
         return gymServiceOperations.showBookings(userId);
     }
 
     public List<Gym> viewAllGymsWithSlots() {
+
         return gymServiceOperations.getAllGymsWithSlots();
     }
 
     public List<Gym> viewAllGymsByArea(String area) {
+
         return gymServiceOperations.getAllGymsByArea(area);
     }
 
     public static Map<Integer,User> getUserMap() {
+
         return userMap;
     }
 }
