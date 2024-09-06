@@ -61,13 +61,33 @@ public class FlipFitGymCustomerClientMenu {
                             System.out.println(ANSI_CYAN+"Booking not cancelled!"+ANSI_RESET);
                         break;
                     case 4:
+
+                    
+                        
+//                        System.out.println("My Bookings: ");
+//                        List<Bookings> bookings = viewAllBookings(email);
+//                        for (Bookings booking : bookings) {
+//                            System.out.println("Booking ID: " + booking.getBookingId() +
+//                                    ", Status: " + booking.getBookingStatus() + ", Time: "
+//                                    + booking.getTime() + ", Gym ID: " + booking.getGymId());
+//                            System.out.println("-------------------------------------------------------------");
+//                        }
                         System.out.println(ANSI_BOLD+ANSI_RED+"My Bookings: "+ANSI_RESET);
+                        
+
                         List<Bookings> bookings = viewAllBookings(email);
-                        for (Bookings booking : bookings) {
-                            System.out.println("Booking ID: " + booking.getBookingId() +
-                                    ", Status: " + booking.getBookingStatus() + ", Time: "
-                                    + booking.getTime() + ", Gym ID: " + booking.getGymId());
-                            System.out.println("-------------------------------------------------------------");
+                        if(bookings.isEmpty()) {
+                            System.out.println("No bookings found.");
+                        } else {
+                            String leftAlignFormat = "| %-10s | %-15s | %-10s | %-10s |%n";
+                            System.out.format("+------------+---------------+------------+------------+");
+                            System.out.format("| Booking ID |     Status    |    Time    |  Gym ID    |");
+                            System.out.format("+------------+---------------+------------+------------+");
+
+                            for (Bookings booking : bookings) {
+                                System.out.format(leftAlignFormat, booking.getBookingId(), booking.getBookingStatus(), booking.getTime(), booking.getGymId());
+                            }
+                            System.out.format("+------------+---------------+------------+------------+\n");
                         }
                         break;
                     case 5:
@@ -93,27 +113,55 @@ public class FlipFitGymCustomerClientMenu {
         return true;
     }
 
-    private void printGyms(List<Gym> y) {
-        for (Gym gym : y) {
-            System.out.println("-------------------------------------------------------------");
-            System.out.println("Gym ID: " + gym.getGymId() +
-                    ", Name: " + gym.getGymName() +
-                    ", Location: " + gym.getLocation() +
-                    ", Address: " + gym.getGymAddress() +
-                    ", Status: " + gym.getStatus());
-            System.out.println("Slot List:");
-
-            String leftAlignFormat = "| %-15d | %-15d | %-20d |%n";
-            System.out.format("+-----------------+-----------------+----------------------+\n");
-            System.out.format("| Start Time      |   End Time      | Remaining Seats      |\n");
-            System.out.format("+-----------------+-----------------+----------------------+\n");
-
-            for (Slots slot : gym.getSlots()) {
-                System.out.format(leftAlignFormat, slot.getStartTime(), (slot.getStartTime() + 1), slot.getSeatCount());
-            }
-            System.out.format("+-----------------+-----------------+----------------------+\n");
-        }
+//    private void printGyms(List<Gym> y) {
+//        for (Gym gym : y) {
+//
+//            System.out.println("Gym ID: " + gym.getGymId() +
+//                    ", Name: " + gym.getGymName() +
+//                    ", Location: " + gym.getLocation() +
+//                    ", Address: " + gym.getGymAddress() +
+//                    ", Status: " + gym.getStatus());
+//            System.out.println("Slot List:");
+//
+//            String leftAlignFormat = "| %-15d | %-15d | %-20d |%n";
+//            System.out.format("+-----------------+-----------------+----------------------+\n");
+//            System.out.format("| Start Time      |   End Time      | Remaining Seats      |\n");
+//            System.out.format("+-----------------+-----------------+----------------------+\n");
+//
+//            for (Slots slot : gym.getSlots()) {
+//                System.out.format(leftAlignFormat, slot.getStartTime(), (slot.getStartTime() + 1), slot.getSeatCount());
+//            }
+//            System.out.format("+-----------------+-----------------+----------------------+\n");
+//        }
+//    }
+private void printGyms(List<Gym> gyms) {
+    if(gyms.isEmpty()) {
+        System.out.println("No gyms found.");
+        return;
     }
+
+    String gymLeftAlignFormat = "| %-5d | %-20s | %-20s | %-40s | %-15s |%n";
+    System.out.println("Gym List:");
+    System.out.format("+-------+----------------------+----------------------+------------------------------------------+------------------+\n");
+    System.out.format("| Gym ID|     Name             |     Location         |           Address                         |     Status       |\n");
+    System.out.format("+-------+----------------------+----------------------+------------------------------------------+------------------+\n");
+
+    for (Gym gym : gyms) {
+        System.out.format(gymLeftAlignFormat, gym.getGymId(), gym.getGymName(), gym.getLocation(), gym.getGymAddress(), gym.getStatus());
+        System.out.println("Slot List:");
+
+        String slotLeftAlignFormat = "| %-15s | %-15s | %-15d |%n";
+        System.out.format("+-----------------+-----------------+-----------------+\n");
+        System.out.format("| Start Time      |   End Time      | Remaining Seats |\n");
+        System.out.format("+-----------------+-----------------+-----------------+\n");
+
+        for (Slots slot : gym.getSlots()) {
+              System.out.format(slotLeftAlignFormat, slot.getStartTime(), (slot.getStartTime() + 1), slot.getSeatCount());
+        }
+        System.out.format("+-----------------+-----------------+-----------------+\n");
+        System.out.println();
+    }
+}
 
     public boolean validateUser(String email, String password) {
         return userServiceOperations.validateUser(email, password);
