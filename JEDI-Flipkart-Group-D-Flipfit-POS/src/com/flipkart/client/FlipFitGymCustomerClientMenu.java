@@ -39,9 +39,9 @@ public class FlipFitGymCustomerClientMenu {
                         printGyms(gyms2);
                         System.out.println("Enter the following: ");
                         System.out.println("Gym ID: ");
-                        int gymId = scanner.nextInt();
+                        int gymId = Integer.parseInt(scanner.nextLine());;
                         System.out.println("Slot Time: ");
-                        int time = scanner.nextInt();
+                        int time = Integer.parseInt(scanner.nextLine());;
 
                         if (bookSlot(gymId, time, email)) {
                             System.out.println("Booked successfully!");

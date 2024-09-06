@@ -36,7 +36,7 @@ public class FlipFitGymOwnerClientMenu {
             System.out.println("Press 5 to update your details");
             System.out.println("Press 6 to logout");
 
-            int y = scanner.nextInt();
+            int y = Integer.parseInt(scanner.nextLine());
 
             switch (y) {
                 case 1:
@@ -50,11 +50,11 @@ public class FlipFitGymOwnerClientMenu {
                     break;
                 case 4:
                     System.out.println("Enter gym ID: ");
-                    int gymId = scanner.nextInt();
+                    int gymId = Integer.parseInt(scanner.nextLine());;
                     System.out.println("Enter slot ID: ");
-                    int slotId = scanner.nextInt();
+                    int slotId = Integer.parseInt(scanner.nextLine());;
                     System.out.println("Enter updated seat count: ");
-                    int seatCount = scanner.nextInt();
+                    int seatCount = Integer.parseInt(scanner.nextLine());;
                     if(gymService.updateSeatCount(gymId, slotId, seatCount))
                         System.out.println("Seat count updated!");
                     else
