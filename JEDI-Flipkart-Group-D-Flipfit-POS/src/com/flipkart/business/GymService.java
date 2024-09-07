@@ -8,18 +8,18 @@ import java.util.Map;
 
 public interface GymService {
 
-    public boolean addBookings(Bookings bookings); // user
+    public boolean addBookings(Bookings bookings);
 
-    public boolean cancelBooking(int bookingId); // user
+    public boolean cancelBooking(int bookingId);
 
-    public List<Bookings> showBookings(int userId); // user
+    public List<Bookings> showBookings(int userId);
 
-    public List<Gym> getAllGymsWithSlots(); // user
+    public List<Gym> getAllGymsWithSlots();
 
-    public List<Gym> getAllGymsByArea(String areaName); // user
+    public List<Gym> getAllGymsByArea(String areaName);
 
-    void listAllGyms(); // user
+    void listAllGyms();
 
-    void listAllGymsWithArea(String areaName); // users
+    void listAllGymsWithArea(String areaName);
 
 }

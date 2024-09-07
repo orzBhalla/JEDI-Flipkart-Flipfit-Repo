@@ -263,6 +263,28 @@ public class FlipFitGymOwnerDAOImplementation implements FlipFitGymOwnerDAOInter
         return true;
     }
 
+    public int getSeatCount(int gymId, int startTime) {
+        conn = DatabaseConnector.getConnection();
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        int seatCount = -1;
+
+        try {
+            preparedStatement = conn.prepareStatement(SQLConstants.GET_SEAT_COUNT);
+            preparedStatement.setInt(1, gymId);
+            preparedStatement.setInt(2, startTime);
+
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                seatCount = resultSet.getInt("seatCount");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return -1;
+        }
+        return seatCount;
+    }
+
     public int getGymOwnerIdByEmail(String email) {
         conn = DatabaseConnector.getConnection();
         ResultSet resultSet = null;
@@ -270,7 +292,7 @@ public class FlipFitGymOwnerDAOImplementation implements FlipFitGymOwnerDAOInter
         int ownerId = -1;
 
         try {
-            preparedStatement = conn.prepareStatement(SQLConstants.GET_SLOTS_BY_GYM_ID);
+            preparedStatement = conn.prepareStatement(SQLConstants.GET_GYM_OWNER_ID_BY_EMAIL);
             preparedStatement.setString(1, email);
 
             resultSet = preparedStatement.executeQuery();
