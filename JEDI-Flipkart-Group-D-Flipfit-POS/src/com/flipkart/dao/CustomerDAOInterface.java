@@ -7,27 +7,23 @@ import com.flipkart.bean.User;
 import java.util.List;
 
 public interface CustomerDAOInterface {
-    List<Gym> getAllGymsByArea();
-    boolean bookSlot(int gymId, int time, String email);
-
-    // List<Bookings> getAllBookingByUserID(String userId);
+    boolean bookSlot(int gymId, int startTime, String email);
 
     List<Bookings> getAllBookingByUserID(String userId);
 
     boolean cancelBooking(int bookingId);
-    boolean validateUser(String username, String pass);
-    void createUser(User user);
 
-    //boolean getUserByEmail(String email);
-    boolean updateUserDetails(User user, User user1);
+    boolean validateUser(String email, String password);
+
+    boolean createUser(User user);
+
+    boolean updateUserDetails(User user);
 
     int getUserIdByEmail(String email);
 
-    List<Bookings> viewAllBookings(String userId);
+    List<Bookings> viewAllBookingsByUserId(String userId);
 
-    List<Gym> viewAllGymswithSlots();
+    List<Gym> viewAllGymsWithSlots();
 
-    List<Gym> viewAllGymsByArea();
-
-    boolean getUserByEmail(String email);
+    List<Gym> viewAllGymsByArea(String area);
 }

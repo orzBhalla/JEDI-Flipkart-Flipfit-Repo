@@ -128,27 +128,7 @@ public class FlipFitGymCustomerClientMenu {
         return true;
     }
 
-//    private void printGyms(List<Gym> y) {
-//        for (Gym gym : y) {
-//
-//            System.out.println("Gym ID: " + gym.getGymId() +
-//                    ", Name: " + gym.getGymName() +
-//                    ", Location: " + gym.getLocation() +
-//                    ", Address: " + gym.getGymAddress() +
-//                    ", Status: " + gym.getStatus());
-//            System.out.println("Slot List:");
-//
-//            String leftAlignFormat = "| %-15d | %-15d | %-20d |%n";
-//            System.out.format("+-----------------+-----------------+----------------------+\n");
-//            System.out.format("| Start Time      |   End Time      | Remaining Seats      |\n");
-//            System.out.format("+-----------------+-----------------+----------------------+\n");
-//
-//            for (Slots slot : gym.getSlots()) {
-//                System.out.format(leftAlignFormat, slot.getStartTime(), (slot.getStartTime() + 1), slot.getSeatCount());
-//            }
-//            System.out.format("+-----------------+-----------------+----------------------+\n");
-//        }
-//    }
+
 private void printGyms(List<Gym> gyms) {
     if(gyms.isEmpty()) {
         System.out.println("No gyms found.");

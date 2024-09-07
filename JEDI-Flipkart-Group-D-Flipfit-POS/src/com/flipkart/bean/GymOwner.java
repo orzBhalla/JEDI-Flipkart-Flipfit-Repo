@@ -12,7 +12,7 @@ public class GymOwner {
     private List<Gym> gyms;
     private String PAN;
     private String ownerName;
-   // private String status; //what is the use?
+    // private String status; // what is the use?
     private String verificationStatus;
     private String status;
 
