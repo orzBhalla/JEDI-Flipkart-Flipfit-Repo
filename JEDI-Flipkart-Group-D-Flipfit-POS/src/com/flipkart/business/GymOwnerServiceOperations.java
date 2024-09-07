@@ -90,10 +90,12 @@ import java.util.*;
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.GymOwner;
 import com.flipkart.dao.FlipFitGymOwnerDAOImplementation;
+import com.flipkart.dao.FlipFitUpdatePasswordDAOImplementation;
 
 public class GymOwnerServiceOperations implements GymOwnerService {
 
     FlipFitGymOwnerDAOImplementation flipFitGymOwnerDAOImplementation = new FlipFitGymOwnerDAOImplementation();
+    FlipFitUpdatePasswordDAOImplementation flipFitUpdatePasswordDAOImplementation = new FlipFitUpdatePasswordDAOImplementation();
 
     public boolean addGym(Gym gym) {
         return flipFitGymOwnerDAOImplementation.addGym(gym);
@@ -112,7 +114,7 @@ public class GymOwnerServiceOperations implements GymOwnerService {
     }
 
     public boolean updateGymOwnerPassword(String email, String password, String updatedPassword) {
-        return false;
+        return flipFitUpdatePasswordDAOImplementation.updateGymOwnerPassword(email, password, updatedPassword);
     }
 
     public boolean updateGymOwner(GymOwner gymOwner) {

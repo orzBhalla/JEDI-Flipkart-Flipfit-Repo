@@ -1,15 +1,8 @@
 package com.flipkart.dao;
 
-import com.flipkart.bean.GymOwner;
-import com.flipkart.bean.User;
-
 public interface FlipFitUpdatePasswordDAOInterface {
+    public boolean updateGymOwnerPassword(String email, String password, String updatedPassword);
 
-    public void updateGymOwnerPassword(String email, String password, String updatedPassword);
-
-    public void updateGymUserPassword(String email, String password, String updatedPassword);
-
-    public boolean verifyGymOwnerPassword(String email, String password);
-
-    public boolean verifyGymUserPassword(String email, String password);
+    public boolean updateGymUserPassword(String email, String password, String updatedPassword);
 }
+

@@ -5,9 +5,9 @@ public class SQLConstants {
 
     public static final String GYM_OWNER_ADD_SLOTS = "INSERT INTO Slots (startTime, seatCount, gymId) VALUES (?, ?, ?)";
 
-    public static final String GYM_USER_UPDATE_PASSWORD = "UPDATE User SET Password = ? WHERE EmailId = ? AND Password = ?";
+    public static final String GYM_USER_UPDATE_PASSWORD = "UPDATE User SET password = ? WHERE email = ? AND password = ?";
 
-    public static final String GYM_OWNER_UPDATE_PASSWORD = "UPDATE GymOwner SET GymOwnerPassword = ? WHERE GymOwnerEmail = ? AND Password = ?";
+    public static final String GYM_OWNER_UPDATE_PASSWORD = "UPDATE GymOwner SET password = ? WHERE ownerEmail = ? AND password = ?";
 
     public static final String GYM_USER_VERIFY_PASSWORD = "SELECT * FROM User WHERE EmailId = ? AND UserPassword = ?";
 

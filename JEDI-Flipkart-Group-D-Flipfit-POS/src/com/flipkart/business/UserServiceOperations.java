@@ -133,12 +133,14 @@ import com.flipkart.bean.Bookings;
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.User;
 import com.flipkart.dao.FlipFitCustomerDAOImplementation;
+import com.flipkart.dao.FlipFitUpdatePasswordDAOImplementation;
 
 import java.util.*;
 
 public class UserServiceOperations implements UserService {
 
     FlipFitCustomerDAOImplementation flipFitCustomerDAOImplementation = new FlipFitCustomerDAOImplementation();
+    FlipFitUpdatePasswordDAOImplementation flipFitUpdatePasswordDAOImplementation = new FlipFitUpdatePasswordDAOImplementation();
 
     public boolean createUser(User user) {
         return flipFitCustomerDAOImplementation.createUser(user);
@@ -149,7 +151,7 @@ public class UserServiceOperations implements UserService {
     }
 
     public boolean updateGymUserPassword(String email, String password, String updatedPassword) {
-        return false;
+        return flipFitUpdatePasswordDAOImplementation.updateGymUserPassword(email, password, updatedPassword);
     }
 
     public boolean updateUserDetails(User user) {
