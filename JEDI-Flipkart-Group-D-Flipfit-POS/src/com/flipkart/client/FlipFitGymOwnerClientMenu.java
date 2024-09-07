@@ -52,11 +52,11 @@ public class FlipFitGymOwnerClientMenu {
                 case 4:
                     System.out.println(ANSI_BLUE+"Enter gym ID: "+ANSI_RESET);
                     int gymId = Integer.parseInt(scanner.nextLine());;
-                    System.out.println(ANSI_BLUE+"Enter slot ID: "+ANSI_RESET);
-                    int slotId = Integer.parseInt(scanner.nextLine());;
+                    System.out.println(ANSI_BLUE+"Enter start time: "+ANSI_RESET);
+                    int startTime = Integer.parseInt(scanner.nextLine());;
                     System.out.println(ANSI_BLUE+"Enter updated seat count: "+ANSI_RESET);
                     int seatCount = Integer.parseInt(scanner.nextLine());;
-                    if(gymService.updateSeatCount(gymId, slotId, seatCount))
+                    if(gymOwnerServiceOperations.updateSeatCount(gymId, startTime, seatCount))
                         System.out.println(ANSI_BLUE+"Seat count updated!"+ANSI_RESET);
                     else
                         System.out.println(ANSI_BLUE+"Seat count not updated"+ANSI_RESET);
@@ -110,7 +110,7 @@ public class FlipFitGymOwnerClientMenu {
         }
 
         gym.setSlots(slots);
-        if(gymService.addGym(gym))
+        if(gymOwnerServiceOperations.addGym(gym))
             System.out.println(ANSI_PURPLE+"Gym added successfully!"+ANSI_RESET);
         else
             System.out.println(ANSI_PURPLE+"Gym already exists!"+ANSI_RESET);

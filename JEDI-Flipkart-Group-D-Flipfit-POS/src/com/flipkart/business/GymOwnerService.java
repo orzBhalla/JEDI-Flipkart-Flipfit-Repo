@@ -8,13 +8,11 @@ import com.flipkart.bean.GymOwner;
 
 public interface GymOwnerService {
 
-    void addGymWithSlots(Gym gym);
+    boolean addGym(Gym gym);
 
     List<Gym> viewMyGyms(int userId);
 
     boolean validateGymOwner(String email, String password);
-
-    // boolean validateLogin(String email, String password);
 
     boolean createGymOwner(GymOwner gymOwner);
 
@@ -22,12 +20,8 @@ public interface GymOwnerService {
 
     boolean updateGymOwner(GymOwner gymOwner);
 
-    public int getGymOwnerIdByEmail(String email);
+    int getGymOwnerIdByEmail(String email);
 
-    public static Map<Integer, GymOwner> getGymOwnerMap() {
-        return Map.of();
-    }
-
-
+    boolean updateSeatCount(int gymId, int startTime, int seatCount);
 }
 

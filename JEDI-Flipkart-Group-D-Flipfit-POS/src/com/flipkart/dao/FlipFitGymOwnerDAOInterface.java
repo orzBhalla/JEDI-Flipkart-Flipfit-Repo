@@ -23,4 +23,6 @@ public interface FlipFitGymOwnerDAOInterface {
     boolean validateGymOwner(String email, String password);
 
     List<Slots> getSlotsByGymId(int gymId);
+
+    int getGymOwnerIdByEmail(String email);
 }

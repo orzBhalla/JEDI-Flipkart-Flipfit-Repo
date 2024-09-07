@@ -38,4 +38,6 @@ public class SQLConstants {
     public static final String UPDATE_GYM_OWNER = "UPDATE GymOwner SET ownerName = ?, phoneNo = ? WHERE ownerEmail = ?";
 
     public static final String GYM_OWNER_UPDATE_SEAT_COUNT = "UPDATE Slots SET seatCount = seatCount + ? WHERE startTime = ? AND gymId = ?)";
+
+    public static final String GET_GYM_OWNER_ID_BY_EMAIL = "SELECT ownerId FROM GymOwner WHERE ownerEmail = ?";
 }
