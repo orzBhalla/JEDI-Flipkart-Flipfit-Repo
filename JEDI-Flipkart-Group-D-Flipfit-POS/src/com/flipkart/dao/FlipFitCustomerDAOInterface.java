@@ -6,10 +6,10 @@ import com.flipkart.bean.User;
 
 import java.util.List;
 
-public interface CustomerDAOInterface {
+public interface FlipFitCustomerDAOInterface {
     boolean bookSlot(int gymId, int startTime, String email);
 
-    List<Bookings> getAllBookingByUserID(String userId);
+    List<Bookings> getAllBookingsByUserID(int userId);
 
     boolean cancelBooking(int bookingId);
 
@@ -20,8 +20,6 @@ public interface CustomerDAOInterface {
     boolean updateUserDetails(User user);
 
     int getUserIdByEmail(String email);
-
-    List<Bookings> viewAllBookingsByUserId(String userId);
 
     List<Gym> viewAllGymsWithSlots();
 

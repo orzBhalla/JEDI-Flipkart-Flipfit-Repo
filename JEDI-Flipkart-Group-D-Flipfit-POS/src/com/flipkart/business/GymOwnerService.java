@@ -1,7 +1,6 @@
 package com.flipkart.business;
 
 import java.util.List;
-import java.util.Map;
 
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.GymOwner;
@@ -10,7 +9,7 @@ public interface GymOwnerService {
 
     boolean addGym(Gym gym);
 
-    List<Gym> viewMyGyms(int userId);
+    List<Gym> viewMyGyms(int gymOwnerId);
 
     boolean validateGymOwner(String email, String password);
 

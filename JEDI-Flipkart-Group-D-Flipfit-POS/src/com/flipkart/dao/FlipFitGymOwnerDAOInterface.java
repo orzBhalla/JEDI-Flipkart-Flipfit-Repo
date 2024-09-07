@@ -18,6 +18,8 @@ public interface FlipFitGymOwnerDAOInterface {
 
     boolean updateSeatCount(int gymId, int startTime, int seatCount);
 
+    int getSeatCount(int gymId, int startTime);
+
     boolean addSlots(int gymId, List<Slots> slots);
 
     boolean validateGymOwner(String email, String password);

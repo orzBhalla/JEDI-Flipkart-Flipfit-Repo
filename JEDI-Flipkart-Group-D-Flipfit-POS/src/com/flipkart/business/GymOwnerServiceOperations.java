@@ -99,8 +99,8 @@ public class GymOwnerServiceOperations implements GymOwnerService {
         return flipFitGymOwnerDAOImplementation.addGym(gym);
     }
 
-    public List<Gym> viewMyGyms(int ownerId) {
-        return flipFitGymOwnerDAOImplementation.viewMyGyms(ownerId);
+    public List<Gym> viewMyGyms(int gymOwnerId) {
+        return flipFitGymOwnerDAOImplementation.viewMyGyms(gymOwnerId);
     }
 
     public boolean createGymOwner(GymOwner gymOwner){
