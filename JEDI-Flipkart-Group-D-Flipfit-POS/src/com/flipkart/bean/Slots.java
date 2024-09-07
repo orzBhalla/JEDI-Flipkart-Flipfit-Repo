@@ -5,10 +5,10 @@ public class Slots {
     private int startTime;
     private int seatCount;
 
-    public Slots(int slotsId, int startTime, int seatCount) {
+    public Slots(int gymId, int startTime, int endTime, int seatCount) {
         this.setSlotsId(slotsId);
-        this.setStartTime(startTime);
-        this.setSeatCount(seatCount);
+        this.setStartTime(this.startTime);
+        this.setSeatCount(this.seatCount);
     }
 
     public int getSlotsId() {

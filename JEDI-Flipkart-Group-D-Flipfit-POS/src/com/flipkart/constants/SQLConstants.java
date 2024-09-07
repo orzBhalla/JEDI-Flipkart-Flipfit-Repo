@@ -22,7 +22,7 @@ public class SQLConstants {
 
     public static final String ADMIN_VERIFY_GYMS = "UPDATE Gym SET IsGymVerified = ? WHERE GymId = ?";
 
-    public static final String ADMIN_VERIFY_GYMOWNERS = "UPDATE GymOwner SET IsVerified = ? WHERE id = ?";
+    public static final String ADMIN_VERIFY_GYMOWNERS = "UPDATE GymOwner SET IsVerified = ? WHERE id = ?"; //gym owner id check in schema
 
     public static final String ADMIN_VIEW_UNVERIFIED_GYMS = "SELECT * FROM Gym WHERE IsGymVerified =?";
 

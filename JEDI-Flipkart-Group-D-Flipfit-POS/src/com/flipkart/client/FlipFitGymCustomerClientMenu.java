@@ -13,7 +13,22 @@ import java.util.Scanner;
 public class FlipFitGymCustomerClientMenu {
     Scanner scanner = new Scanner(System.in);
     User user = new User();
-    UserServiceOperations userServiceOperations = new UserServiceOperations();
+    UserServiceOperations userServiceOperations = new UserServiceOperations() {
+        @Override
+        public boolean cancelSlot(int bookingId) {
+            return false;
+        }
+
+        @Override
+        public List<Bookings> viewAllBookings(int userId) {
+            return List.of();
+        }
+
+        @Override
+        public boolean bookSlot(int gymId, int time, String email) {
+            return false;
+        }
+    };
     GymServiceOperations gymServiceOperations = new GymServiceOperations();
 
     public boolean userLogin(String email, String pass) {
