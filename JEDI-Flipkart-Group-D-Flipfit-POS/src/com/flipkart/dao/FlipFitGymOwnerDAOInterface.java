@@ -8,7 +8,7 @@ import com.flipkart.bean.Slots;
 import java.util.List;
 
 public interface FlipFitGymOwnerDAOInterface {
-    List<Gym> viewMyGyms(int userId);
+    List<Gym> viewMyGyms(int ownerId);
 
     boolean createGymOwner(GymOwner gymOwner);
 
@@ -16,9 +16,11 @@ public interface FlipFitGymOwnerDAOInterface {
 
     boolean addGym(Gym gym);
 
-    boolean updateSeatCount(int gymId, int slotId, int seatCount);
+    boolean updateSeatCount(int gymId, int startTime, int seatCount);
 
-    // boolean addSlots(int gymId, List<Slots> slots);
+    boolean addSlots(int gymId, List<Slots> slots);
 
     boolean validateGymOwner(String email, String password);
+
+    List<Slots> getSlotsByGymId(int gymId);
 }

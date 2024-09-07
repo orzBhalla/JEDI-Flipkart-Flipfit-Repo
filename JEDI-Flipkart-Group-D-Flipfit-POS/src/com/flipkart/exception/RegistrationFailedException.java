@@ -3,6 +3,6 @@ package com.flipkart.exception;
 public class RegistrationFailedException extends Exception{
     @Override
     public String getMessage(){
-        return "Registration Failed. Please try again";
+        return "registration failed. Please try again";
     }
 }
