@@ -1,8 +1,8 @@
 package com.flipkart.exception;
 
-public class ListNotFoundException extends Exception{
+public class ListNotFoundException extends Exception {
     @Override
     public String getMessage(){
-        return "List not found.";
+        return "List not found";
     }
 }
