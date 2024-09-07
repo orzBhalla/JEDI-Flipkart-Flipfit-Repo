@@ -1,8 +1,8 @@
 package com.flipkart.exception;
 
-public class VerificationFailedException extends Exception{
+public class VerificationFailedException extends Exception {
     @Override
-    public String getMessage(){
-        return "Verification Failed.";
+    public String getMessage() {
+        return "verification failed";
     }
 }

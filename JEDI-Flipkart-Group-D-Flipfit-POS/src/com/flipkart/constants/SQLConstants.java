@@ -9,23 +9,21 @@ public class SQLConstants {
 
     public static final String GYM_OWNER_UPDATE_PASSWORD = "UPDATE GymOwner SET password = ? WHERE ownerEmail = ? AND password = ?";
 
-    public static final String GYM_USER_VERIFY_PASSWORD = "SELECT * FROM User WHERE EmailId = ? AND UserPassword = ?";
-
     public static final String GYM_OWNER_VERIFY_PASSWORD = "SELECT * FROM GymOwner WHERE ownerEmail = ? AND password = ?";
 
     public static final String ADMIN_VIEW_ALL_USERS = "SELECT * FROM User";
 
     public static final String ADMIN_VIEW_ALL_GYMS = "SELECT * FROM Gym";
 
-    public static final String ADMIN_VIEW_ALL_GYMOWNERS = "SELECT * FROM GymOwner";
+    public static final String ADMIN_VIEW_ALL_GYM_OWNERS = "SELECT * FROM GymOwner";
 
-    public static final String ADMIN_VERIFY_GYMS = "UPDATE Gym SET IsGymVerified = ? WHERE GymId = ?";
+    public static final String ADMIN_VERIFY_GYM = "UPDATE Gym SET Status = 'verified' WHERE gymId = ?";
 
-    public static final String ADMIN_VERIFY_GYMOWNERS = "UPDATE GymOwner SET IsVerified = ? WHERE id = ?"; //gym owner id check in schema
+    public static final String ADMIN_VERIFY_GYM_OWNER = "UPDATE GymOwner SET verificationStatus = 'verified' WHERE ownerId = ?";
 
-    public static final String ADMIN_VIEW_UNVERIFIED_GYMS = "SELECT * FROM Gym WHERE IsGymVerified = ?";
+    public static final String ADMIN_VIEW_UNVERIFIED_GYMS = "SELECT * FROM Gym WHERE Status = 'unverified'";
 
-    public static final String ADMIN_VIEW_UNVERIFIED_GYMOWNER = "SELECT * FROM GymOwner WHERE IsVerified =?";
+    public static final String ADMIN_VIEW_UNVERIFIED_GYM_OWNERS = "SELECT * FROM GymOwner WHERE verificationStatus = 'unverified'?";
 
     public static final String INSERT_GYM_OWNER = "INSERT INTO GymOwner (ownerName, ownerEmail, password, phoneNo, nationalId, GST, PAN, verificationStatus) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 
