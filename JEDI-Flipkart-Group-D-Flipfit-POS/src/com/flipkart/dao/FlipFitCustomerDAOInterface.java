@@ -13,6 +13,8 @@ public interface FlipFitCustomerDAOInterface {
 
     boolean cancelBooking(int bookingId);
 
+    Bookings getBooking(int bookingId);
+
     boolean validateUser(String email, String password);
 
     boolean createUser(User user);

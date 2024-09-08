@@ -113,7 +113,7 @@ public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInter
             if (userId == -1) {
                 return false;
             }
-            int bookingStatus = 1;
+            int bookingStatus = 1; // confirmed
             int slotId = getSlotsIdByGymIdAndStartTime(gymId, startTime);
             if (slotId == -1) {
                 return false;
@@ -198,14 +198,17 @@ public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInter
         try (Connection conn = DatabaseConnector.getConnection();
              PreparedStatement preparedStatement = conn.prepareStatement(SQLConstants.UPDATE_BOOKING_STATUS)) {
 
-            int bookingStatus = 2;
+            int bookingStatus = 2; // cancelled
             preparedStatement.setInt(1, bookingStatus);
             preparedStatement.setInt(2, bookingId);
 
             int rowsAffected = preparedStatement.executeUpdate();
             if (rowsAffected > 0) {
                 // System.out.println("Booking cancelled successfully!");
-                return true;
+                Bookings booking = getBooking(bookingId);
+                int gymId = booking.getGymId();
+                int startTime = booking.getTime();
+                return flipFitGymOwnerDAOImplementation.updateSeatCount(gymId, startTime, 1);
             } else {
                 throw new BookingCancellationFailedException();
             }
@@ -216,6 +219,32 @@ public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInter
             // System.out.println(e.getMessage());
             return false;
         }
+    }
+
+    public Bookings getBooking(int bookingId) {
+        Bookings booking = new Bookings();
+
+        try (Connection conn = DatabaseConnector.getConnection();
+             PreparedStatement preparedStatement = conn.prepareStatement(SQLConstants.GET_BOOKING_BY_BOOKING_ID)) {
+
+            preparedStatement.setInt(1, bookingId);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    booking.setBookingId(resultSet.getInt("bookingId"));
+                    booking.setTime(resultSet.getInt("time"));
+                    booking.setSlotId(resultSet.getInt("slotId"));
+                    booking.setBookingStatus(resultSet.getInt("bookingStatus"));
+                    booking.setGymId(resultSet.getInt("gymId"));
+                    booking.setUserId(resultSet.getInt("userId"));
+                }
+            } catch (SQLException e) {
+                System.out.println("SQL Error: " + e.getMessage());
+            }
+        } catch (SQLException e) {
+            System.out.println("SQL Error: " + e.getMessage());
+        }
+        return booking;
     }
 
     @Override

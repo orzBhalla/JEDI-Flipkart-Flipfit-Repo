@@ -58,4 +58,6 @@ public class SQLConstants {
     public static final String GET_BOOKINGS_BY_USER_ID = "SELECT * FROM Bookings WHERE userId = ?";
 
     public static final String UPDATE_BOOKING_STATUS = "UPDATE Bookings SET bookingStatus = ? WHERE bookingId = ?";
+
+    public static final String GET_BOOKING_BY_BOOKING_ID = "SELECT * FROM Bookings WHERE bookingId = ?";
 }
