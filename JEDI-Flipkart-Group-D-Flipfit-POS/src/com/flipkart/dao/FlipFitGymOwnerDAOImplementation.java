@@ -226,8 +226,7 @@ public class FlipFitGymOwnerDAOImplementation implements FlipFitGymOwnerDAOInter
                 slotList.add(slots);
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            return null;
+            System.out.println("SQL Error: " + e.getMessage());
         }
         return slotList;
     }

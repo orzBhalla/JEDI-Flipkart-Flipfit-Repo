@@ -36,48 +36,28 @@ public class FlipFitGymCustomerClientMenu {
                     case 2:
                         List<Gym> gyms2 = viewAllGymsWithSlots();
                         printGyms(gyms2);
+
                         System.out.println(ANSI_BOLD + ANSI_RED + "Enter the following: " + ANSI_RESET);
                         System.out.println(ANSI_CYAN + "Gym ID: " + ANSI_RESET);
                         int gymId = Integer.parseInt(scanner.nextLine());
-                        ;
                         System.out.println(ANSI_GREEN + "Slot Time: " + ANSI_RESET);
                         int time = Integer.parseInt(scanner.nextLine());
-                        ;
 
                         if (bookSlot(gymId, time, email)) {
-                            System.out.println(ANSI_CYAN + "Booked successfully!" + ANSI_RESET);
-                        } else {
-                            System.out.println(ANSI_CYAN + "Booking unsuccessful" + ANSI_RESET);
+                            System.out.println(ANSI_CYAN + "Slot booked successfully!" + ANSI_RESET);
                         }
                         break;
                     case 3:
-                        System.out.println(ANSI_GREEN + "My Bookings: " + ANSI_RESET);
-                        System.out.println(viewAllBookings(email));
+                        viewAllBookings(email);
                         System.out.println(ANSI_RED + "Enter Booking ID: " + ANSI_RESET);
                         int bookingId = Integer.parseInt(scanner.nextLine());
                         if (cancelSlot(bookingId))
-                            System.out.println(ANSI_CYAN + "Booking cancelled!" + ANSI_RESET);
+                            System.out.println(ANSI_CYAN + "Booking cancelled successfully!" + ANSI_RESET);
                         else
-                            System.out.println(ANSI_CYAN + "Booking not cancelled!" + ANSI_RESET);
+                            System.out.println(ANSI_CYAN + "Booking cancellation failed." + ANSI_RESET);
                         break;
                     case 4:
-                        System.out.println(ANSI_BOLD + ANSI_RED + "My Bookings: " + ANSI_RESET);
-
-
-                        List<Bookings> bookings = viewAllBookings(email);
-                        if (bookings.isEmpty()) {
-                            System.out.println("No bookings found.");
-                        } else {
-                            String leftAlignFormat = "| %-10s | %-15s | %-10s | %-10s |%n";
-                            System.out.format("+------------+---------------+------------+------------+");
-                            System.out.format("| Booking ID |     Status    |    Time    |  Gym ID    |");
-                            System.out.format("+------------+---------------+------------+------------+");
-
-                            for (Bookings booking : bookings) {
-                                System.out.format(leftAlignFormat, booking.getBookingId(), booking.getBookingStatus(), booking.getTime(), booking.getGymId());
-                            }
-                            System.out.format("+------------+---------------+------------+------------+\n");
-                        }
+                        viewAllBookings(email);
                         break;
                     case 5:
                         String location = scanner.nextLine();
@@ -88,7 +68,7 @@ public class FlipFitGymCustomerClientMenu {
                         if (updateUserDetails())
                             System.out.println(ANSI_RED + "User updated successfully!" + ANSI_RESET);
                         else
-                            System.out.println(ANSI_RED + "Update was unsuccessful" + ANSI_RESET);
+                            System.out.println(ANSI_RED + "User update was unsuccessful" + ANSI_RESET);
                         break;
                     case 7:
                         isLoggedIn = false;
@@ -149,9 +129,27 @@ public class FlipFitGymCustomerClientMenu {
         return userServiceOperations.cancelSlot(bookingId);
     }
 
-    public List<Bookings> viewAllBookings(String email) {
+    public void viewAllBookings(String email) {
+        System.out.println(ANSI_BOLD + ANSI_RED + "My Bookings: " + ANSI_RESET);
         int userId = userServiceOperations.getUserIdByEmail(email);
-        return userServiceOperations.viewAllBookings(userId);
+        if (userId == -1) {
+            System.out.println("No such user exists with email: " + email);
+            return;
+        }
+        List<Bookings> bookings = userServiceOperations.viewAllBookings(userId);
+        if (bookings.isEmpty()) {
+            System.out.println("No bookings found.");
+        } else {
+            String leftAlignFormat = "| %-10s | %-15s | %-10s | %-10s |%n";
+            System.out.format("+------------+---------------+------------+------------+");
+            System.out.format("| Booking ID |     Status    |    Time    |  Gym ID    |");
+            System.out.format("+------------+---------------+------------+------------+");
+
+            for (Bookings booking : bookings) {
+                System.out.format(leftAlignFormat, booking.getBookingId(), booking.getBookingStatus(), booking.getTime(), booking.getGymId());
+            }
+            System.out.format("+------------+---------------+------------+------------+\n");
+        }
     }
 
     List<Gym> viewAllGymsByArea(String location) {

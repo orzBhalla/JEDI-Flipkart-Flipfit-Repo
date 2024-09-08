@@ -55,7 +55,6 @@ public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInter
             }
         } catch (SQLException e) {
             System.out.println("SQL Error: " + e.getMessage());
-            return null;
         }
         return gyms;
     }
@@ -93,7 +92,6 @@ public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInter
             }
         } catch (SQLException e) {
             System.out.println("SQL Error: " + e.getMessage());
-            return null;
         }
         return gyms;
     }
@@ -112,8 +110,14 @@ public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInter
             }
 
             int userId = getUserIdByEmail(email);
+            if (userId == -1) {
+                return false;
+            }
             int bookingStatus = 1;
             int slotId = getSlotsIdByGymIdAndStartTime(gymId, startTime);
+            if (slotId == -1) {
+                return false;
+            }
             preparedStatement.setInt(1, userId);
             preparedStatement.setInt(2, bookingStatus);
             preparedStatement.setInt(3, startTime);
@@ -123,7 +127,7 @@ public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInter
             int rowsInserted = preparedStatement.executeUpdate();
 
             if (rowsInserted > 0) {
-                System.out.println("Record inserted successfully!");
+                // System.out.println("Record inserted successfully!");
                 return flipFitGymOwnerDAOImplementation.updateSeatCount(gymId, startTime, -1);
             }
         } catch (SQLException e) {
@@ -200,18 +204,18 @@ public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInter
 
             int rowsAffected = preparedStatement.executeUpdate();
             if (rowsAffected > 0) {
-                System.out.println("Booking cancelled successfully!");
+                // System.out.println("Booking cancelled successfully!");
                 return true;
             } else {
                 throw new BookingCancellationFailedException();
             }
         } catch (SQLException e) {
             System.out.println("SQL Error: " + e.getMessage());
+            return false;
         } catch (BookingCancellationFailedException e) {
-            System.out.println(e.getMessage());
+            // System.out.println(e.getMessage());
             return false;
         }
-        return false;
     }
 
     @Override
@@ -280,18 +284,18 @@ public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInter
 
             int rowsUpdated = preparedStatement.executeUpdate();
             if (rowsUpdated > 0) {
-                System.out.println("Record updated successfully!");
+                // System.out.println("Record updated successfully!");
+                return true;
             } else {
                 throw new UpdationFailedException();
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("SQL Error: " + e.getMessage());
             return false;
         } catch (UpdationFailedException e) {
-            System.out.println("User " + e.getMessage());
+            // System.out.println("User " + e.getMessage());
             return false;
         }
-        return true;
     }
 
     public int getUserIdByEmail(String email) {
@@ -309,7 +313,7 @@ public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInter
                 userId = resultSet.getInt("userId");
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("SQL Error: " + e.getMessage());
             return -1;
         }
         return userId;
