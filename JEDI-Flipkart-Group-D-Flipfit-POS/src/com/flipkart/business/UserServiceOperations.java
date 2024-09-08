@@ -181,4 +181,8 @@ public class UserServiceOperations implements UserService {
     public List<Gym> viewAllGymsByArea(String area) {
         return flipFitCustomerDAOImplementation.viewAllGymsByArea(area);
     }
+
+    public int getSeatCount(int gymId, int startTime) {
+        return flipFitCustomerDAOImplementation.getSeatCount(gymId, startTime);
+    }
 }

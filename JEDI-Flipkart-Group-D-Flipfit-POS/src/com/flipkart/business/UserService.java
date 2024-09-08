@@ -27,5 +27,7 @@ public interface UserService {
     boolean updateUserDetails(User user);
 
     int getUserIdByEmail(String email);
+
+    int getSeatCount(int gymId, int startTime);
 }
 

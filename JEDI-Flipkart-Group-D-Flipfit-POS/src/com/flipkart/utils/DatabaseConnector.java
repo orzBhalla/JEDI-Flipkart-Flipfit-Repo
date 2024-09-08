@@ -9,13 +9,14 @@ import java.util.Properties;
 
 public class DatabaseConnector {
     private static Connection connection = null;
+
     public static Connection getConnection() {
         try {
             if (isValid()) {
                 return connection;
             } else {
                 try {
-                    Properties prop = new Properties(); // Properties is used to read files
+                    Properties prop = new Properties();
                     InputStream inputStream = DatabaseConnector.class.getClassLoader().getResourceAsStream("./config.properties");
                     prop.load(inputStream);
                     String driver = prop.getProperty("driver");

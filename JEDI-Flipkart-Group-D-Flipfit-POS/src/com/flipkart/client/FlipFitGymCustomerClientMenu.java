@@ -25,8 +25,9 @@ public class FlipFitGymCustomerClientMenu {
                 System.out.println("Press 3 to cancel slot");
                 System.out.println("Press 4 to view all bookings");
                 System.out.println("Press 5 to view all gyms by area");
-                System.out.println("Press 6 to update your details");
-                System.out.println("Press 7 to logout" + ANSI_RESET);
+                System.out.println("Press 6 to view a slot's availability");
+                System.out.println("Press 7 to update your details");
+                System.out.println("Press 8 to logout" + ANSI_RESET);
                 int choice = Integer.parseInt(scanner.nextLine());
                 switch (choice) {
                     case 1:
@@ -65,12 +66,24 @@ public class FlipFitGymCustomerClientMenu {
                         printGyms(gyms3);
                         break;
                     case 6:
+                        System.out.println(ANSI_RED + "Enter gym ID: " + ANSI_RESET);
+                        int _gymId = Integer.parseInt(scanner.nextLine());
+                        System.out.println(ANSI_RED + "Enter start time: " + ANSI_RESET);
+                        int _startTime = Integer.parseInt(scanner.nextLine());
+                        int availableSeatCount = userServiceOperations.getSeatCount(_gymId, _startTime);
+                        if(availableSeatCount == -1) {
+                            System.out.println("Seat count is not available. Please try again." + ANSI_RESET);
+                            break;
+                        }
+                        System.out.println(ANSI_GREEN + "Available seat count: " + availableSeatCount + ANSI_RESET);
+                        break;
+                    case 7:
                         if (updateUserDetails())
                             System.out.println(ANSI_RED + "User updated successfully!" + ANSI_RESET);
                         else
                             System.out.println(ANSI_RED + "User update was unsuccessful" + ANSI_RESET);
                         break;
-                    case 7:
+                    case 8:
                         isLoggedIn = false;
                         break;
                     default:
