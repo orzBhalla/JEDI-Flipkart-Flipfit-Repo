@@ -23,7 +23,7 @@ public class SQLConstants {
 
     public static final String ADMIN_VIEW_UNVERIFIED_GYMS = "SELECT * FROM Gym WHERE Status = 'unverified'";
 
-    public static final String ADMIN_VIEW_UNVERIFIED_GYM_OWNERS = "SELECT * FROM GymOwner WHERE verificationStatus = 'unverified'?";
+    public static final String ADMIN_VIEW_UNVERIFIED_GYM_OWNERS = "SELECT * FROM GymOwner WHERE verificationStatus = 'unverified'";
 
     public static final String INSERT_GYM_OWNER = "INSERT INTO GymOwner (ownerName, ownerEmail, password, phoneNo, nationalId, GST, PAN, verificationStatus) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 
