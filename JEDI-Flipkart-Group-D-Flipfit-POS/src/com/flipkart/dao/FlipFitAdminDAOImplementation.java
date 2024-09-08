@@ -207,7 +207,7 @@ public class FlipFitAdminDAOImplementation implements FlipFitAdminDAOInterface {
                 gyms.add(gym);
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("SQL Error: " + e.getMessage());
         }
         return gyms;
     }
@@ -246,7 +246,7 @@ public class FlipFitAdminDAOImplementation implements FlipFitAdminDAOInterface {
                 gymOwners.add(gymOwner);
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("SQL Error: " + e.getMessage());
         }
         return gymOwners;
     }

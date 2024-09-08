@@ -20,7 +20,7 @@ public class FlipFitGymOwnerDAOImplementation implements FlipFitGymOwnerDAOInter
     DatabaseConnector connector;
 
     @Override
-    public boolean addGym(Gym gym){
+    public boolean addGym(Gym gym) {
         conn = DatabaseConnector.getConnection();
         Statement statement = null;
         ResultSet resultSet = null;
@@ -30,7 +30,7 @@ public class FlipFitGymOwnerDAOImplementation implements FlipFitGymOwnerDAOInter
         try {
             statement = conn.createStatement();
 
-            preparedStatement =  conn.prepareStatement(SQLConstants.GYM_OWNER_INSERT_GYM, statement.RETURN_GENERATED_KEYS);
+            preparedStatement = conn.prepareStatement(SQLConstants.GYM_OWNER_INSERT_GYM, statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, gym.getGymName());
             preparedStatement.setString(2, gym.getGymAddress());
             preparedStatement.setString(3, gym.getLocation());
@@ -38,46 +38,47 @@ public class FlipFitGymOwnerDAOImplementation implements FlipFitGymOwnerDAOInter
             preparedStatement.setString(5, gym.getStatus());
 
             int rowsInserted = preparedStatement.executeUpdate();
-            if (rowsInserted > 0) {
-                System.out.println("Record inserted successfully!");
-            } else {
+            if (rowsInserted == 0) {
                 throw new RegistrationFailedException();
             }
 
-            ResultSet rs = preparedStatement.getGeneratedKeys();
-            if (rs.next()) {
-                gymId = rs.getInt(1);
+            resultSet = preparedStatement.getGeneratedKeys();
+            if (resultSet.next()) {
+                gymId = resultSet.getInt(1);
             }
-        } catch (RegistrationFailedException e){
-            System.out.println("Gym " + e.getMessage());
+        } catch (RegistrationFailedException e) {
+            // System.out.println("Gym " + e.getMessage());
             return false;
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("SQL Error: " + e.getMessage());
             return false;
         }
         return addSlots(gymId, gym.getSlots());
     }
 
     @Override
-    public boolean addSlots(int gymId, List<Slots> slots){
+    public boolean addSlots(int gymId, List<Slots> slots) {
         conn = DatabaseConnector.getConnection();
         PreparedStatement preparedStatement = null;
 
-        for(Slots slot: slots){
+        for (Slots slot : slots) {
             try {
-                preparedStatement =  conn.prepareStatement(SQLConstants.GYM_OWNER_ADD_SLOTS);
+                preparedStatement = conn.prepareStatement(SQLConstants.GYM_OWNER_ADD_SLOTS);
                 preparedStatement.setInt(1, slot.getStartTime());
                 preparedStatement.setInt(2, slot.getSeatCount());
                 preparedStatement.setInt(3, gymId);
 
                 int rowsInserted = preparedStatement.executeUpdate();
                 if (rowsInserted > 0) {
-                    System.out.println("Record inserted successfully!");
+                    // System.out.println("Record inserted successfully!");
                 } else {
                     throw new SlotInsertionFailedException();
                 }
-            } catch(SlotInsertionFailedException | SQLException e){
-                System.out.println(e.getMessage());
+            } catch (SlotInsertionFailedException e) {
+                // System.out.println(e.getMessage());
+                return false;
+            } catch (SQLException e) {
+                System.out.println("SQL Error: " + e.getMessage());
                 return false;
             }
         }
@@ -91,14 +92,14 @@ public class FlipFitGymOwnerDAOImplementation implements FlipFitGymOwnerDAOInter
         conn = DatabaseConnector.getConnection();
 
         try {
-            preparedStatement =  conn.prepareStatement(SQLConstants.INSERT_GYM_OWNER);
+            preparedStatement = conn.prepareStatement(SQLConstants.INSERT_GYM_OWNER);
             preparedStatement.setString(1, gymOwner.getOwnerName());
             preparedStatement.setString(2, gymOwner.getOwnerEmail());
             preparedStatement.setString(3, gymOwner.getPassword());
             preparedStatement.setString(4, gymOwner.getPhoneNo());
             preparedStatement.setString(5, gymOwner.getNationalId());
             preparedStatement.setString(6, gymOwner.getGST());
-            preparedStatement.setString(7,gymOwner.getPAN());
+            preparedStatement.setString(7, gymOwner.getPAN());
             preparedStatement.setString(8, gymOwner.getVerificationStatus());
 
             int rowsInserted = preparedStatement.executeUpdate();
@@ -108,7 +109,7 @@ public class FlipFitGymOwnerDAOImplementation implements FlipFitGymOwnerDAOInter
             } else {
                 throw new RegistrationFailedException();
             }
-        } catch(RegistrationFailedException e){
+        } catch (RegistrationFailedException e) {
             // System.out.println("Gym owner " + e.getMessage());
             return false;
         } catch (SQLException e) {
@@ -118,7 +119,7 @@ public class FlipFitGymOwnerDAOImplementation implements FlipFitGymOwnerDAOInter
     }
 
     @Override
-    public boolean updateGymOwner(GymOwner gymOwner){
+    public boolean updateGymOwner(GymOwner gymOwner) {
         conn = DatabaseConnector.getConnection();
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -133,18 +134,18 @@ public class FlipFitGymOwnerDAOImplementation implements FlipFitGymOwnerDAOInter
 
             int rowsUpdated = preparedStatement.executeUpdate();
             if (rowsUpdated > 0) {
-                System.out.println("Record updated successfully!");
+                // System.out.println("Record updated successfully!");
+                return true;
             } else {
                 throw new UpdationFailedException();
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("SQL Error: " + e.getMessage());
             return false;
         } catch (UpdationFailedException e) {
-            System.out.println("Gym owner " + e.getMessage());
+            // System.out.println("Gym owner " + e.getMessage());
             return false;
         }
-        return true;
     }
 
     @Override
@@ -200,13 +201,12 @@ public class FlipFitGymOwnerDAOImplementation implements FlipFitGymOwnerDAOInter
                 gyms.add(gym);
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            return null;
+            System.out.println("SQL Error: " + e.getMessage());
         }
         return gyms;
     }
 
-    public List<Slots> getSlotsByGymId(int gymId){
+    public List<Slots> getSlotsByGymId(int gymId) {
         conn = DatabaseConnector.getConnection();
         ResultSet resultSet = null;
         PreparedStatement preparedStatement = null;
@@ -248,18 +248,18 @@ public class FlipFitGymOwnerDAOImplementation implements FlipFitGymOwnerDAOInter
 
             int rowsUpdated = preparedStatement.executeUpdate();
             if (rowsUpdated > 0) {
-                System.out.println("Record updated successfully!");
+                // System.out.println("Record updated successfully!");
+                return true;
             } else {
                 throw new UpdationFailedException();
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("SQL Error: " + e.getMessage());
             return false;
         } catch (UpdationFailedException e) {
-            System.out.println("Seat count " + e.getMessage());
+            // System.out.println("Seat count " + e.getMessage());
             return false;
         }
-        return true;
     }
 
     public int getSeatCount(int gymId, int startTime) {
@@ -299,7 +299,7 @@ public class FlipFitGymOwnerDAOImplementation implements FlipFitGymOwnerDAOInter
                 ownerId = resultSet.getInt("ownerId");
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("SQL Error: " + e.getMessage());
             return -1;
         }
         return ownerId;

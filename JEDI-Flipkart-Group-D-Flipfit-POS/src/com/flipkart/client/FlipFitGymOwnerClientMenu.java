@@ -44,7 +44,7 @@ public class FlipFitGymOwnerClientMenu {
                     displayGyms(email);
                     break;
                 case 3:
-                    // delete a Customer
+                    // delete a customer
                     break;
                 case 4:
                     System.out.println(ANSI_BLUE + "Enter gym ID: " + ANSI_RESET);
@@ -65,7 +65,7 @@ public class FlipFitGymOwnerClientMenu {
                     if (updateGymOwnerDetails())
                         System.out.println(ANSI_BLUE + "Gym owner updated successfully!" + ANSI_RESET);
                     else
-                        System.out.println(ANSI_BLUE + "Update was unsuccessful" + ANSI_RESET);
+                        System.out.println(ANSI_BLUE + "Gym owner not updated" + ANSI_RESET);
                     break;
                 case 6:
                     return true;
@@ -78,6 +78,10 @@ public class FlipFitGymOwnerClientMenu {
     void addGym(String email) {
         Gym gym = new Gym();
         int gymOwnerId = gymOwnerServiceOperations.getGymOwnerIdByEmail(email);
+        if (gymOwnerId == -1) {
+            System.out.println("No such gym owner exists with email: " + email);
+            return;
+        }
         gym.setOwnerId(gymOwnerId);
 
         System.out.println(ANSI_BOLD + ANSI_YELLOW + "Enter details of the gym: " + ANSI_RESET);
@@ -214,6 +218,11 @@ public class FlipFitGymOwnerClientMenu {
 
     void displayGyms(String email) {
         int gymOwnerId = gymOwnerServiceOperations.getGymOwnerIdByEmail(email);
+        if (gymOwnerId == -1) {
+            System.out.println("No such gym owner exists with email: " + email);
+            return;
+        }
+
         List<Gym> gymsList = gymOwnerServiceOperations.viewMyGyms(gymOwnerId);
         if (gymsList.isEmpty()) {
             System.out.println("No gyms found for the gym owner with email: " + email);

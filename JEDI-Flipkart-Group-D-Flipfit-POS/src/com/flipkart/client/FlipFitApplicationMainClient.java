@@ -111,7 +111,7 @@ public class FlipFitApplicationMainClient {
                             }
                             break;
                         default:
-                            System.out.println(ANSI_RED + "You selected an invalid option. Please select a valid option" + ANSI_RESET);
+                            System.out.println(ANSI_RED + "You have selected an invalid option. Please select a valid option" + ANSI_RESET);
                             break;
                     }
                     break;
