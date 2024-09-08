@@ -3,11 +3,13 @@ package com.flipkart.client;
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.GymOwner;
 import com.flipkart.business.AdminServiceOperations;
+import com.flipkart.constants.AdminCredentials;
 
 import java.util.List;
 
 public class FlipFitGymAdminMenu {
     AdminServiceOperations adminServiceOperations = new AdminServiceOperations();
+    AdminCredentials adminCredentials = new AdminCredentials();
 
     public void viewGyms() {
         adminServiceOperations.viewGyms();
@@ -21,8 +23,8 @@ public class FlipFitGymAdminMenu {
         adminServiceOperations.viewGymOwners();
     }
 
-    public boolean verifyGym(int id) {
-        return adminServiceOperations.verifyGym(id);
+    public boolean verifyGym(int gymId) {
+        return adminServiceOperations.verifyGym(gymId);
     }
 
     public boolean verifyGymOwner(int gymOwnerId) {
@@ -48,25 +50,6 @@ public class FlipFitGymAdminMenu {
         System.out.format("+-------+----------------------+--------+------------------------------------------+----------------------+------------------+\n");
     }
 
-
-//    public void viewUnverifiedGymOwners() {
-//        List<GymOwner> gymOwnerList =  adminServiceOperations.getUnverifiedGymOwners();
-//        String leftAlignFormat = "| %-5d | %-20s | %-5d | %-40s | %-20s | %-15s |%n";
-//        int gymOwnerCounter = 1;
-//        for (GymOwner gymOwner : gymOwnerList) {
-//            System.out.println("GymOwner " + gymOwnerCounter + " --> ID: "
-//                    + gymOwner.getOwnerId() + ", Name: "
-//                    + gymOwner.getOwnerName() + ", Email: "
-//                    + gymOwner.getOwnerEmail()
-//                    + ", Phone Number: "
-//                    + gymOwner.getPhoneNo()
-//                    + ", Verification Status: "
-//                    + gymOwner.getVerificationStatus());
-//            gymOwnerCounter++;
-//            System.out.println("-------------------------------------------------------------");
-//        }
-//    }
-
     public void viewUnverifiedGymOwners() {
         List<GymOwner> gymOwnerList = adminServiceOperations.getUnverifiedGymOwners();
         if(gymOwnerList.isEmpty()) {
@@ -88,10 +71,9 @@ public class FlipFitGymAdminMenu {
     }
 
 
-    public boolean verifyAdminCredentials(String userId, String password) {
+    public boolean verifyAdminCredentials(String userMail, String password) {
         try {
-            // verify from database
-            return true;
+            return userMail.equals(AdminCredentials.ADMIN_EMAIL) && password.equals(AdminCredentials.ADMIN_PASSWORD);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return false;

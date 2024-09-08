@@ -103,19 +103,18 @@ public class FlipFitGymOwnerDAOImplementation implements FlipFitGymOwnerDAOInter
 
             int rowsInserted = preparedStatement.executeUpdate();
             if (rowsInserted > 0) {
-                System.out.println("Record inserted successfully!");
+                // System.out.println("Record inserted successfully!");
+                return true;
             } else {
                 throw new RegistrationFailedException();
             }
-
         } catch(RegistrationFailedException e){
-            System.out.println("Gym owner " + e.getMessage());
+            // System.out.println("Gym owner " + e.getMessage());
             return false;
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("SQL Error: " + e.getMessage());
             return false;
         }
-        return true;
     }
 
     @Override
@@ -164,7 +163,7 @@ public class FlipFitGymOwnerDAOImplementation implements FlipFitGymOwnerDAOInter
                 return true;
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("SQL Error: " + e.getMessage());
             return false;
         }
         return false;

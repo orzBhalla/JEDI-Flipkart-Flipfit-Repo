@@ -158,9 +158,9 @@ public class FlipFitGymOwnerClientMenu {
         gymOwner.setStatus(gymOwnerStatus);
 
         if (gymOwnerServiceOperations.createGymOwner(gymOwner)) {
-            System.out.println(ANSI_YELLOW + "Gym Owner Created!" + ANSI_RESET);
+            System.out.println(ANSI_YELLOW + "Gym owner created!" + ANSI_RESET);
         } else {
-            System.out.println(ANSI_YELLOW + "Gym Owner Creation Failed!" + ANSI_RESET);
+            System.out.println(ANSI_YELLOW + "Gym owner not created!" + ANSI_RESET);
         }
     }
 

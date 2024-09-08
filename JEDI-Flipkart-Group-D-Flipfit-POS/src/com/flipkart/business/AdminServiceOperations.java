@@ -112,36 +112,54 @@ public class AdminServiceOperations implements AdminService {
     FlipFitAdminDAOImplementation flipFitAdminDAOImplementation = new FlipFitAdminDAOImplementation();
 
     public void viewUsers() {
+        List<User> users = flipFitAdminDAOImplementation.viewUsers();
+        if(users.isEmpty()) {
+            System.out.println("No users found.");
+            return;
+        }
+
         String leftAlignFormat = "| %-8s | %-20s | %-30s | %-15s | %-20s | %-40s |%n";
         System.out.format(ANSI_CYAN + "+----------+----------------------+-------------------------------+---------------+--------------------+--------------------------------------+%n");
         System.out.format("| User ID  |     Name             | Email                         | Phone Number  | Location           | Address                              |%n");
         System.out.format("+----------+----------------------+-------------------------------+---------------+--------------------+--------------------------------------+%n" + ANSI_RESET);
 
-        for (User user : flipFitAdminDAOImplementation.viewUsers()) {
+        for (User user : users) {
             System.out.format(leftAlignFormat, user.getUserId(), user.getUserName(), user.getEmail(), user.getPhoneNumber(), user.getLocation(), user.getAddress());
         }
         System.out.format("+----------+----------------------+-------------------------------+---------------+--------------------+--------------------------------------+%n");
     }
 
     public void viewGymOwners() {
+        List<GymOwner> gymOwners = flipFitAdminDAOImplementation.viewGymOwners();
+        if(gymOwners.isEmpty()) {
+            System.out.println("No gym owners found.");
+            return;
+        }
+
         String leftAlignFormat = "| %-13s | %-20s | %-30s | %-15s | %-10s | %-20s | %-20s | %-20s |%n";
         System.out.format(ANSI_CYAN + "+---------------+----------------------+-------------------------------+---------------+------------+----------------------+----------------------+----------------------+%n");
         System.out.format("| Gym Owner ID  |     Name             | Email                         | Phone Number  | GST        | National ID          | Verification Status  | PAN                  |%n");
         System.out.format("+---------------+----------------------+-------------------------------+---------------+------------+----------------------+----------------------+----------------------+%n" + ANSI_RESET);
 
-        for (GymOwner gymOwner : flipFitAdminDAOImplementation.viewGymOwners()) {
+        for (GymOwner gymOwner : gymOwners) {
             System.out.format(leftAlignFormat, gymOwner.getOwnerId(), gymOwner.getOwnerName(), gymOwner.getOwnerEmail(), gymOwner.getPhoneNo(), gymOwner.getGST(), gymOwner.getNationalId(), gymOwner.getVerificationStatus(), gymOwner.getPAN());
         }
         System.out.format("+---------------+----------------------+-------------------------------+---------------+------------+----------------------+----------------------+----------------------+%n");
     }
 
     public void viewGyms() {
+        List<Gym> gyms = flipFitAdminDAOImplementation.viewGyms();
+        if(gyms.isEmpty()) {
+            System.out.println("No gyms found.");
+            return;
+        }
+
         String leftAlignFormat = "| %-6s | %-20s | %-40s | %-20s | %-10s | %-10s |%n";
         System.out.format(ANSI_CYAN + "+--------+----------------------+----------------------------------------+----------------------+----------+----------+%n");
         System.out.format("| Gym ID |     Name             | Address                                | Location             | Owner ID | Status   |%n");
         System.out.format("+--------+----------------------+----------------------------------------+----------------------+----------+----------+%n" + ANSI_RESET);
 
-        for (Gym gym : flipFitAdminDAOImplementation.viewGyms()) {
+        for (Gym gym : gyms) {
             System.out.format(leftAlignFormat, gym.getGymId(), gym.getGymName(), gym.getGymAddress(), gym.getLocation(), gym.getOwnerId(), gym.getStatus());
         }
         System.out.format("+--------+----------------------+----------------------------------------+----------------------+----------+----------+%n");

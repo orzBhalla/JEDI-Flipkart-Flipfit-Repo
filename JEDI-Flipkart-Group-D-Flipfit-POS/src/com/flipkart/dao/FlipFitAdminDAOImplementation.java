@@ -46,7 +46,7 @@ public class FlipFitAdminDAOImplementation implements FlipFitAdminDAOInterface {
                 gyms.add(gym);
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("SQL Error: " + e.getMessage());
         }
         return gyms;
     }
@@ -81,7 +81,7 @@ public class FlipFitAdminDAOImplementation implements FlipFitAdminDAOInterface {
                 users.add(user);
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("SQL Error: " + e.getMessage());
         }
         return users;
     }
@@ -120,7 +120,7 @@ public class FlipFitAdminDAOImplementation implements FlipFitAdminDAOInterface {
                 gymOwners.add(gymOwner);
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("SQL Error: " + e.getMessage());
         }
         return gymOwners;
     }
@@ -138,15 +138,15 @@ public class FlipFitAdminDAOImplementation implements FlipFitAdminDAOInterface {
 
             int rowsUpdated = preparedStatement.executeUpdate(); // execute update statement
             if (rowsUpdated > 0) {
-                System.out.println("Gym owner verified successfully!");
+                // System.out.println("Gym owner verified successfully!");
                 return true;
             } else {
                 throw new VerificationFailedException();
             }
         } catch (VerificationFailedException e) {
-            System.out.println("Gym owner " + e.getMessage());
+            // System.out.println("Gym owner " + e.getMessage());
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("SQL Error: " + e.getMessage());
         }
         return false;
     }
@@ -164,15 +164,15 @@ public class FlipFitAdminDAOImplementation implements FlipFitAdminDAOInterface {
 
             int rowsUpdated = preparedStatement.executeUpdate(); // execute update statement
             if (rowsUpdated > 0) {
-                System.out.println("Gym verified successfully!");
+                // System.out.println("Gym verified successfully!");
                 return true;
             } else {
                 throw new VerificationFailedException();
             }
         } catch (VerificationFailedException e) {
-            System.out.println("Gym " + e.getMessage());
+            // System.out.println("Gym " + e.getMessage());
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("SQL Error: " + e.getMessage());
         }
         return false;
     }

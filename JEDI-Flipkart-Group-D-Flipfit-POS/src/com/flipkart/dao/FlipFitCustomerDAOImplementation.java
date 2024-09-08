@@ -251,7 +251,8 @@ public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInter
 
             int rowsInserted = preparedStatement.executeUpdate();
             if (rowsInserted > 0) {
-                System.out.println("User created successfully!");
+                // System.out.println("User created successfully!");
+                return true;
             } else {
                 throw new RegistrationFailedException();
             }
@@ -259,10 +260,9 @@ public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInter
             System.out.println("SQL Error: " + e.getMessage());
             return false;
         } catch (RegistrationFailedException e) {
-            System.out.println("User " + e.getMessage());
+            // System.out.println("User " + e.getMessage());
             return false;
         }
-        return true;
     }
 
     public boolean updateUserDetails(User user) {

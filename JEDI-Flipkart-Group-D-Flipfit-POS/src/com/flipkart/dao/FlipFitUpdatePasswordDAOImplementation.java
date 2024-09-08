@@ -30,13 +30,13 @@ public class FlipFitUpdatePasswordDAOImplementation implements FlipFitUpdatePass
 
             int rowsInserted = preparedStatement.executeUpdate();
             if (rowsInserted > 0) {
-                System.out.println("Password updated successfully!");
+                // System.out.println("Password updated successfully!");
                 return true;
             } else {
                 throw new WrongCredentialsException();
             }
         } catch (WrongCredentialsException e) {
-            System.out.println("(Gym owner) " + e.getMessage());
+            // System.out.println("(Gym owner) " + e.getMessage());
             return false;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -61,13 +61,13 @@ public class FlipFitUpdatePasswordDAOImplementation implements FlipFitUpdatePass
 
             int rowsInserted = preparedStatement.executeUpdate();
             if (rowsInserted > 0) {
-                System.out.println("Password updated successfully!");
+                // System.out.println("Password updated successfully!");
                 return true;
             } else {
                 throw new WrongCredentialsException();
             }
         } catch (WrongCredentialsException e) {
-            System.out.println("(Gym user) " + e.getMessage());
+            // System.out.println("(Gym user) " + e.getMessage());
             return false;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
