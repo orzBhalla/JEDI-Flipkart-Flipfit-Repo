@@ -28,11 +28,12 @@ public class FlipFitGymOwnerClientMenu {
         while (true) {
             System.out.println(ANSI_BOLD + ANSI_PURPLE + "-----------------Gym Owner Menu-----------------" + ANSI_RESET);
             System.out.println(ANSI_PURPLE + "Press 1 to add a gym");
-            System.out.println("Press 2 to view all gyms");
-            System.out.println("Press 3 to delete a customer");
-            System.out.println("Press 4 to update seat count");
-            System.out.println("Press 5 to update your details");
-            System.out.println("Press 6 to logout" + ANSI_RESET);
+            System.out.println("Press 2 to update a gym");
+            System.out.println("Press 3 to view all gyms");
+            System.out.println("Press 4 to delete a customer");
+            System.out.println("Press 5 to update seat count");
+            System.out.println("Press 6 to update your details");
+            System.out.println("Press 7 to logout" + ANSI_RESET);
 
             int y = Integer.parseInt(scanner.nextLine());
 
@@ -41,12 +42,15 @@ public class FlipFitGymOwnerClientMenu {
                     addGym(email);
                     break;
                 case 2:
-                    displayGyms(email);
+                    // update a gym
                     break;
                 case 3:
-                    // delete a customer
+                    displayGyms(email);
                     break;
                 case 4:
+                    // delete a customer
+                    break;
+                case 5:
                     System.out.println(ANSI_BLUE + "Enter gym ID: " + ANSI_RESET);
                     int gymId = Integer.parseInt(scanner.nextLine());
 
@@ -61,13 +65,13 @@ public class FlipFitGymOwnerClientMenu {
                     else
                         System.out.println(ANSI_BLUE + "Seat count not updated" + ANSI_RESET);
                     break;
-                case 5:
+                case 6:
                     if (updateGymOwnerDetails())
                         System.out.println(ANSI_BLUE + "Gym owner updated successfully!" + ANSI_RESET);
                     else
                         System.out.println(ANSI_BLUE + "Gym owner not updated" + ANSI_RESET);
                     break;
-                case 6:
+                case 7:
                     return true;
                 default:
                     System.out.println(ANSI_BLUE + "Invalid option!" + ANSI_RESET);
