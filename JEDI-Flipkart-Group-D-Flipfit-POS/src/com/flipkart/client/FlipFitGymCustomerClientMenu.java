@@ -5,6 +5,7 @@ import java.util.*;
 import com.flipkart.bean.*;
 import com.flipkart.business.PaymentsServiceOperations;
 import com.flipkart.business.UserServiceOperations;
+import com.flipkart.validator.ValidateCredential;
 
 import static com.flipkart.constants.ColorConstants.*;
 
@@ -14,7 +15,11 @@ import java.util.Scanner;
 public class FlipFitGymCustomerClientMenu {
     Scanner scanner = new Scanner(System.in);
     UserServiceOperations userServiceOperations = new UserServiceOperations();
+
+    ValidateCredential validateCredential = new ValidateCredential();
+
     PaymentsServiceOperations payerServiceOperations = new PaymentsServiceOperations();
+
 
     public boolean userLogin(String email, String password) {
         if (validateUser(email, password)) {
@@ -205,10 +210,19 @@ public class FlipFitGymCustomerClientMenu {
         System.out.println(ANSI_BLUE + "Enter customer details: " + ANSI_RESET);
         System.out.println("Email: ");
         String ownerEmail = scanner.nextLine();
+        if(!validateCredential.validateEmail(ownerEmail)){
+            System.out.println(ANSI_RED + "Invalid Email address! Try Again!" + ANSI_RESET);
+            return;
+        }
         System.out.println(ANSI_BLUE + "Name: " + ANSI_RESET);
         String ownerName = scanner.nextLine();
         System.out.println(ANSI_BLUE + "Password: " + ANSI_RESET);
         String password = scanner.nextLine();
+        if(!validateCredential.validatePassword(password)){
+            System.out.println(ANSI_RED + "Password length should be in between 10 to 20" + ANSI_RESET);
+            System.out.println(ANSI_RED + "It must also contain a number, lowercase, uppercase and special character." + ANSI_RESET);
+            return;
+        }
         System.out.println(ANSI_BLUE + "Phone Number: " + ANSI_RESET);
         String phoneNo = scanner.nextLine();
         System.out.println(ANSI_BLUE + "Address: " + ANSI_RESET);
@@ -234,6 +248,10 @@ public class FlipFitGymCustomerClientMenu {
         System.out.println(ANSI_PURPLE + "Enter customer details: " + ANSI_RESET);
         System.out.println(ANSI_PURPLE + "Email: " + ANSI_RESET);
         String ownerEmail = scanner.nextLine();
+        if(!validateCredential.validateEmail(ownerEmail)){
+            System.out.println(ANSI_RED + "Invalid Email address! Try Again!" + ANSI_RESET);
+            return false;
+        }
         System.out.println(ANSI_PURPLE + "Name: " + ANSI_RESET);
         String ownerName = scanner.nextLine();
         System.out.println(ANSI_PURPLE + "Phone Number: " + ANSI_RESET);

@@ -4,6 +4,7 @@ import com.flipkart.bean.Gym;
 import com.flipkart.bean.GymOwner;
 import com.flipkart.bean.Slots;
 import com.flipkart.business.GymOwnerServiceOperations;
+import com.flipkart.validator.ValidateCredential;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,7 @@ import static com.flipkart.constants.ColorConstants.*;
 public class FlipFitGymOwnerClientMenu {
     Scanner scanner = new Scanner(System.in);
     GymOwnerServiceOperations gymOwnerServiceOperations = new GymOwnerServiceOperations();
+    ValidateCredential validateCredential = new ValidateCredential();
 
     boolean verifyGymOwner(String email, String password) {
         return gymOwnerServiceOperations.validateGymOwner(email, password);
@@ -128,10 +130,19 @@ public class FlipFitGymOwnerClientMenu {
         System.out.println(ANSI_BOLD + ANSI_YELLOW + "Enter gym owner details:" + ANSI_RESET);
         System.out.println(ANSI_YELLOW + "Email: " + ANSI_RESET);
         String ownerEmail = scanner.nextLine();
+        if(!validateCredential.validateEmail(ownerEmail)){
+            System.out.println(ANSI_RED + "Invalid Email address! Try Again!" + ANSI_RESET);
+            return;
+        }
         System.out.println(ANSI_YELLOW + "Name: " + ANSI_RESET);
         String ownerName = scanner.nextLine();
         System.out.println(ANSI_YELLOW + "Password: " + ANSI_RESET);
         String password = scanner.nextLine();
+        if(!validateCredential.validatePassword(password)){
+            System.out.println(ANSI_RED + "Password length should be in between 10 to 20" + ANSI_RESET);
+            System.out.println(ANSI_RED + "It must also contain a number, lowercase, uppercase and special character." + ANSI_RESET);
+            return;
+        }
         System.out.println(ANSI_YELLOW + "Phone Number: " + ANSI_RESET);
         String phoneNo = scanner.nextLine();
         System.out.println(ANSI_YELLOW + "National ID: " + ANSI_RESET);
@@ -176,6 +187,10 @@ public class FlipFitGymOwnerClientMenu {
         System.out.println(ANSI_BLUE + ANSI_BOLD + "Enter gym owner details:" + ANSI_RESET);
         System.out.println(ANSI_BLUE + "Email: " + ANSI_RESET);
         String ownerEmail = scanner.nextLine();
+        if(!validateCredential.validateEmail(ownerEmail)){
+            System.out.println(ANSI_RED + "Invalid Email address! Try Again!" + ANSI_RESET);
+            return false;
+        }
         System.out.println(ANSI_BLUE + "Name: " + ANSI_RESET);
         String ownerName = scanner.nextLine();
         // System.out.println("Password: ");
