@@ -29,7 +29,8 @@ CREATE TABLE Slots (
     startTime INT NOT NULL,
     seatCount INT NOT NULL CHECK (seatCount >= 0),
     gymId INT NOT NULL,
-    FOREIGN KEY (gymId) REFERENCES Gym(gymId)
+    FOREIGN KEY (gymId) REFERENCES Gym(gymId),
+    UNIQUE (gymId, startTime)
 );
 
 CREATE TABLE User (
