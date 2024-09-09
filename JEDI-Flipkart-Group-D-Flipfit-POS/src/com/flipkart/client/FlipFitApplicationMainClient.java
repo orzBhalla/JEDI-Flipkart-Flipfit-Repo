@@ -4,12 +4,15 @@ import java.util.Scanner;
 
 import static com.flipkart.constants.ColorConstants.*;
 
+import com.flipkart.validator.*;
+
 public class FlipFitApplicationMainClient {
     static Scanner scanner = new Scanner(System.in);
 
     static FlipFitGymOwnerClientMenu gymOwnerMenu = new FlipFitGymOwnerClientMenu();
     static FlipFitGymCustomerClientMenu customerMenu = new FlipFitGymCustomerClientMenu();
     static FlipFitGymAdminMenu adminMenu = new FlipFitGymAdminMenu();
+    static ValidateCredential validateCredential = new ValidateCredential();
 
     public static void main(String[] args) {
         System.out.println(ANSI_BOLD + ANSI_CYAN + "-----------------------------------------------------------------------------------");
@@ -35,6 +38,10 @@ public class FlipFitApplicationMainClient {
                     int role = Integer.parseInt(scanner.nextLine());
                     System.out.println("Please enter your email:");
                     String userMail = scanner.nextLine();
+                    if(!validateCredential.validateEmail(userMail)){
+                        System.out.println(ANSI_RED + "Invalid Email address! Try Again!" + ANSI_RESET);
+                        break;
+                    }
                     System.out.println("Please enter your password:");
                     String password = scanner.nextLine();
 
@@ -143,10 +150,19 @@ public class FlipFitApplicationMainClient {
                     role = Integer.parseInt(scanner.nextLine());
                     System.out.println("Please enter your email:");
                     userMail = scanner.nextLine();
+                    if(!validateCredential.validateEmail(userMail)){
+                        System.out.println(ANSI_RED + "Invalid Email address! Try Again!" + ANSI_RESET);
+                        break;
+                    }
                     System.out.println("Please enter your current password:");
                     password = scanner.nextLine();
                     System.out.println("Please enter new password:");
                     String updatedPassword = scanner.nextLine();
+                    if(!validateCredential.validatePassword(updatedPassword)){
+                        System.out.println(ANSI_RED + "Password length should be in between 10 to 20" + ANSI_RESET);
+                        System.out.println(ANSI_RED + "It must also contain a number, lowercase, uppercase and special character." + ANSI_RESET);
+                        break;
+                    }
 
                     switch (role) {
                         case 1:
