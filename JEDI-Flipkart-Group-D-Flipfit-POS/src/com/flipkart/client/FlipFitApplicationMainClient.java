@@ -3,6 +3,7 @@ package com.flipkart.client;
 import java.util.Scanner;
 
 import static com.flipkart.constants.ColorConstants.*;
+import static com.flipkart.utils.DateAndTime.displayCurrentDate;
 
 import com.flipkart.validator.*;
 
@@ -87,7 +88,9 @@ public class FlipFitApplicationMainClient {
                                 break;
                             }
                             System.out.println(ANSI_CYAN + "Login successful! (Admin)" + ANSI_RESET);
+                            displayCurrentDate();
                             boolean isLoggedIn = true;
+
                             while (isLoggedIn) {
                                 System.out.println(ANSI_BOLD + ANSI_GREEN + "-----------------Admin Menu------------------" + ANSI_RESET);
                                 System.out.println("Press 1 to view users");

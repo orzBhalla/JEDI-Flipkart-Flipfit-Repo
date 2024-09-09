@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import static com.flipkart.constants.ColorConstants.*;
+import static com.flipkart.utils.DateAndTime.displayCurrentDate;
 
 public class FlipFitGymOwnerClientMenu {
     private Scanner scanner = new Scanner(System.in);
@@ -40,6 +41,7 @@ public class FlipFitGymOwnerClientMenu {
             return false;
         }
         System.out.println(ANSI_BOLD + "Login Successful! (Gym Owner)" + ANSI_RESET);
+        displayCurrentDate();
         while (true) {
             System.out.println(ANSI_BOLD + ANSI_PURPLE + "-----------------Gym Owner Menu-----------------" + ANSI_RESET);
             System.out.println(ANSI_PURPLE + "Press 1 to add a gym");
