@@ -1,8 +1,12 @@
 package com.flipkart.exception;
 
-public class RegistrationFailedException extends Exception{
+// Custom exception class for handling registration failure scenarios
+public class RegistrationFailedException extends Exception {
+
+    // Overrides the getMessage() method from the Exception class
     @Override
-    public String getMessage(){
-        return "registration failed. Please try again";
+    public String getMessage() {
+        // Returns a custom error message when this exception is thrown
+        return "Registration failed. Please try again";
     }
 }
