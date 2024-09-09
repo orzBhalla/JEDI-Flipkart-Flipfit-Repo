@@ -62,7 +62,7 @@ public class FlipFitGymCustomerClientMenu {
             System.out.println(ANSI_BOLD + "Customer Login Successful!!" + ANSI_RESET);
             displayCurrentDate();
             while (isLoggedIn) {
-                System.out.println(ANSI_RED + "-------------CUSTOMER MENU-------------");
+                System.out.println(ANSI_YELLOW + "-------------CUSTOMER MENU-------------");
                 System.out.println("Press 1 to view all gyms with slots");
                 System.out.println("Press 2 to book slot");
                 System.out.println("Press 3 to cancel slot");

@@ -13,7 +13,7 @@ import com.flipkart.dao.FlipFitUpdatePasswordDAOImplementation;
  *
  * @author Shriya, Shreya K
  */
-public class GymOwnerServiceOperations implements GymOwnerService {
+    public class GymOwnerServiceOperations implements GymOwnerService {
 
     private final FlipFitGymOwnerDAOImplementation flipFitGymOwnerDAOImplementation = new FlipFitGymOwnerDAOImplementation();
     private final FlipFitUpdatePasswordDAOImplementation flipFitUpdatePasswordDAOImplementation = new FlipFitUpdatePasswordDAOImplementation();
@@ -47,14 +47,14 @@ public class GymOwnerServiceOperations implements GymOwnerService {
      * @return true if the gym owner was created successfully; false otherwise
      * @author Shriya, Shreya K
      */
-    public boolean createGymOwner(GymOwner gymOwner){
+    public boolean createGymOwner(GymOwner gymOwner) {
         return flipFitGymOwnerDAOImplementation.createGymOwner(gymOwner);
     }
 
     /**
      * Validates the credentials of a gym owner.
      *
-     * @param email the email of the gym owner
+     * @param email    the email of the gym owner
      * @param password the current password of the gym owner
      * @return true if the email and password are valid; false otherwise
      * @author Shriya, Shreya K
@@ -66,8 +66,8 @@ public class GymOwnerServiceOperations implements GymOwnerService {
     /**
      * Updates the password of a gym owner.
      *
-     * @param email the email of the gym owner
-     * @param password the current password of the gym owner
+     * @param email           the email of the gym owner
+     * @param password        the current password of the gym owner
      * @param updatedPassword the new password to be set
      * @return true if the password was updated successfully; false otherwise
      * @author Shriya, Shreya K
@@ -101,7 +101,7 @@ public class GymOwnerServiceOperations implements GymOwnerService {
     /**
      * Updates the seat count for a specific gym slot.
      *
-     * @param gymId the unique identifier of the gym
+     * @param gymId     the unique identifier of the gym
      * @param startTime the start time of the slot
      * @param seatCount the new seat count to be set for the slot
      * @return true if the seat count was updated successfully; false otherwise
@@ -110,8 +110,8 @@ public class GymOwnerServiceOperations implements GymOwnerService {
     public boolean updateSeatCount(int gymId, int startTime, int seatCount) {
         return flipFitGymOwnerDAOImplementation.updateSeatCount(gymId, startTime, seatCount);
     }
-}
 
+}
 
 
 //package com.flipkart.business;
