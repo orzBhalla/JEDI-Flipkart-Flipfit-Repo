@@ -43,7 +43,7 @@ public class FlipFitGymOwnerClientMenu {
         while (true) {
             System.out.println(ANSI_BOLD + ANSI_PURPLE + "-----------------Gym Owner Menu-----------------" + ANSI_RESET);
             System.out.println(ANSI_PURPLE + "Press 1 to add a gym");
-            System.out.println("Press 2 to update a gym");
+            System.out.println("Press 2 to update gym details");
             System.out.println("Press 3 to view all gyms");
             System.out.println("Press 4 to add slots");
             System.out.println("Press 5 to update seat count");
@@ -57,7 +57,7 @@ public class FlipFitGymOwnerClientMenu {
                     addGym(email);
                     break;
                 case 2:
-                    // Placeholder for updating a gym
+                    updateGym(email);
                     break;
                 case 3:
                     displayGyms(email);
@@ -360,6 +360,43 @@ public class FlipFitGymOwnerClientMenu {
             System.out.println(ANSI_BLUE + "Seat count updated!" + ANSI_RESET);
         else
             System.out.println(ANSI_BLUE + "Seat count not updated" + ANSI_RESET);
+    }
+
+    /**
+     * Updates the details of an existing gym.
+     * @param email email of the gymOwner
+     * @return true if gym details are updated successfully, false otherwise.
+     * @author Shreya K
+     */
+    public boolean updateGym(String email) {
+        displayGyms(email);
+
+        System.out.println(ANSI_BLUE + "Enter gym ID: " + ANSI_RESET);
+        int gymId = Integer.parseInt(scanner.nextLine());
+
+        System.out.println(ANSI_PURPLE + "Enter gym details: " + ANSI_RESET);
+        System.out.println(ANSI_PURPLE + "Name: " + ANSI_RESET);
+        String gymName = scanner.nextLine();
+        System.out.println(ANSI_PURPLE + "Gym Address: " + ANSI_RESET);
+        String gymAddress = scanner.nextLine();
+        if (!validateIdentity.validateAddress(gymAddress)) {
+            System.out.println(ANSI_RED + "Address invalid! Try again!" + ANSI_RESET);
+            return false;
+        }
+        System.out.println(ANSI_PURPLE + "Gym Location: " + ANSI_RESET);
+        String gymALocation = scanner.nextLine();
+        if (!validateIdentity.validateLocation(gymALocation)) {
+            System.out.println(ANSI_RED + "Location invalid! Try again!" + ANSI_RESET);
+            return false;
+        }
+
+        Gym gym = new Gym();
+        gym.setGymName(gymName);
+        gym.setGymAddress(gymAddress);
+        gym.setLocation(gymALocation);
+        gym.setGymId(gymId);
+
+        return gymOwnerServiceOperations.updateGymDetails(gym);
     }
 }
 
