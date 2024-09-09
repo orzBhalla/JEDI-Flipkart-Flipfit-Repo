@@ -90,6 +90,14 @@ public interface GymOwnerService {
      * @author Shriya, Shreya k
      */
     boolean updateSeatCount(int gymId, int startTime, int seatCount);
+
+    /**
+     * Updates user details.
+     *
+     * @param gym the Gym object containing updated gym details
+     * @return true if the gym details were updated successfully; false otherwise
+     */
+    boolean updateGymDetails(Gym gym);
 }
 
 
