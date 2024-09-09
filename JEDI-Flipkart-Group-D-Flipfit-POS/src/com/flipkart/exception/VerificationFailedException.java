@@ -7,7 +7,7 @@ package com.flipkart.exception;
  * @author Adarsh and Chahat
 
  */
-public class VerificationFailedExceptionException extends Exception {
+public class VerificationFailedException extends Exception {
 
     /**
      * Overrides the getMessage() method from the Exception class to provide
