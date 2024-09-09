@@ -54,6 +54,7 @@ public class FlipFitGymOwnerClientMenu {
                     // delete a customer
                     break;
                 case 5:
+                    displayGyms(email);
                     System.out.println(ANSI_BLUE + "Enter gym ID: " + ANSI_RESET);
                     int gymId = Integer.parseInt(scanner.nextLine());
 
@@ -192,7 +193,7 @@ public class FlipFitGymOwnerClientMenu {
             System.out.println(ANSI_RED + "PAN invalid! Try again!" + ANSI_RESET);
             return;
         }
-        String gymOwnerStatus = "unverified";
+        String gymOwnerVerificationStatus = "unverified";
 
         if (PAN.length() != 10) {
             System.out.println(ANSI_YELLOW + "Invalid PAN Card Number. Length must be 10" + ANSI_RESET);
@@ -209,7 +210,7 @@ public class FlipFitGymOwnerClientMenu {
         gymOwner.setNationalId(nationalId);
         gymOwner.setPhoneNo(phoneNo);
         gymOwner.setGyms(emptyGymList);
-        gymOwner.setStatus(gymOwnerStatus);
+        gymOwner.setVerificationStatus(gymOwnerVerificationStatus);
 
         if (gymOwnerServiceOperations.createGymOwner(gymOwner)) {
             System.out.println(ANSI_YELLOW + "Gym owner created!" + ANSI_RESET);
