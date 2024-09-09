@@ -118,6 +118,8 @@ public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInter
             if (slotId == -1) {
                 return false;
             }
+
+            //Set Values for the placeholders in the prpared statement
             preparedStatement.setInt(1, userId);
             preparedStatement.setInt(2, bookingStatus);
             preparedStatement.setInt(3, startTime);
@@ -302,7 +304,7 @@ public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInter
     public boolean createUser(User user) {
         try (Connection conn = DatabaseConnector.getConnection();
              PreparedStatement preparedStatement = conn.prepareStatement(SQLConstants.INSERT_USER)) {
-
+            //Set values for the placeholder in the prepared statement
             preparedStatement.setString(1, user.getUserName());
             preparedStatement.setString(2, user.getEmail());
             preparedStatement.setString(3, user.getPassword());
