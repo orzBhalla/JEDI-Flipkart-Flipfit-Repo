@@ -4,13 +4,23 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Validator class for credit card details such as card number, expiry date, and CVV.
+ *
+ * @author Nitish and Chahat
+ */
 public class ValidateCard {
+
+    // Regex pattern to validate a 16-digit card number
     private static final String CARD_NUMBER_REGEX = "^[0-9]{16}$";
 
     /**
      * Validates a 16-digit card number based on format and checksum.
+     *
      * @param cardNumber The 16-digit card number to validate.
-     * @return true if the card number is valid, false otherwise.
+     * @return boolean true if the card number is valid, false otherwise.
+     * @author Nitish and Chahat
+
      */
     public static boolean validateCardNumber(String cardNumber) {
         if (cardNumber == null || cardNumber.isEmpty()) {
@@ -22,28 +32,32 @@ public class ValidateCard {
             return false;
         }
 
-        // Check checksum using Luhn algorithm
-       return true;
+        // Check checksum using Luhn algorithm (implementation not provided)
+        return true;
     }
 
+    // Formatter for expiry date in MM/YY format
     private static final DateTimeFormatter EXPIRY_DATE_FORMAT = DateTimeFormatter.ofPattern("MM/yy");
 
     /**
      * Validates an expiry date based on format and if it is not in the past.
+     *
      * @param expiryDate The expiry date to validate in MM/YY format.
-     * @return true if the expiry date is valid and in the future, false otherwise.
+     * @return boolean true if the expiry date is valid and in the future, false otherwise.
+     * @author Nitish and Chahat
+
      */
     public static boolean validateExpiryDate(String expiryDate) {
         if (expiryDate == null || expiryDate.isEmpty()) {
             return false;
         }
 
-        // Check format
+        // Check format and parse expiry date
         LocalDate expiryLocalDate;
         try {
-           expiryLocalDate = LocalDate.parse("01/" + expiryDate, DateTimeFormatter.ofPattern("dd/MM/yy"));
-       } catch (DateTimeParseException e) {
-           return false;
+            expiryLocalDate = LocalDate.parse("01/" + expiryDate, DateTimeFormatter.ofPattern("dd/MM/yy"));
+        } catch (DateTimeParseException e) {
+            return false;
         }
 
         // Check if the expiry date is in the future
@@ -63,8 +77,11 @@ public class ValidateCard {
 
     /**
      * Validates a CVV based on length and format.
+     *
      * @param cvv The CVV to validate.
-     * @return true if the CVV is valid, false otherwise.
+     * @return boolean true if the CVV is valid, false otherwise.
+     * @author Nitish and Chahat
+
      */
     public static boolean validateCVV(String cvv) {
         if (cvv == null || cvv.isEmpty()) {
@@ -74,6 +91,4 @@ public class ValidateCard {
         // Check format
         return cvv.matches(CVV_REGEX);
     }
-
-
 }
