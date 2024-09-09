@@ -35,6 +35,7 @@ public class ValidateIdentity {
 
         return true;
     }
+
     public static boolean validateSlots(Integer idStr) {
         if (idStr == null) {
             return false;
@@ -122,8 +123,7 @@ public class ValidateIdentity {
         public static boolean validatePANStructure(String pan) {
 
             char fourthLetter = pan.charAt(3);
-            if (fourthLetter == 'P' || fourthLetter == 'C' || fourthLetter == 'H' ||
-                    fourthLetter == 'F' || fourthLetter == 'A' || fourthLetter == 'T') {
+            if (fourthLetter == 'P' || fourthLetter == 'C' || fourthLetter == 'H' || fourthLetter == 'F' || fourthLetter == 'A' || fourthLetter == 'T') {
                 return true;
             }
             return false;

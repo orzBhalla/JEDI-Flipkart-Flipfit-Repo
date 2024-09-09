@@ -5,8 +5,7 @@ import java.util.*;
 import com.flipkart.bean.*;
 import com.flipkart.business.PaymentsServiceOperations;
 import com.flipkart.business.UserServiceOperations;
-import com.flipkart.validator.ValidateCredential;
-import com.flipkart.validator.ValidateIdentity;
+import com.flipkart.validator.*;
 
 import static com.flipkart.constants.ColorConstants.*;
 
@@ -20,6 +19,7 @@ public class FlipFitGymCustomerClientMenu {
     ValidateCredential validateCredential = new ValidateCredential();
     PaymentsServiceOperations payerServiceOperations = new PaymentsServiceOperations();
     ValidateIdentity validateIdentity = new ValidateIdentity();
+    ValidateCard validateCard = new ValidateCard();
 
     public boolean userLogin(String email, String password) {
         if (validateUser(email, password)) {
@@ -156,15 +156,26 @@ public class FlipFitGymCustomerClientMenu {
     public boolean collectAndValidateCardDetails() {
         System.out.print("Enter card number: ");
         String cardNumber = scanner.nextLine();
-
+        if(!validateCard.validateCardNumber(cardNumber)){
+            System.out.println(ANSI_RED + "Card number invalid!" + ANSI_RESET);
+            return false;
+        }
         System.out.print("Enter expiry date (MM/YY): ");
         String expiryDate = scanner.nextLine();
+        if(!validateCard.validateExpiryDate(expiryDate)){
+            System.out.println(ANSI_RED + "Expiry Date invalid!" + ANSI_RESET);
+            return false;
+        }
 
         System.out.print("Enter cardholder's name: ");
         String name = scanner.nextLine();
 
         System.out.print("Enter CVV: ");
         String cvv = scanner.nextLine();
+        if(!validateCard.validateCVV(cvv)){
+            System.out.println(ANSI_RED + "CVV invalid!" + ANSI_RESET);
+            return false;
+        }
 
         Payments payments = new Payments();
         payments.setCardNumber(cardNumber);
