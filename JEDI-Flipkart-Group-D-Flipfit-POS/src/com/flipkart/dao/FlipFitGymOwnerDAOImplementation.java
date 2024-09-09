@@ -303,4 +303,35 @@ public class FlipFitGymOwnerDAOImplementation implements FlipFitGymOwnerDAOInter
         }
         return ownerId;
     }
+
+    public boolean updateGymDetails(Gym gym) {
+        conn = DatabaseConnector.getConnection();
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            preparedStatement = conn.prepareStatement(SQLConstants.UPDATE_GYM);
+            preparedStatement.setString(1, gym.getLocation());
+            preparedStatement.setString(2, gym.getGymAddress());
+            preparedStatement.setString(3, gym.getGymName());
+            preparedStatement.setInt(4, gym.getGymId());
+
+            preparedStatement.executeUpdate();
+
+            int rowsUpdated = preparedStatement.executeUpdate();
+            if (rowsUpdated > 0) {
+                System.out.println("Gym details updated successfully!");
+                return true;
+            } else {
+                throw new UpdationFailedException();
+            }
+        } catch (SQLException e) {
+            System.out.println("SQL Error: " + e.getMessage());
+            return false;
+        } catch (UpdationFailedException e) {
+            // System.out.println("Gym " + e.getMessage());
+            return false;
+        }
+
+    }
 }

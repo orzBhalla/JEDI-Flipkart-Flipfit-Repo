@@ -59,6 +59,9 @@ public class SQLConstants {
     // Update user's details (name, phone number)
     public static final String UPDATE_USER = "UPDATE User SET userName = ?, phoneNumber = ? WHERE email = ?";
 
+    // Update gym's details (name, address, location)
+    public static final String UPDATE_GYM = "UPDATE Gym SET location = ?, gymAddress = ?, gymName = ? Where gymId = ?";
+
     // Update seat count for a gym's slot
     public static final String GYM_OWNER_UPDATE_SEAT_COUNT = "UPDATE Slots SET seatCount = seatCount + ? WHERE startTime = ? AND gymId = ?";
 

@@ -101,4 +101,12 @@ public interface FlipFitGymOwnerDAOInterface {
      */
 
     int getGymOwnerIdByEmail(String email);
+
+    /**
+     * Updates a gym given the updated information
+     * @param gym Gym object with the updated details of the Gym
+     * @return  true if the update is successful, false otherwise
+     * @author : Nitish, Adarsh, Navaratna, Chahat, Shreya,Shriya
+     */
+    boolean updateGymDetails(Gym gym);
 }

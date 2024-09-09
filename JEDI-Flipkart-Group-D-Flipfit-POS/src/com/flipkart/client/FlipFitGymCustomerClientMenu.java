@@ -16,6 +16,7 @@ import java.util.Scanner;
  * Handles the customer menu operations for the FlipFit application.
  * Provides functionality for user login, viewing and managing gym slots, bookings,
  * and updating user details.
+ *
  * @author: Navratana, Adarsh
  */
 public class FlipFitGymCustomerClientMenu {
@@ -52,7 +53,8 @@ public class FlipFitGymCustomerClientMenu {
 
     /**
      * Manages user login and displays the customer menu.
-     * @param email User's email address.
+     *
+     * @param email    User's email address.
      * @param password User's password.
      * @return true if login is successful, false otherwise.
      */
@@ -80,7 +82,9 @@ public class FlipFitGymCustomerClientMenu {
                     case 2:
                         List<Gym> gyms2 = viewAllGymsWithSlots();
                         printGyms(gyms2);
-
+                        if (gyms2.isEmpty()) {
+                            break;
+                        }
                         System.out.println(ANSI_BOLD + ANSI_RED + "Enter the following: " + ANSI_RESET);
                         System.out.println(ANSI_CYAN + "Gym ID: " + ANSI_RESET);
                         int gymId = Integer.parseInt(scanner.nextLine());
@@ -100,7 +104,9 @@ public class FlipFitGymCustomerClientMenu {
                         }
                         break;
                     case 3:
-                        viewAllBookings(email);
+                        if (!viewAllBookings(email)) {
+                            break;
+                        }
                         System.out.println(ANSI_RED + "Enter Booking ID: " + ANSI_RESET);
                         int bookingId = Integer.parseInt(scanner.nextLine());
                         if (!validateIdentity.validateId(bookingId)) {
@@ -158,6 +164,7 @@ public class FlipFitGymCustomerClientMenu {
 
     /**
      * Prints the list of gyms and their slots.
+     *
      * @param gyms List of gyms to be printed.
      */
     private void printGyms(List<Gym> gyms) {
@@ -193,7 +200,8 @@ public class FlipFitGymCustomerClientMenu {
 
     /**
      * Validates user credentials.
-     * @param email User's email address.
+     *
+     * @param email    User's email address.
      * @param password User's password.
      * @return true if credentials are valid, false otherwise.
      */
@@ -203,6 +211,7 @@ public class FlipFitGymCustomerClientMenu {
 
     /**
      * Collects and validates card details for payment.
+     *
      * @return true if card details are valid, false otherwise.
      */
     public boolean collectAndValidateCardDetails() {
@@ -240,6 +249,7 @@ public class FlipFitGymCustomerClientMenu {
 
     /**
      * Processes the payment by collecting and validating card details.
+     *
      * @return true if payment is successful, false otherwise.
      */
     public boolean processPayments() {
@@ -248,6 +258,7 @@ public class FlipFitGymCustomerClientMenu {
 
     /**
      * Retrieves the list of all gyms with available slots.
+     *
      * @return List of gyms with slots.
      */
     List<Gym> viewAllGymsWithSlots() {
@@ -256,9 +267,10 @@ public class FlipFitGymCustomerClientMenu {
 
     /**
      * Books a slot in a gym.
-     * @param gymId ID of the gym.
+     *
+     * @param gymId     ID of the gym.
      * @param startTime Start time of the slot.
-     * @param email User's email address.
+     * @param email     User's email address.
      * @return true if slot is booked successfully, false otherwise.
      */
     public boolean bookSlot(int gymId, int startTime, String email) {
@@ -267,6 +279,7 @@ public class FlipFitGymCustomerClientMenu {
 
     /**
      * Cancels a booking.
+     *
      * @param bookingId ID of the booking to be cancelled.
      * @return true if booking is cancelled successfully, false otherwise.
      */
@@ -276,18 +289,20 @@ public class FlipFitGymCustomerClientMenu {
 
     /**
      * Displays all bookings made by the user.
+     *
      * @param email User's email address.
      */
-    public void viewAllBookings(String email) {
+    public boolean viewAllBookings(String email) {
         System.out.println(ANSI_BOLD + ANSI_RED + "My Bookings: " + ANSI_RESET);
         int userId = userServiceOperations.getUserIdByEmail(email);
         if (userId == -1) {
             System.out.println("No such user exists with email: " + email);
-            return;
+            return false;
         }
         List<Bookings> bookings = userServiceOperations.viewAllBookings(userId);
         if (bookings.isEmpty()) {
             System.out.println("No bookings found.");
+            return false;
         } else {
             String leftAlignFormat = "| %-10s | %-15s | %-10s | %-10s | %n";
             System.out.format("+------------+---------------+------------+------------+\n");
@@ -299,10 +314,12 @@ public class FlipFitGymCustomerClientMenu {
             }
             System.out.format("+------------+---------------+------------+------------+\n");
         }
+        return true;
     }
 
     /**
      * Retrieves the list of all gyms by a specified area.
+     *
      * @param location Location to filter gyms.
      * @return List of gyms in the specified area.
      */
@@ -365,6 +382,7 @@ public class FlipFitGymCustomerClientMenu {
 
     /**
      * Updates the details of an existing user.
+     *
      * @return true if user details are updated successfully, false otherwise.
      */
     public boolean updateUserDetails() {
@@ -394,8 +412,9 @@ public class FlipFitGymCustomerClientMenu {
 
     /**
      * Updates the password of a user.
-     * @param userMail User's email address.
-     * @param password Current password.
+     *
+     * @param userMail        User's email address.
+     * @param password        Current password.
      * @param updatedPassword New password.
      * @return true if password is updated successfully, false otherwise.
      */
