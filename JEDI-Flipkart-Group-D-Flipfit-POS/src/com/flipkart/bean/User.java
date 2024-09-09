@@ -186,7 +186,7 @@ public class User {
 
 
 
-//package com.flipkart.bean;
+// package com.flipkart.bean;
 //
 //public class User {
 //    private int userId;
