@@ -153,10 +153,10 @@ public class FlipFitGymCustomerClientMenu {
         if (bookings.isEmpty()) {
             System.out.println("No bookings found.");
         } else {
-            String leftAlignFormat = "| %-10s | %-15s | %-10s | %-10s |%n";
-            System.out.format("+------------+---------------+------------+------------+");
-            System.out.format("| Booking ID |     Status    |    Time    |  Gym ID    |");
-            System.out.format("+------------+---------------+------------+------------+");
+            String leftAlignFormat = "| %-10s | %-15s | %-10s | %-10s | %n";
+            System.out.format("+------------+---------------+------------+------------+\n");
+            System.out.format("| Booking ID |     Status    |    Time    |  Gym ID    |\n");
+            System.out.format("+------------+---------------+------------+------------+\n");
 
             for (Bookings booking : bookings) {
                 System.out.format(leftAlignFormat, booking.getBookingId(), booking.getBookingStatus(), booking.getTime(), booking.getGymId());

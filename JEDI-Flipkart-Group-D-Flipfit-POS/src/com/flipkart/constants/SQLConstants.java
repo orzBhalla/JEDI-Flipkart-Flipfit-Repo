@@ -35,7 +35,7 @@ public class SQLConstants {
 
     public static final String UPDATE_USER = "UPDATE User SET userName = ?, phoneNumber = ? WHERE email = ?";
 
-    public static final String GYM_OWNER_UPDATE_SEAT_COUNT = "UPDATE Slots SET seatCount = seatCount + ? WHERE startTime = ? AND gymId = ?)";
+    public static final String GYM_OWNER_UPDATE_SEAT_COUNT = "UPDATE Slots SET seatCount = seatCount + ? WHERE startTime = ? AND gymId = ?";
 
     public static final String GET_SEAT_COUNT = "SELECT seatCount FROM Slots WHERE gymId = ? AND startTime = ?";
 
