@@ -45,7 +45,8 @@ public class FlipFitGymCustomerClientMenu {
                         int gymId = Integer.parseInt(scanner.nextLine());
                         System.out.println(ANSI_GREEN + "Slot Time: " + ANSI_RESET);
                         int time = Integer.parseInt(scanner.nextLine());
-                        if(processPayments()) {
+                        if (processPayments()) {
+                            System.out.println("Payment was successful");
                             if (bookSlot(gymId, time, email)) {
                                 System.out.println(ANSI_CYAN + "Slot booked successfully!" + ANSI_RESET);
                             }
@@ -76,7 +77,7 @@ public class FlipFitGymCustomerClientMenu {
                         System.out.println(ANSI_RED + "Enter start time: " + ANSI_RESET);
                         int _startTime = Integer.parseInt(scanner.nextLine());
                         int availableSeatCount = userServiceOperations.getSeatCount(_gymId, _startTime);
-                        if(availableSeatCount == -1) {
+                        if (availableSeatCount == -1) {
                             System.out.println("Seat count is not available. Please try again." + ANSI_RESET);
                             break;
                         }
@@ -135,7 +136,7 @@ public class FlipFitGymCustomerClientMenu {
         return userServiceOperations.validateUser(email, password);
     }
 
-    public boolean collectCardDetails() {
+    public boolean collectAndValidateCardDetails() {
         System.out.print("Enter card number: ");
         String cardNumber = scanner.nextLine();
 
@@ -158,7 +159,7 @@ public class FlipFitGymCustomerClientMenu {
     }
 
     public boolean processPayments() {
-        return collectCardDetails();
+        return collectAndValidateCardDetails();
     }
 
     List<Gym> viewAllGymsWithSlots() {
