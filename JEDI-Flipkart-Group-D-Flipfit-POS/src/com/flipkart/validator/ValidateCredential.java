@@ -2,7 +2,7 @@ package com.flipkart.validator;
 
 import java.util.regex.Pattern;
 
-public class ValidateEmail {
+public class ValidateCredential {
 
     public static final String EMAIL_REGEX = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
     public static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX);
