@@ -128,7 +128,12 @@ public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInter
 
             if (rowsInserted > 0) {
                 // System.out.println("Record inserted successfully!");
-                return flipFitGymOwnerDAOImplementation.updateSeatCount(gymId, startTime, -1);
+                if (cancelOverlappingBookingIfExists(gymId, startTime, userId, 0) || cancelOverlappingBookingIfExists(gymId, startTime, userId, 1))
+                    return flipFitGymOwnerDAOImplementation.updateSeatCount(gymId, startTime, -1);
+                else {
+                    System.out.println("Unable to cancel the overlapping booking. Please try again");
+                    return false;
+                }
             }
         } catch (SQLException e) {
             System.out.println("SQL Error: " + e.getMessage());
@@ -142,6 +147,29 @@ public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInter
 
     public int getSeatCount(int gymId, int startTime) {
         return flipFitGymOwnerDAOImplementation.getSeatCount(gymId, startTime);
+    }
+
+    public boolean cancelOverlappingBookingIfExists(int gymId, int startTime, int userId, int bookingStatus) {
+        try (Connection conn = DatabaseConnector.getConnection();
+             PreparedStatement preparedStatement = conn.prepareStatement(SQLConstants.UPDATE_OVERLAPPING_BOOKING_STATUS)) {
+
+            int updatedBookingStatus = 2;
+            preparedStatement.setInt(1, updatedBookingStatus);
+            preparedStatement.setInt(2, userId);
+            preparedStatement.setInt(3, gymId);
+            preparedStatement.setInt(4, startTime);
+            preparedStatement.setInt(5, bookingStatus);
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0) {
+                // System.out.println("Booking cancelled successfully!");
+                return flipFitGymOwnerDAOImplementation.updateSeatCount(gymId, startTime, 1);
+            }
+        } catch (SQLException e) {
+            System.out.println("SQL Error: " + e.getMessage());
+            return false;
+        }
+        return true;
     }
 
     public int getSlotsIdByGymIdAndStartTime(int gymId, int startTime) {
