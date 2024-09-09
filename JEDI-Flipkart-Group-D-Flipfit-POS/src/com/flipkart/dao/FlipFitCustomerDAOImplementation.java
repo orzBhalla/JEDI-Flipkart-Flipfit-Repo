@@ -27,8 +27,10 @@ public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInter
         List<Gym> gyms = new ArrayList<>();
 
         try (Connection conn = DatabaseConnector.getConnection();
-             PreparedStatement preparedStatement = conn.prepareStatement(SQLConstants.GET_GYMS_BY_AREA);
-             ResultSet resultSet = preparedStatement.executeQuery()) {
+             PreparedStatement preparedStatement = conn.prepareStatement(SQLConstants.GET_GYMS_BY_AREA);) {
+            preparedStatement.setString(1, area);
+            preparedStatement.setString(2, area);
+            ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
                 int gymId = resultSet.getInt("gymId");

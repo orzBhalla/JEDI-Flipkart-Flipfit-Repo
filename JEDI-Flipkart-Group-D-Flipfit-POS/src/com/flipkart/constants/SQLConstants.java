@@ -78,7 +78,7 @@ public class SQLConstants {
     public static final String GET_USER_ID_BY_EMAIL = "SELECT userId FROM User WHERE email = ?";
 
     // Get gyms by area (address or location)
-    public static final String GET_GYMS_BY_AREA = "SELECT * FROM Gym WHERE gymAddress LIKE '%?%' OR location LIKE '%?%'";
+    public static final String GET_GYMS_BY_AREA = "SELECT * FROM Gym WHERE gymAddress LIKE CONCAT( '%',?,'%') OR location LIKE CONCAT( '%',?,'%')";
 
     // Get slot ID by gym ID and start time
     public static final String GET_SLOTS_ID_BY_GYM_ID_AND_START_TIME = "SELECT slotsId FROM Slots WHERE gymId = ? AND startTime = ?";

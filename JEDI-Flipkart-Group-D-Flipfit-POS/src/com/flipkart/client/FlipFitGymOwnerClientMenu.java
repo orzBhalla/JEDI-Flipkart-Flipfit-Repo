@@ -25,7 +25,7 @@ public class FlipFitGymOwnerClientMenu {
      * @param password Gym owner's password.
      * @return true if the credentials are valid, false otherwise.
      */
-    private boolean verifyGymOwner(String email, String password) {
+    boolean verifyGymOwner(String email, String password) {
         return gymOwnerServiceOperations.validateGymOwner(email, password);
     }
 
@@ -66,7 +66,7 @@ public class FlipFitGymOwnerClientMenu {
                     // Placeholder for deleting a customer
                     break;
                 case 5:
-                    updateSeatCount();
+                    updateSeatCount(email);
                     break;
                 case 6:
                     if (updateGymOwnerDetails())
@@ -306,7 +306,7 @@ public class FlipFitGymOwnerClientMenu {
     /**
      * Updates the seat count for a specific gym and slot.
      */
-    private void updateSeatCount() {
+    private void updateSeatCount(String email) {
         displayGyms(email);
         System.out.println(ANSI_BLUE + "Enter gym ID: " + ANSI_RESET);
         int gymId = Integer.parseInt(scanner.nextLine());

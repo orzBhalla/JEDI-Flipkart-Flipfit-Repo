@@ -58,7 +58,7 @@ public class FlipFitGymCustomerClientMenu {
     public boolean userLogin(String email, String password) {
         if (validateUser(email, password)) {
             boolean isLoggedIn = true;
-            System.out.println(ANSI_BOLD + "Login Successful! (Customer)" + ANSI_RESET);
+            System.out.println(ANSI_BOLD + "Customer Login Successful!!" + ANSI_RESET);
             while (isLoggedIn) {
                 System.out.println(ANSI_RED + "-------------CUSTOMER MENU-------------");
                 System.out.println("Press 1 to view all gyms with slots");
@@ -114,6 +114,7 @@ public class FlipFitGymCustomerClientMenu {
                         viewAllBookings(email);
                         break;
                     case 5:
+                        System.out.println(ANSI_RED + "Enter location you want find gyms in: " + ANSI_RESET);
                         String location = scanner.nextLine();
                         List<Gym> gyms3 = viewAllGymsByArea(location);
                         printGyms(gyms3);
@@ -180,7 +181,8 @@ public class FlipFitGymCustomerClientMenu {
             System.out.format("+-----------------+-----------------+-----------------+\n");
 
             for (Slots slot : gym.getSlots()) {
-                System.out.format(slotLeftAlignFormat, slot.getStartTime(), (slot.getStartTime() + 1), slot.getSeatCount());
+                if (slot.getSeatCount() > 0)
+                    System.out.format(slotLeftAlignFormat, slot.getStartTime(), (slot.getStartTime() + 1), slot.getSeatCount());
             }
             System.out.format("+-----------------+-----------------+-----------------+\n");
             System.out.println();
