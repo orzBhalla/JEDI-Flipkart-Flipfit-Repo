@@ -53,6 +53,7 @@ public class FlipFitGymOwnerClientMenu {
                     // delete a customer
                     break;
                 case 5:
+                    displayGyms(email);
                     System.out.println(ANSI_BLUE + "Enter gym ID: " + ANSI_RESET);
                     int gymId = Integer.parseInt(scanner.nextLine());
 
