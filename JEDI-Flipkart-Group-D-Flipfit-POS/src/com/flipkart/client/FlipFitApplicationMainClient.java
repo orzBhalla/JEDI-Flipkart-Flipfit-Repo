@@ -36,6 +36,12 @@ public class FlipFitApplicationMainClient {
                     System.out.println("Press 2 for gym owner");
                     System.out.println("Press 3 for gym customer");
                     int role = Integer.parseInt(scanner.nextLine());
+
+                    if (role > 3 || role < 1) {
+                        System.out.println(ANSI_RED + "You have selected an invalid option. Please select a valid option" + ANSI_RESET);
+                        break;
+                    }
+
                     System.out.println("Please enter your email:");
                     String userMail = scanner.nextLine();
                     if(!validateCredential.validateEmail(userMail)){
@@ -77,20 +83,22 @@ public class FlipFitApplicationMainClient {
                                         adminMenu.viewGymOwners();
                                         break;
                                     case 4:
+                                        adminMenu.viewUnverifiedGyms();
                                         System.out.println("Enter the gym ID to be verified:");
                                         int gymId = Integer.parseInt(scanner.nextLine());
                                         if (adminMenu.verifyGym(gymId))
                                             System.out.println("Gym verified successfully!");
                                         else
-                                            System.out.println("Gym not verified.");
+                                            System.out.println(ANSI_RED + "Gym with given Id does not exists." + ANSI_RESET);
                                         break;
                                     case 5:
+                                        adminMenu.viewUnverifiedGymOwners();
                                         System.out.println("Enter the gym owner ID to be verified:");
                                         int gymOwnerId = Integer.parseInt(scanner.nextLine());
                                         if (adminMenu.verifyGymOwner(gymOwnerId))
                                             System.out.println("Gym owner verified successfully!");
                                         else
-                                            System.out.println("Gym owner not verified.");
+                                            System.out.println(ANSI_RED + "Gym owner with given ID does not exists." + ANSI_RESET);
                                         break;
                                     case 6:
                                         adminMenu.viewUnverifiedGyms();
@@ -195,6 +203,7 @@ public class FlipFitApplicationMainClient {
                     System.out.println(ANSI_PURPLE + "Thank you for using FLipFit!" + ANSI_RESET);
                     break;
                 default:
+                    System.out.println(ANSI_RED + "!!! Enter a valid option !!!" + ANSI_RESET);
                     break;
             }
         }
