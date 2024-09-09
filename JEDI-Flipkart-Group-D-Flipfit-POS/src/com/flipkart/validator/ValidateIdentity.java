@@ -16,40 +16,43 @@ public class ValidateIdentity {
 
     }
 
-
-    public static final String ADDRESS_REGEX = "^[\\d]+\\s+[A-Za-z]+(?:\\s+[A-Za-z]+)*,\\s*[A-Za-z]+(?:\\s+[A-Za-z]+)*,\\s*[A-Z]{2}\\s+\\d{5}$";
-    public static final Pattern ADDRESS_PATTERN = Pattern.compile(ADDRESS_REGEX);
-
     public static boolean validateAddress(String address) {
-        if (address == null || address.isEmpty()) {
-            return false;
-        }
-        return ADDRESS_PATTERN.matcher(address).matches();
+        return address != null && !address.isEmpty();
     }
 
-    public static Set<Long> existingUserIds = new HashSet<>();
+    public static boolean validateLocation(String location) {
+        return validateAddress(location);
+    }
 
-    public static boolean validateUserId(String userIdStr) {
-        if (userIdStr == null || userIdStr.isEmpty()) {
+
+    public static boolean validateId(Integer idStr) {
+        if (idStr == null) {
+            return false;
+        }
+        if (idStr <= 0) {
             return false;
         }
 
-        long userId;
-        try {
-          userId = Long.parseLong(userIdStr);
-        } catch (NumberFormatException e) {
+        return true;
+    }
+    public static boolean validateSlots(Integer idStr) {
+        if (idStr == null) {
+            return false;
+        }
+        if (idStr <= 0) {
             return false;
         }
 
-        if (userId <= 0) {
+        return true;
+    }
+
+    public static boolean validateTime(Integer idStr) {
+        if (idStr == null) {
             return false;
         }
-
-        if (existingUserIds.contains(userId)) {
+        if (idStr < 0) {
             return false;
         }
-
-        existingUserIds.add(userId);
 
         return true;
     }
