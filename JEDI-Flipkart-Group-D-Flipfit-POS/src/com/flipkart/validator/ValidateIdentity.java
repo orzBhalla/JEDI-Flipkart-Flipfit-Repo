@@ -212,60 +212,69 @@ public class ValidateIdentity {
      */
     public class GSTValidator {
 
-        // Regex pattern for validating GST number format
-        public static final String GST_REGEX = "^[A-Z]{2}[A-Z0-9]{10}[0-9A-Z]$";
-        public static final Pattern GST_PATTERN = Pattern.compile(GST_REGEX);
 
-        // Valid state codes for GST validation
-        public static final String[] VALID_STATE_CODES = {
-                "01", "02", "03", "04", "05", "06", "07", "08", "09", "10",
-                "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
-                "21", "22", "23", "24", "25", "26", "27", "28", "29", "30",
-                "31", "32", "33", "34", "35", "36", "37", "38", "39", "40",
-                "41", "42", "43", "44", "45", "46", "47", "48", "49", "50"
-        };
-
-        /**
-         * Validates a GST number based on format and state code.
-         *
-         * @param gstNumber The GST number to validate.
-         * @return boolean true if the GST number is valid, false otherwise.
-         * @author Nitish and Navaratna
-         */
         public static boolean validateGST(String gstNumber) {
             if (gstNumber == null || gstNumber.isEmpty()) {
-                return false;
-            }
-
-            // Check format
-            if (!GST_PATTERN.matcher(gstNumber).matches()) {
-                return false;
-            }
-
-            // Extract state code from GST number
-            String stateCode = gstNumber.substring(0, 2);
-            if (!isValidStateCode(stateCode)) {
                 return false;
             }
 
             // Further validation could include checking PAN structure and check digit if necessary
             return true;
         }
-
-        /**
-         * Checks if the state code is valid.
-         *
-         * @param stateCode The state code to check.
-         * @return boolean true if the state code is valid, false otherwise.
-         * @author Nitish and Navaratna
-         */
-        private static boolean isValidStateCode(String stateCode) {
-            for (String validCode : VALID_STATE_CODES) {
-                if (validCode.equals(stateCode)) {
-                    return true;
-                }
-            }
-            return false;
-        }
+//        // Regex pattern for validating GST number format
+//        public static final String GST_REGEX = "^[A-Z]{2}[A-Z0-9]{10}[0-9A-Z]$";
+//        public static final Pattern GST_PATTERN = Pattern.compile(GST_REGEX);
+//
+//        // Valid state codes for GST validation
+//        public static final String[] VALID_STATE_CODES = {
+//                "01", "02", "03", "04", "05", "06", "07", "08", "09", "10",
+//                "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
+//                "21", "22", "23", "24", "25", "26", "27", "28", "29", "30",
+//                "31", "32", "33", "34", "35", "36", "37", "38", "39", "40",
+//                "41", "42", "43", "44", "45", "46", "47", "48", "49", "50"
+//        };
+//
+//        /**
+//         * Validates a GST number based on format and state code.
+//         *
+//         * @param gstNumber The GST number to validate.
+//         * @return boolean true if the GST number is valid, false otherwise.
+//         * @author Nitish and Navaratna
+//         */
+//        public static boolean validateGST(String gstNumber) {
+//            if (gstNumber == null || gstNumber.isEmpty()) {
+//                return false;
+//            }
+//
+//            // Check format
+//            if (!GST_PATTERN.matcher(gstNumber).matches()) {
+//                return false;
+//            }
+//
+//            // Extract state code from GST number
+//            String stateCode = gstNumber.substring(0, 2);
+//            if (!isValidStateCode(stateCode)) {
+//                return false;
+//            }
+//
+//            // Further validation could include checking PAN structure and check digit if necessary
+//            return true;
+//        }
+//
+//        /**
+//         * Checks if the state code is valid.
+//         *
+//         * @param stateCode The state code to check.
+//         * @return boolean true if the state code is valid, false otherwise.
+//         * @author Nitish and Navaratna
+//         */
+//        private static boolean isValidStateCode(String stateCode) {
+//            for (String validCode : VALID_STATE_CODES) {
+//                if (validCode.equals(stateCode)) {
+//                    return true;
+//                }
+//            }
+//            return false;
+//        }
     }
 }
