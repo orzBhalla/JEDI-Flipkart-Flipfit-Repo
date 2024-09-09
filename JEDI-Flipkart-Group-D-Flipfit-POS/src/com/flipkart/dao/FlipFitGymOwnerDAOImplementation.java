@@ -243,9 +243,8 @@ public class FlipFitGymOwnerDAOImplementation implements FlipFitGymOwnerDAOInter
             preparedStatement.setInt(2, startTime);
             preparedStatement.setInt(3, gymId);
 
-            preparedStatement.executeUpdate();
-
             int rowsUpdated = preparedStatement.executeUpdate();
+
             if (rowsUpdated > 0) {
                 // System.out.println("Record updated successfully!");
                 return true;
