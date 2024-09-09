@@ -112,6 +112,19 @@ public class GymOwnerServiceOperations implements GymOwnerService {
         return flipFitGymOwnerDAOImplementation.updateSeatCount(gymId, startTime, seatCount);
     }
 
+    /**
+     * Updates the details of a user.
+     *
+     * @param gym  the gym object containing updated gym details
+     * @return  true if gym details update is successful, false otherwise
+     * @author Shreya K
+     */
+    public boolean updateGymDetails(Gym gym) {
+        return flipFitGymOwnerDAOImplementation.updateGymDetails(gym);
+    }
+}
+
+
     public boolean addSlots(int gymId, List<Slots> slots) {
         return flipFitGymOwnerDAOImplementation.addSlots(gymId, slots);
     }
