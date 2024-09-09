@@ -34,7 +34,6 @@ public class FlipFitAdminDAOImplementation implements FlipFitAdminDAOInterface {
                 String gymName = resultSet.getString("gymName");
                 String status = resultSet.getString("Status");
                 int ownerId = resultSet.getInt("ownerId");
-
                 Gym gym = new Gym();
                 gym.setGymId(gymId);
                 gym.setGymName(gymName);
