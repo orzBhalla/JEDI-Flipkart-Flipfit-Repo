@@ -5,6 +5,7 @@ import com.flipkart.bean.GymOwner;
 import com.flipkart.bean.Slots;
 import com.flipkart.business.GymOwnerServiceOperations;
 import com.flipkart.validator.ValidateCredential;
+import com.flipkart.validator.ValidateIdentity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,7 @@ public class FlipFitGymOwnerClientMenu {
     Scanner scanner = new Scanner(System.in);
     GymOwnerServiceOperations gymOwnerServiceOperations = new GymOwnerServiceOperations();
     ValidateCredential validateCredential = new ValidateCredential();
-
+    ValidateIdentity validateIdentity = new ValidateIdentity();
     boolean verifyGymOwner(String email, String password) {
         return gymOwnerServiceOperations.validateGymOwner(email, password);
     }
@@ -95,8 +96,16 @@ public class FlipFitGymOwnerClientMenu {
         String gymName = scanner.nextLine();
         System.out.println(ANSI_PURPLE + "Address: " + ANSI_RESET);
         String address = scanner.nextLine();
+        if(!validateIdentity.validateAddress(address)){
+            System.out.println(ANSI_RED + "Invalid address!" + ANSI_RESET);
+            return;
+        }
         System.out.println(ANSI_PURPLE + "Location: " + ANSI_RESET);
         String location = scanner.nextLine();
+        if(!validateIdentity.validateLocation(location)){
+            System.out.println(ANSI_RED + "Invalid location!" + ANSI_RESET);
+            return;
+        }
         String gymStatus = "unverified";
 
         gym.setGymAddress(address);
@@ -107,13 +116,22 @@ public class FlipFitGymOwnerClientMenu {
         List<Slots> slots = new ArrayList<>();
         System.out.println(ANSI_PURPLE + "Please enter number of slots: " + ANSI_RESET);
         int slotCount = Integer.parseInt(scanner.nextLine());
+        if(!validateIdentity.validateSlots(slotCount)){
+            System.out.println(ANSI_RED + "Invalid number of slots!" + ANSI_RESET);
+        }
         int currentCount = 1;
         while (currentCount <= slotCount) {
             System.out.println("Add for slot number " + currentCount + ": ");
             System.out.println("Enter start time: ");
             int startTime = Integer.parseInt(scanner.nextLine());
+            if(!validateIdentity.validateTime(startTime)){
+                System.out.println(ANSI_RED + "Invalid start time!" + ANSI_RESET);
+            }
             System.out.println("Enter available seats: ");
             int seatCount = Integer.parseInt(scanner.nextLine());
+            if(!validateIdentity.validateSlots(seatCount)){
+                System.out.println(ANSI_RED + "Invalid seat count!" + ANSI_RESET);
+            }
             Slots slot = new Slots(-1, startTime, seatCount);
             slots.add(slot);
             currentCount++;
@@ -145,8 +163,16 @@ public class FlipFitGymOwnerClientMenu {
         }
         System.out.println(ANSI_YELLOW + "Phone Number: " + ANSI_RESET);
         String phoneNo = scanner.nextLine();
+        if(!validateIdentity.validatePhoneNumber(phoneNo)){
+            System.out.println(ANSI_RED + "Phone Number invalid! Try again!" + ANSI_RESET);
+            return;
+        }
         System.out.println(ANSI_YELLOW + "National ID: " + ANSI_RESET);
         String nationalId = scanner.nextLine();
+        if(!ValidateIdentity.validateAadhaar(nationalId)){
+            System.out.println(ANSI_RED + "Aadhaar Card invalid! Try again!" + ANSI_RESET);
+            return;
+        }
 
         if (nationalId.length() != 12) {
             System.out.println(ANSI_YELLOW + "Invalid national ID! Length must be 12" + ANSI_RESET);
@@ -155,8 +181,17 @@ public class FlipFitGymOwnerClientMenu {
 
         System.out.println(ANSI_YELLOW + "GST: " + ANSI_RESET);
         String GST = scanner.nextLine();
+        if(!ValidateIdentity.GSTValidator.validateGST(GST)){
+            System.out.println(ANSI_YELLOW + "Invalid national ID! Length must be 12" + ANSI_RESET);
+            return;
+        }
         System.out.println(ANSI_YELLOW + "PAN Number: " + ANSI_RESET);
         String PAN = scanner.nextLine();
+        if(!ValidateIdentity.PANCardValidator.validatePAN(PAN))
+        {
+            System.out.println(ANSI_RED + "PAN invalid! Try again!" + ANSI_RESET);
+            return;
+        }
         String gymOwnerStatus = "unverified";
 
         if (PAN.length() != 10) {
@@ -197,6 +232,11 @@ public class FlipFitGymOwnerClientMenu {
         // String password = scanner.nextLine();
         System.out.println(ANSI_BLUE + "Phone Number: " + ANSI_RESET);
         String phoneNo = scanner.nextLine();
+        if(!validateIdentity.validatePhoneNumber(phoneNo)){
+            System.out.println(ANSI_RED + "Phone Number invalid! Try again!" + ANSI_RESET);
+            return false;
+        }
+
         // System.out.println("National ID: ");
         // String nationalId = scanner.nextLine();
 

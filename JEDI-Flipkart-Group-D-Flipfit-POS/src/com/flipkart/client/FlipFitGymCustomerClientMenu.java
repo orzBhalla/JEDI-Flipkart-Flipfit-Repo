@@ -6,6 +6,7 @@ import com.flipkart.bean.*;
 import com.flipkart.business.PaymentsServiceOperations;
 import com.flipkart.business.UserServiceOperations;
 import com.flipkart.validator.ValidateCredential;
+import com.flipkart.validator.ValidateIdentity;
 
 import static com.flipkart.constants.ColorConstants.*;
 
@@ -17,6 +18,7 @@ public class FlipFitGymCustomerClientMenu {
     UserServiceOperations userServiceOperations = new UserServiceOperations();
     ValidateCredential validateCredential = new ValidateCredential();
     PaymentsServiceOperations payerServiceOperations = new PaymentsServiceOperations();
+    ValidateIdentity validateIdentity = new ValidateIdentity();
 
     public boolean userLogin(String email, String password) {
         if (validateUser(email, password)) {
@@ -45,6 +47,10 @@ public class FlipFitGymCustomerClientMenu {
                         System.out.println(ANSI_BOLD + ANSI_RED + "Enter the following: " + ANSI_RESET);
                         System.out.println(ANSI_CYAN + "Gym ID: " + ANSI_RESET);
                         int gymId = Integer.parseInt(scanner.nextLine());
+                        if(!validateIdentity.validateId(gymId)) {
+                            System.out.println(ANSI_RED + "Gym ID invalid!" + ANSI_RESET);
+                            break;
+                        }
                         System.out.println(ANSI_GREEN + "Slot Time: " + ANSI_RESET);
                         int time = Integer.parseInt(scanner.nextLine());
 
@@ -56,6 +62,10 @@ public class FlipFitGymCustomerClientMenu {
                         viewAllBookings(email);
                         System.out.println(ANSI_RED + "Enter Booking ID: " + ANSI_RESET);
                         int bookingId = Integer.parseInt(scanner.nextLine());
+                        if(!validateIdentity.validateId(bookingId)) {
+                            System.out.println(ANSI_RED + "Booking ID invalid!" + ANSI_RESET);
+                            break;
+                        }
                         if (cancelSlot(bookingId))
                             System.out.println(ANSI_CYAN + "Booking cancelled successfully!" + ANSI_RESET);
                         else
@@ -72,6 +82,10 @@ public class FlipFitGymCustomerClientMenu {
                     case 6:
                         System.out.println(ANSI_RED + "Enter gym ID: " + ANSI_RESET);
                         int _gymId = Integer.parseInt(scanner.nextLine());
+                        if(!validateIdentity.validateId(_gymId)) {
+                            System.out.println(ANSI_RED + "Gym ID invalid!" + ANSI_RESET);
+                            break;
+                        }
                         System.out.println(ANSI_RED + "Enter start time: " + ANSI_RESET);
                         int _startTime = Integer.parseInt(scanner.nextLine());
                         int availableSeatCount = userServiceOperations.getSeatCount(_gymId, _startTime);
@@ -218,10 +232,22 @@ public class FlipFitGymCustomerClientMenu {
         }
         System.out.println(ANSI_BLUE + "Phone Number: " + ANSI_RESET);
         String phoneNo = scanner.nextLine();
+        if(!validateIdentity.validatePhoneNumber(phoneNo)){
+            System.out.println(ANSI_RED + "Phone Number invalid! Try again!" + ANSI_RESET);
+            return;
+        }
         System.out.println(ANSI_BLUE + "Address: " + ANSI_RESET);
         String address = scanner.nextLine();
+        if(!validateIdentity.validateAddress(address)){
+            System.out.println(ANSI_RED + "Address invalid! Try again!" + ANSI_RESET);
+            return;
+        }
         System.out.println(ANSI_BLUE + "Location: " + ANSI_RESET);
         String location = scanner.nextLine();
+        if(!validateIdentity.validateLocation(location)){
+            System.out.println(ANSI_RED + "Location invalid! Try again!" + ANSI_RESET);
+            return;
+        }
 
         User user = new User();
         user.setEmail(ownerEmail);
@@ -249,6 +275,10 @@ public class FlipFitGymCustomerClientMenu {
         String ownerName = scanner.nextLine();
         System.out.println(ANSI_PURPLE + "Phone Number: " + ANSI_RESET);
         String phoneNo = scanner.nextLine();
+        if(!validateIdentity.validatePhoneNumber(phoneNo)){
+            System.out.println(ANSI_RED + "Phone Number invalid! Try again!" + ANSI_RESET);
+            return false;
+        }
         // System.out.println("Address: ");
         // String address = scanner.nextLine();
         // System.out.println("Location: ");
