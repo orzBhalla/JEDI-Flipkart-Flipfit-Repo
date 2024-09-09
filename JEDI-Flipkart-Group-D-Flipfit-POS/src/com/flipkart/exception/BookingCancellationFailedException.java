@@ -14,7 +14,7 @@ public class BookingCancellationFailedException extends Exception {
      * Provides a custom error message to be returned when this exception is thrown.
      *
      * @return a custom error message indicating that booking cancellation has failed
-     * @author xyz
+     * @author Adarsh, Chahat
      */
     @Override
     public String getMessage() {
