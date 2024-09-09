@@ -5,7 +5,7 @@ package com.flipkart.exception;
  * Inherits from the Exception class to allow for specific exception handling
  * related to booking cancellations.
  *
- * @author
+ * @author Adarsh, Chahat
  */
 public class BookingCancellationFailedException extends Exception {
 
