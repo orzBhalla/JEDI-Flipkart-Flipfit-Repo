@@ -4,6 +4,7 @@ import java.util.*;
 
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.GymOwner;
+import com.flipkart.bean.Slots;
 import com.flipkart.dao.FlipFitGymOwnerDAOImplementation;
 import com.flipkart.dao.FlipFitUpdatePasswordDAOImplementation;
 
@@ -110,9 +111,11 @@ public class GymOwnerServiceOperations implements GymOwnerService {
     public boolean updateSeatCount(int gymId, int startTime, int seatCount) {
         return flipFitGymOwnerDAOImplementation.updateSeatCount(gymId, startTime, seatCount);
     }
+
+    public boolean addSlots(int gymId, List<Slots> slots) {
+        return flipFitGymOwnerDAOImplementation.addSlots(gymId, slots);
+    }
 }
-
-
 
 //package com.flipkart.business;
 //

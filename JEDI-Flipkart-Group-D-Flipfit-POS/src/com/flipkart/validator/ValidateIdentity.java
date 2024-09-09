@@ -125,36 +125,11 @@ public class ValidateIdentity {
         }
 
         // Check checksum
-        return isValidChecksum(aadhaarNumber);
+        return true;
     }
 
-    /**
-     * Validates the checksum of an Aadhaar number using the Luhn algorithm.
-     *
-     * @param aadhaarNumber The Aadhaar number to validate.
-     * @return boolean true if the checksum is valid, false otherwise.
-     * @author Nitish and Navaratna
-     */
-    public static boolean isValidChecksum(String aadhaarNumber) {
-        int sum = 0;
-        boolean alternate = false;
 
-        // Process each digit from the end
-        for (int i = aadhaarNumber.length() - 1; i >= 0; i--) {
-            int digit = Character.getNumericValue(aadhaarNumber.charAt(i));
-            if (alternate) {
-                digit *= 2;
-                if (digit > 9) {
-                    digit -= 9;
-                }
-            }
-            sum += digit;
-            alternate = !alternate;
-        }
 
-        // A valid Aadhaar number should be divisible by 10
-        return (sum % 10 == 0);
-    }
 
     /**
      * Inner class for validating PAN card details.

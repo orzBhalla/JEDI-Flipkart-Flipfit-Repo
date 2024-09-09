@@ -45,7 +45,7 @@ public class FlipFitGymOwnerClientMenu {
             System.out.println(ANSI_PURPLE + "Press 1 to add a gym");
             System.out.println("Press 2 to update a gym");
             System.out.println("Press 3 to view all gyms");
-            System.out.println("Press 4 to delete a customer");
+            System.out.println("Press 4 to add slots");
             System.out.println("Press 5 to update seat count");
             System.out.println("Press 6 to update your details");
             System.out.println("Press 7 to logout" + ANSI_RESET);
@@ -63,7 +63,7 @@ public class FlipFitGymOwnerClientMenu {
                     displayGyms(email);
                     break;
                 case 4:
-                    // Placeholder for deleting a customer
+                    addSlots();
                     break;
                 case 5:
                     updateSeatCount(email);
@@ -149,6 +149,45 @@ public class FlipFitGymOwnerClientMenu {
             System.out.println(ANSI_PURPLE + "Gym added successfully!" + ANSI_RESET);
         else
             System.out.println(ANSI_PURPLE + "Gym could not be added!" + ANSI_RESET);
+    }
+
+    private void addSlots() {
+        System.out.println(ANSI_CYAN + "Gym ID: " + ANSI_RESET);
+        int gymId = Integer.parseInt(scanner.nextLine());
+        if (!validateIdentity.validateId(gymId)) {
+            System.out.println(ANSI_RED + "Gym ID invalid!" + ANSI_RESET);
+            return;
+        }
+        List<Slots> slots = new ArrayList<>();
+        System.out.println(ANSI_PURPLE + "Please enter number of slots: " + ANSI_RESET);
+        int slotCount = Integer.parseInt(scanner.nextLine());
+        if (!validateIdentity.validateSlots(slotCount)) {
+            System.out.println(ANSI_RED + "Invalid number of slots!" + ANSI_RESET);
+            return;
+        }
+        int currentCount = 1;
+        while (currentCount <= slotCount) {
+            System.out.println("Add details for slot number " + currentCount + ": ");
+            System.out.println("Enter start time: ");
+            int startTime = Integer.parseInt(scanner.nextLine());
+            if (!validateIdentity.validateTime(startTime)) {
+                System.out.println(ANSI_RED + "Invalid start time!" + ANSI_RESET);
+                continue;
+            }
+            System.out.println("Enter available seats: ");
+            int seatCount = Integer.parseInt(scanner.nextLine());
+            if (!validateIdentity.validateSlots(seatCount)) {
+                System.out.println(ANSI_RED + "Invalid seat count!" + ANSI_RESET);
+                continue;
+            }
+            Slots slot = new Slots(-1, startTime, seatCount);
+            slots.add(slot);
+            currentCount++;
+        }
+        if(gymOwnerServiceOperations.addSlots(gymId, slots))
+            System.out.println(ANSI_GREEN + "Gym added successfully!" + ANSI_RESET);
+        else
+            System.out.println(ANSI_RED + "Gym could not be added!" + ANSI_RESET);
     }
 
     /**
