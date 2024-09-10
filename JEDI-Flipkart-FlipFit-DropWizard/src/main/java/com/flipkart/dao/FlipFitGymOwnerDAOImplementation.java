@@ -90,7 +90,7 @@ public class FlipFitGymOwnerDAOImplementation implements FlipFitGymOwnerDAOInter
             preparedStatement.setString(5, gymOwner.getNationalId());
             preparedStatement.setString(6, gymOwner.getGST());
             preparedStatement.setString(7, gymOwner.getPAN());
-            preparedStatement.setString(8, gymOwner.getVerificationStatus());
+            preparedStatement.setString(8, "unverified");
 
             int rowsInserted = preparedStatement.executeUpdate();
             if (rowsInserted > 0) {
