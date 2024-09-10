@@ -4,13 +4,13 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 
-@Path("/hello")
+@Path("/check")
 @Produces(MediaType.APPLICATION_JSON)
-public class HelloController {
+public class DemoController {
 
     @GET
-    public String getEmployees() {
-        return "my dropwizard service";
+    public String isServerUp() {
+        return "Server is up!";
     }
 
 }

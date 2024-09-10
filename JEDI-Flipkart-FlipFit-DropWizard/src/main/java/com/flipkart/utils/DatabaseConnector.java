@@ -16,16 +16,20 @@ public class DatabaseConnector {
                 return connection;
             } else {
                 try {
-                    Properties prop = new Properties();
-                    InputStream inputStream = DatabaseConnector.class.getClassLoader().getResourceAsStream("./config.properties");
-                    prop.load(inputStream);
-                    String driver = prop.getProperty("driver");
-                    String url = prop.getProperty("url");
-                    String user = prop.getProperty("user");
-                    String password = prop.getProperty("password");
+//                    Properties prop = new Properties();
+//                    InputStream inputStream = DatabaseConnector.class.getClassLoader().getResourceAsStream("./config.properties");
+//                    prop.load(inputStream);
+//                    String driver = prop.getProperty("driver");
+//                    String url = prop.getProperty("url");
+//                    String user = prop.getProperty("user");
+//                    String password = prop.getProperty("password");
+                    String driver = "com.mysql.cj.jdbc.Driver";
+                    String url = "jdbc:mysql://localhost:3306/FlipFit_Database";
+                    String user = "root";
+                    String password = "";
                     Class.forName(driver);
                     connection = DriverManager.getConnection(url, user, password);
-                } catch (ClassNotFoundException | SQLException | IOException e) {
+                } catch (ClassNotFoundException | SQLException e) {
                     e.printStackTrace();
                 }
             }
