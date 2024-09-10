@@ -10,7 +10,6 @@ public class HelloController {
 
     @GET
     public String getEmployees() {
-
         return "my dropwizard service";
     }
 
