@@ -186,7 +186,7 @@ public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInter
             // System.out.println("Booking cancelled successfully!");
             return flipFitGymOwnerDAOImplementation.updateSeatCount(gymId, startTime, 1);
         } else {
-            return true;
+            return false;
         }
     }
 
