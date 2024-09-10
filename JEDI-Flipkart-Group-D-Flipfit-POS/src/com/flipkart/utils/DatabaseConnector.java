@@ -36,6 +36,7 @@ public class DatabaseConnector {
     }
 
     public static boolean isValid() throws SQLException {
+        // return false;
         return connection != null && !connection.isClosed();
     }
 }
