@@ -2,6 +2,8 @@ package com.flipkart.business;
 
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.GymOwner;
+import com.flipkart.bean.User;
+
 import java.util.List;
 
 /**
@@ -19,7 +21,7 @@ public interface AdminService {
      *
      * @author Chahat, Navaratna
      */
-    void viewGymOwners();
+    List<GymOwner> viewGymOwners();
 
     /**
      * Views the list of gyms.
@@ -28,16 +30,16 @@ public interface AdminService {
      *
      * @author Chahat, Navaratna
      */
-    void viewGyms();
+    List<Gym> viewGyms();
 
     /**
-     * Views the list of users.
+     * Returns the list of users.
      *
-     * This method retrieves and displays all registered users.
+     * This method retrieves and returns all registered users.
      *
      * @author Chahat, Navaratna
      */
-    void viewUsers();
+    List<User> viewUsers();
 
     /**
      * Verifies the legitimacy of a gym.
