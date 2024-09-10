@@ -1,6 +1,8 @@
 package com.flipkart.app;
 
 import com.flipkart.rest.HelloController;
+import com.flipkart.rest.AdminController;
+import com.flipkart.business.AdminServiceOperations;
 import io.dropwizard.*;
 
 import io.dropwizard.Application;
@@ -26,7 +28,7 @@ public class App extends Application<Configuration> {
         LOGGER.info("Registering REST resources");
         //  e.jersey().register(new EmployeeRESTController(e.getValidator()));
         e.jersey().register(new HelloController());
-        // e.jersey().register(new AdminController(e.getValidator(),new AdminServiceOperation()));
+        e.jersey().register(new AdminController(new AdminServiceOperations()));
         // e.jersey().register(new GymOwnerController(e.getValidator(), new GymOwnerServiceOperation()));
         // e.jersey().register(new CustomerController(e.getValidator(), new UserServiceOperations()));
     }
