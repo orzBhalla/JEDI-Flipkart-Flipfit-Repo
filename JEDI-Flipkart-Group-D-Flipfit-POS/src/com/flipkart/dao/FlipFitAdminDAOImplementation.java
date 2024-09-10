@@ -13,36 +13,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FlipFitAdminDAOImplementation implements FlipFitAdminDAOInterface {
-    DatabaseConnector connector;
-    Connection conn;
 
     @Override
     public List<Gym> viewGyms() {
-        conn = DatabaseConnector.getConnection();
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
         List<Gym> gyms = new ArrayList<>();
 
-        try {
-            preparedStatement = conn.prepareStatement(SQLConstants.ADMIN_VIEW_ALL_GYMS);
+        try (Connection conn = DatabaseConnector.getConnection();
+             PreparedStatement preparedStatement = conn.prepareStatement(SQLConstants.ADMIN_VIEW_ALL_GYMS);) {
 
-            resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                int gymId = resultSet.getInt("gymId");
-                String gymAddress = resultSet.getString("gymAddress");
-                String location = resultSet.getString("location");
-                String gymName = resultSet.getString("gymName");
-                String status = resultSet.getString("Status");
-                int ownerId = resultSet.getInt("ownerId");
-                Gym gym = new Gym();
-                gym.setGymId(gymId);
-                gym.setGymName(gymName);
-                gym.setGymAddress(gymAddress);
-                gym.setOwnerId(ownerId);
-                gym.setLocation(location);
-                gym.setStatus(status);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    int gymId = resultSet.getInt("gymId");
+                    String gymAddress = resultSet.getString("gymAddress");
+                    String location = resultSet.getString("location");
+                    String gymName = resultSet.getString("gymName");
+                    String status = resultSet.getString("Status");
+                    int ownerId = resultSet.getInt("ownerId");
+                    Gym gym = new Gym();
+                    gym.setGymId(gymId);
+                    gym.setGymName(gymName);
+                    gym.setGymAddress(gymAddress);
+                    gym.setOwnerId(ownerId);
+                    gym.setLocation(location);
+                    gym.setStatus(status);
 
-                gyms.add(gym);
+                    gyms.add(gym);
+                }
             }
         } catch (SQLException e) {
             System.out.println("SQL Error: " + e.getMessage());
@@ -52,32 +48,30 @@ public class FlipFitAdminDAOImplementation implements FlipFitAdminDAOInterface {
 
     @Override
     public List<User> viewUsers() {
-        Connection conn = null;
-        PreparedStatement preparedStatement = null;
         List<User> users = new ArrayList<>();
 
-        try {
-            conn = DatabaseConnector.getConnection();
-            preparedStatement = conn.prepareStatement(SQLConstants.ADMIN_VIEW_ALL_USERS);
+        try (Connection conn = DatabaseConnector.getConnection();
+             PreparedStatement preparedStatement = conn.prepareStatement(SQLConstants.ADMIN_VIEW_ALL_USERS);) {
 
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                int userId = resultSet.getInt("userId");
-                String phoneNumber = resultSet.getString("phoneNumber");
-                String userName = resultSet.getString("userName");
-                String address = resultSet.getString("address");
-                String location = resultSet.getString("location");
-                String email = resultSet.getString("email");
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    int userId = resultSet.getInt("userId");
+                    String phoneNumber = resultSet.getString("phoneNumber");
+                    String userName = resultSet.getString("userName");
+                    String address = resultSet.getString("address");
+                    String location = resultSet.getString("location");
+                    String email = resultSet.getString("email");
 
-                User user = new User();
-                user.setUserId(userId);
-                user.setPhoneNumber(phoneNumber);
-                user.setUserName(userName);
-                user.setAddress(address);
-                user.setLocation(location);
-                user.setEmail(email);
+                    User user = new User();
+                    user.setUserId(userId);
+                    user.setPhoneNumber(phoneNumber);
+                    user.setUserName(userName);
+                    user.setAddress(address);
+                    user.setLocation(location);
+                    user.setEmail(email);
 
-                users.add(user);
+                    users.add(user);
+                }
             }
         } catch (SQLException e) {
             System.out.println("SQL Error: " + e.getMessage());
@@ -87,36 +81,34 @@ public class FlipFitAdminDAOImplementation implements FlipFitAdminDAOInterface {
 
     @Override
     public List<GymOwner> viewGymOwners() {
-        Connection conn = null;
-        PreparedStatement preparedStatement = null;
         List<GymOwner> gymOwners = new ArrayList<>();
 
-        try {
-            conn = DatabaseConnector.getConnection();
-            preparedStatement = conn.prepareStatement(SQLConstants.ADMIN_VIEW_ALL_GYM_OWNERS);
+        try (Connection conn = DatabaseConnector.getConnection();
+             PreparedStatement preparedStatement = conn.prepareStatement(SQLConstants.ADMIN_VIEW_ALL_GYM_OWNERS);) {
 
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                int ownerId = resultSet.getInt("ownerId");
-                String phoneNo = resultSet.getString("phoneNo");
-                String ownerName = resultSet.getString("ownerName");
-                String ownerEmail = resultSet.getString("ownerEmail");
-                String nationalId = resultSet.getString("nationalId");
-                String GST = resultSet.getString("GST");
-                String PAN = resultSet.getString("PAN");
-                String verificationStatus = resultSet.getString("verificationStatus");
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    int ownerId = resultSet.getInt("ownerId");
+                    String phoneNo = resultSet.getString("phoneNo");
+                    String ownerName = resultSet.getString("ownerName");
+                    String ownerEmail = resultSet.getString("ownerEmail");
+                    String nationalId = resultSet.getString("nationalId");
+                    String GST = resultSet.getString("GST");
+                    String PAN = resultSet.getString("PAN");
+                    String verificationStatus = resultSet.getString("verificationStatus");
 
-                GymOwner gymOwner = new GymOwner();
-                gymOwner.setOwnerId(ownerId);
-                gymOwner.setPhoneNo(phoneNo);
-                gymOwner.setOwnerName(ownerName);
-                gymOwner.setOwnerEmail(ownerEmail);
-                gymOwner.setNationalId(nationalId);
-                gymOwner.setGST(GST);
-                gymOwner.setPAN(PAN);
-                gymOwner.setVerificationStatus(verificationStatus);
+                    GymOwner gymOwner = new GymOwner();
+                    gymOwner.setOwnerId(ownerId);
+                    gymOwner.setPhoneNo(phoneNo);
+                    gymOwner.setOwnerName(ownerName);
+                    gymOwner.setOwnerEmail(ownerEmail);
+                    gymOwner.setNationalId(nationalId);
+                    gymOwner.setGST(GST);
+                    gymOwner.setPAN(PAN);
+                    gymOwner.setVerificationStatus(verificationStatus);
 
-                gymOwners.add(gymOwner);
+                    gymOwners.add(gymOwner);
+                }
             }
         } catch (SQLException e) {
             System.out.println("SQL Error: " + e.getMessage());
@@ -126,12 +118,8 @@ public class FlipFitAdminDAOImplementation implements FlipFitAdminDAOInterface {
 
     @Override
     public boolean verifyGymOwner(int gymOwnerId) {
-        Connection conn = null;
-        PreparedStatement preparedStatement = null;
-
-        try {
-            conn = DatabaseConnector.getConnection();
-            preparedStatement = conn.prepareStatement(SQLConstants.ADMIN_VERIFY_GYM_OWNER);
+        try (Connection conn = DatabaseConnector.getConnection();
+             PreparedStatement preparedStatement = conn.prepareStatement(SQLConstants.ADMIN_VERIFY_GYM_OWNER);) {
 
             preparedStatement.setInt(1, gymOwnerId);
 
@@ -152,12 +140,8 @@ public class FlipFitAdminDAOImplementation implements FlipFitAdminDAOInterface {
 
     @Override
     public boolean verifyGym(int gymId) {
-        Connection conn = null;
-        PreparedStatement preparedStatement = null;
-
-        try {
-            conn = DatabaseConnector.getConnection();
-            preparedStatement = conn.prepareStatement(SQLConstants.ADMIN_VERIFY_GYM);
+        try (Connection conn = DatabaseConnector.getConnection();
+             PreparedStatement preparedStatement = conn.prepareStatement(SQLConstants.ADMIN_VERIFY_GYM);) {
 
             preparedStatement.setInt(1, gymId);
 
@@ -178,15 +162,12 @@ public class FlipFitAdminDAOImplementation implements FlipFitAdminDAOInterface {
 
     @Override
     public List<Gym> getUnverifiedGyms() {
-        conn = DatabaseConnector.getConnection();
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
         List<Gym> gyms = new ArrayList<>();
 
-        try {
-            preparedStatement = conn.prepareStatement(SQLConstants.ADMIN_VIEW_UNVERIFIED_GYMS);
+        try (Connection conn = DatabaseConnector.getConnection();
+             PreparedStatement preparedStatement = conn.prepareStatement(SQLConstants.ADMIN_VIEW_UNVERIFIED_GYMS);
+             ResultSet resultSet = preparedStatement.executeQuery();) {
 
-            resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 int gymId = resultSet.getInt("gymId");
                 String gymAddress = resultSet.getString("gymAddress");
@@ -213,15 +194,12 @@ public class FlipFitAdminDAOImplementation implements FlipFitAdminDAOInterface {
 
     @Override
     public List<GymOwner> getUnverifiedGymOwners() {
-        Connection conn = null;
-        PreparedStatement preparedStatement = null;
         List<GymOwner> gymOwners = new ArrayList<>();
 
-        try {
-            conn = DatabaseConnector.getConnection();
-            preparedStatement = conn.prepareStatement(SQLConstants.ADMIN_VIEW_UNVERIFIED_GYM_OWNERS);
+        try (Connection conn = DatabaseConnector.getConnection();
+             PreparedStatement preparedStatement = conn.prepareStatement(SQLConstants.ADMIN_VIEW_UNVERIFIED_GYM_OWNERS);
+             ResultSet resultSet = preparedStatement.executeQuery();) {
 
-            ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 int ownerId = resultSet.getInt("ownerId");
                 String phoneNo = resultSet.getString("phoneNo");
