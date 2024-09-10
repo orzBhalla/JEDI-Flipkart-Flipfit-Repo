@@ -1,5 +1,7 @@
 package com.flipkart.app;
 
+import com.flipkart.business.UserServiceOperations;
+import com.flipkart.rest.CustomerController;
 import com.flipkart.rest.DemoController;
 import io.dropwizard.*;
 
@@ -9,6 +11,8 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import javax.xml.validation.Validator;
 
 /**
  * Hello world!
@@ -27,7 +31,7 @@ public class App extends Application<Configuration> {
         e.jersey().register(new DemoController());
         // e.jersey().register(new AdminController(e.getValidator(),new AdminServiceOperation()));
         // e.jersey().register(new GymOwnerController(e.getValidator(), new GymOwnerServiceOperation()));
-        // e.jersey().register(new CustomerController(e.getValidator(), new UserServiceOperations()));
+        e.jersey().register(new CustomerController(new UserServiceOperations()));
     }
 
     public static void main(String[] args) throws Exception {
