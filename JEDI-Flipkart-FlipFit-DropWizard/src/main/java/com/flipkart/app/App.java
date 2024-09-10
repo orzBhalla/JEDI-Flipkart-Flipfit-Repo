@@ -1,5 +1,7 @@
 package com.flipkart.app;
 
+import com.flipkart.business.GymOwnerServiceOperations;
+import com.flipkart.rest.GymOwnerController;
 import com.flipkart.rest.HelloController;
 import io.dropwizard.*;
 
@@ -27,7 +29,7 @@ public class App extends Application<Configuration> {
         //  e.jersey().register(new EmployeeRESTController(e.getValidator()));
         e.jersey().register(new HelloController());
         // e.jersey().register(new AdminController(e.getValidator(),new AdminServiceOperation()));
-        // e.jersey().register(new GymOwnerController(e.getValidator(), new GymOwnerServiceOperation()));
+        e.jersey().register(new GymOwnerController(e.getValidator(), new GymOwnerServiceOperations()));
         // e.jersey().register(new CustomerController(e.getValidator(), new UserServiceOperations()));
     }
 
