@@ -178,14 +178,17 @@ public class FlipFitGymOwnerDAOImplementation implements FlipFitGymOwnerDAOInter
                     gym.setOwnerId(ownerId);
                     gym.setLocation(location);
                     gym.setStatus(status);
-                    List<Slots> slots = getSlotsByGymId(gymId);
-                    gym.setSlots(slots);
 
                     gyms.add(gym);
                 }
             }
         } catch (SQLException e) {
             System.out.println("SQL Error: " + e.getMessage());
+        }
+
+        for (Gym gym : gyms) {
+            List<Slots> slots = getSlotsByGymId(gym.getGymId());
+            gym.setSlots(slots);
         }
         return gyms;
     }

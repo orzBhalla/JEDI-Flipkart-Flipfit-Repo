@@ -53,7 +53,7 @@ public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInter
             System.out.println("SQL Error: " + e.getMessage());
         }
 
-        for(Gym gym : gyms) {
+        for (Gym gym : gyms) {
             List<Slots> slots = flipFitGymOwnerDAOImplementation.getSlotsByGymId(gym.getGymId());
             gym.setSlots(slots);
         }
@@ -150,7 +150,7 @@ public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInter
             System.out.println(e.getMessage());
             return false;
         }
-        if(isBookingSuccessful) {
+        if (isBookingSuccessful) {
             // System.out.println("Record inserted successfully!");
             return flipFitGymOwnerDAOImplementation.updateSeatCount(gymId, startTime, -1);
         } else
@@ -176,13 +176,13 @@ public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInter
 
             int rowsAffected = preparedStatement.executeUpdate();
             if (rowsAffected > 0) {
-                isBookingCancelled = true;
+                isBookingCancelled = true; // issue
             }
         } catch (SQLException e) {
             System.out.println("SQL Error: " + e.getMessage());
             return false;
         }
-        if(isBookingCancelled) {
+        if (isBookingCancelled) {
             // System.out.println("Booking cancelled successfully!");
             return flipFitGymOwnerDAOImplementation.updateSeatCount(gymId, startTime, 1);
         } else {
@@ -240,6 +240,10 @@ public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInter
 
     @Override
     public boolean cancelBooking(int bookingId) {
+        boolean isBookingCancelled = false;
+        int gymId = -1;
+        int startTime = -1;
+
         try (Connection conn = DatabaseConnector.getConnection();
              PreparedStatement preparedStatement = conn.prepareStatement(SQLConstants.UPDATE_BOOKING_STATUS)) {
 
@@ -250,10 +254,7 @@ public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInter
             int rowsAffected = preparedStatement.executeUpdate();
             if (rowsAffected > 0) {
                 // System.out.println("Booking cancelled successfully!");
-                Bookings booking = getBooking(bookingId);
-                int gymId = booking.getGymId();
-                int startTime = booking.getTime();
-                return flipFitGymOwnerDAOImplementation.updateSeatCount(gymId, startTime, 1);
+                isBookingCancelled = true;
             } else {
                 throw new BookingCancellationFailedException();
             }
@@ -264,6 +265,13 @@ public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInter
             // System.out.println(e.getMessage());
             return false;
         }
+        if (isBookingCancelled) {
+            Bookings booking = getBooking(bookingId);
+            gymId = booking.getGymId();
+            startTime = booking.getTime();
+            return flipFitGymOwnerDAOImplementation.updateSeatCount(gymId, startTime, 1);
+        } else
+            return false;
     }
 
     public Bookings getBooking(int bookingId) {
@@ -316,7 +324,8 @@ public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInter
     public boolean createUser(User user) {
         try (Connection conn = DatabaseConnector.getConnection();
              PreparedStatement preparedStatement = conn.prepareStatement(SQLConstants.INSERT_USER)) {
-            //Set values for the placeholder in the prepared statement
+
+            // Set values for the placeholder in the prepared statement
             preparedStatement.setString(1, user.getUserName());
             preparedStatement.setString(2, user.getEmail());
             preparedStatement.setString(3, user.getPassword());
