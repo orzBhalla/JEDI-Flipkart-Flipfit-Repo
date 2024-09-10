@@ -1,5 +1,5 @@
 package com.flipkart.bean;
-
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,7 +7,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Credentials {
-    private String user;
-    private String password;
+public class AddSlotsRequest {
+    // Getters and setters
+    private int gymId;
+    private List<Slots> slots;
+
 }

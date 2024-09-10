@@ -1,8 +1,10 @@
 package com.flipkart.app;
 
-import com.flipkart.business.UserServiceOperations;
-import com.flipkart.rest.CustomerController;
-import com.flipkart.rest.DemoController;
+import com.flipkart.rest.GymOwnerController;
+import com.flipkart.rest.HelloController;
+import com.flipkart.rest.AdminController;
+import com.flipkart.business.AdminServiceOperations;
+import com.flipkart.business.GymOwnerServiceOperations;
 import io.dropwizard.*;
 
 import io.dropwizard.Application;
@@ -16,6 +18,7 @@ import javax.xml.validation.Validator;
 
 /**
  * Hello world!
+ *
  */
 public class App extends Application<Configuration> {
     private static final Logger LOGGER = LoggerFactory.getLogger(App.class);
@@ -26,12 +29,12 @@ public class App extends Application<Configuration> {
 
     @Override
     public void run(Configuration c, Environment e) throws Exception {
-        LOGGER.info("Registering REST resources: ");
+        LOGGER.info("Registering REST resources");
         //  e.jersey().register(new EmployeeRESTController(e.getValidator()));
-        e.jersey().register(new DemoController());
-        // e.jersey().register(new AdminController(e.getValidator(),new AdminServiceOperation()));
-        // e.jersey().register(new GymOwnerController(e.getValidator(), new GymOwnerServiceOperation()));
-        e.jersey().register(new CustomerController(new UserServiceOperations()));
+        e.jersey().register(new HelloController());
+        e.jersey().register(new AdminController(new AdminServiceOperations()));
+        e.jersey().register(new GymOwnerController(new GymOwnerServiceOperations()));
+        // e.jersey().register(new CustomerController(e.getValidator(), new UserServiceOperations()));
     }
 
     public static void main(String[] args) throws Exception {
