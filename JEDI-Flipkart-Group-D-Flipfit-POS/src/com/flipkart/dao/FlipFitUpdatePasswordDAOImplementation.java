@@ -10,19 +10,11 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public class FlipFitUpdatePasswordDAOImplementation implements FlipFitUpdatePasswordDAOInterface {
-    DatabaseConnector connector;
-    Connection conn;
-
 
     public boolean updateGymOwnerPassword(String email, String password, String updatedPassword) {
-        conn = DatabaseConnector.getConnection();
-        Statement statement = null;
-        ResultSet resultSet = null;
-        PreparedStatement preparedStatement = null;
-
-        try {
-            statement = conn.createStatement();
-            preparedStatement = conn.prepareStatement(SQLConstants.GYM_OWNER_UPDATE_PASSWORD, statement.RETURN_GENERATED_KEYS);
+        try (Connection conn = DatabaseConnector.getConnection();
+             Statement statement = conn.createStatement();
+             PreparedStatement preparedStatement = conn.prepareStatement(SQLConstants.GYM_OWNER_UPDATE_PASSWORD, statement.RETURN_GENERATED_KEYS);) {
 
             preparedStatement.setString(1, updatedPassword);
             preparedStatement.setString(2, email);
@@ -46,14 +38,9 @@ public class FlipFitUpdatePasswordDAOImplementation implements FlipFitUpdatePass
 
 
     public boolean updateGymUserPassword(String email, String password, String updatedPassword) {
-        conn = DatabaseConnector.getConnection();
-        Statement statement = null;
-        ResultSet resultSet = null;
-        PreparedStatement preparedStatement = null;
-
-        try {
-            statement = conn.createStatement();
-            preparedStatement = conn.prepareStatement(SQLConstants.GYM_USER_UPDATE_PASSWORD, statement.RETURN_GENERATED_KEYS);
+        try (Connection conn = DatabaseConnector.getConnection();
+             Statement statement = conn.createStatement();
+             PreparedStatement preparedStatement = conn.prepareStatement(SQLConstants.GYM_USER_UPDATE_PASSWORD);) {
 
             preparedStatement.setString(1, updatedPassword);
             preparedStatement.setString(2, email);

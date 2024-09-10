@@ -16,53 +16,51 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInterface {
-    DatabaseConnector connector;
-    Connection conn;
-
     FlipFitGymOwnerDAOImplementation flipFitGymOwnerDAOImplementation = new FlipFitGymOwnerDAOImplementation();
 
     @Override
     public List<Gym> viewAllGymsByArea(String area) {
-        conn = DatabaseConnector.getConnection();
         List<Gym> gyms = new ArrayList<>();
 
         try (Connection conn = DatabaseConnector.getConnection();
              PreparedStatement preparedStatement = conn.prepareStatement(SQLConstants.GET_GYMS_BY_AREA);) {
             preparedStatement.setString(1, area);
             preparedStatement.setString(2, area);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
 
-            while (resultSet.next()) {
-                int gymId = resultSet.getInt("gymId");
-                String gymAddress = resultSet.getString("gymAddress");
-                String location = resultSet.getString("location");
-                String gymName = resultSet.getString("gymName");
-                String status = resultSet.getString("Status");
-                int gymOwnerID = resultSet.getInt("ownerId");
+                while (resultSet.next()) {
+                    int gymId = resultSet.getInt("gymId");
+                    String gymAddress = resultSet.getString("gymAddress");
+                    String location = resultSet.getString("location");
+                    String gymName = resultSet.getString("gymName");
+                    String status = resultSet.getString("Status");
+                    int gymOwnerID = resultSet.getInt("ownerId");
 
-                if (status.equals("unverified")) continue;
+                    if (status.equals("unverified")) continue;
 
-                Gym gym = new Gym();
-                gym.setGymName(gymName);
-                gym.setGymAddress(gymAddress);
-                gym.setOwnerId(gymOwnerID);
-                gym.setLocation(location);
-                gym.setStatus(status);
-                gym.setGymId(gymId);
+                    Gym gym = new Gym();
+                    gym.setGymName(gymName);
+                    gym.setGymAddress(gymAddress);
+                    gym.setOwnerId(gymOwnerID);
+                    gym.setLocation(location);
+                    gym.setStatus(status);
+                    gym.setGymId(gymId);
 
-                List<Slots> slots = flipFitGymOwnerDAOImplementation.getSlotsByGymId(gymId);
-                gym.setSlots(slots);
-
-                gyms.add(gym);
+                    gyms.add(gym);
+                }
             }
         } catch (SQLException e) {
             System.out.println("SQL Error: " + e.getMessage());
+        }
+
+        for (Gym gym : gyms) {
+            List<Slots> slots = flipFitGymOwnerDAOImplementation.getSlotsByGymId(gym.getGymId());
+            gym.setSlots(slots);
         }
         return gyms;
     }
 
     public List<Gym> viewAllGymsWithSlots() {
-        conn = DatabaseConnector.getConnection();
         List<Gym> gyms = new ArrayList<>();
 
         try (Connection conn = DatabaseConnector.getConnection();
@@ -87,22 +85,24 @@ public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInter
                 gym.setStatus(status);
                 gym.setGymId(gymId);
 
-                List<Slots> slots = flipFitGymOwnerDAOImplementation.getSlotsByGymId(gymId);
-                gym.setSlots(slots);
-
                 gyms.add(gym);
             }
         } catch (SQLException e) {
             System.out.println("SQL Error: " + e.getMessage());
+        }
+
+        for (Gym gym : gyms) {
+            List<Slots> slots = flipFitGymOwnerDAOImplementation.getSlotsByGymId(gym.getGymId());
+            gym.setSlots(slots);
         }
         return gyms;
     }
 
     @Override
     public boolean bookSlot(int gymId, int startTime, String email) {
-        try (Connection conn = DatabaseConnector.getConnection();
-             PreparedStatement preparedStatement = conn.prepareStatement(SQLConstants.INSERT_BOOKING)) {
+        boolean isBookingSuccessful = false;
 
+        try {
             int seatCount = getSeatCount(gymId, startTime);
             if (seatCount == 0) {
                 throw new SlotsUnavailableException();
@@ -116,28 +116,32 @@ public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInter
                 return false;
             }
             int bookingStatus = 1; // confirmed
+
             int slotId = getSlotsIdByGymIdAndStartTime(gymId, startTime);
             if (slotId == -1) {
                 return false;
             }
 
-            //Set Values for the placeholders in the prpared statement
-            preparedStatement.setInt(1, userId);
-            preparedStatement.setInt(2, bookingStatus);
-            preparedStatement.setInt(3, startTime);
-            preparedStatement.setInt(4, slotId);
-            preparedStatement.setInt(5, gymId);
-
-            if (!(cancelOverlappingBookingIfExists(gymId, startTime, userId, 0) && cancelOverlappingBookingIfExists(gymId, startTime, userId, 1))) {
+            if ((!cancelOverlappingBookingIfExists(gymId, startTime, userId, 0)) && (!cancelOverlappingBookingIfExists(gymId, startTime, userId, 1))) {
                 System.out.println("Unable to cancel the overlapping booking. Please try again");
                 return false;
             }
 
-            int rowsInserted = preparedStatement.executeUpdate();
+            try (Connection conn = DatabaseConnector.getConnection();
+                 PreparedStatement preparedStatement = conn.prepareStatement(SQLConstants.INSERT_BOOKING);) {
 
-            if (rowsInserted > 0) {
-                // System.out.println("Record inserted successfully!");
-                return flipFitGymOwnerDAOImplementation.updateSeatCount(gymId, startTime, -1);
+                // Set values for the placeholders in the prepared statement
+                preparedStatement.setInt(1, userId);
+                preparedStatement.setInt(2, bookingStatus);
+                preparedStatement.setInt(3, startTime);
+                preparedStatement.setInt(4, slotId);
+                preparedStatement.setInt(5, gymId);
+
+                int rowsInserted = preparedStatement.executeUpdate();
+
+                if (rowsInserted > 0) {
+                    isBookingSuccessful = true;
+                }
             }
         } catch (SQLException e) {
             System.out.println("SQL Error: " + e.getMessage());
@@ -146,7 +150,11 @@ public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInter
             System.out.println(e.getMessage());
             return false;
         }
-        return false;
+        if (isBookingSuccessful) {
+            // System.out.println("Record inserted successfully!");
+            return flipFitGymOwnerDAOImplementation.updateSeatCount(gymId, startTime, -1);
+        } else
+            return false;
     }
 
     public int getSeatCount(int gymId, int startTime) {
@@ -154,6 +162,8 @@ public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInter
     }
 
     public boolean cancelOverlappingBookingIfExists(int gymId, int startTime, int userId, int bookingStatus) {
+        boolean isBookingCancelled = false;
+
         try (Connection conn = DatabaseConnector.getConnection();
              PreparedStatement preparedStatement = conn.prepareStatement(SQLConstants.UPDATE_OVERLAPPING_BOOKING_STATUS)) {
 
@@ -166,30 +176,33 @@ public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInter
 
             int rowsAffected = preparedStatement.executeUpdate();
             if (rowsAffected > 0) {
-                // System.out.println("Booking cancelled successfully!");
-                return flipFitGymOwnerDAOImplementation.updateSeatCount(gymId, startTime, 1);
+                isBookingCancelled = true; // issue
             }
         } catch (SQLException e) {
             System.out.println("SQL Error: " + e.getMessage());
             return false;
         }
-        return true;
+        if (isBookingCancelled) {
+            // System.out.println("Booking cancelled successfully!");
+            return flipFitGymOwnerDAOImplementation.updateSeatCount(gymId, startTime, 1);
+        } else {
+            return false;
+        }
     }
 
     public int getSlotsIdByGymIdAndStartTime(int gymId, int startTime) {
-        conn = DatabaseConnector.getConnection();
-        ResultSet resultSet = null;
-        PreparedStatement preparedStatement = null;
         int slotId = -1;
 
-        try {
-            preparedStatement = conn.prepareStatement(SQLConstants.GET_SLOTS_ID_BY_GYM_ID_AND_START_TIME);
+        try (Connection conn = DatabaseConnector.getConnection();
+             PreparedStatement preparedStatement = conn.prepareStatement(SQLConstants.GET_SLOTS_ID_BY_GYM_ID_AND_START_TIME);
+        ) {
             preparedStatement.setInt(1, gymId);
             preparedStatement.setInt(2, startTime);
 
-            resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                slotId = resultSet.getInt("slotsId");
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    slotId = resultSet.getInt("slotsId");
+                }
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -227,6 +240,10 @@ public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInter
 
     @Override
     public boolean cancelBooking(int bookingId) {
+        boolean isBookingCancelled = false;
+        int gymId = -1;
+        int startTime = -1;
+
         try (Connection conn = DatabaseConnector.getConnection();
              PreparedStatement preparedStatement = conn.prepareStatement(SQLConstants.UPDATE_BOOKING_STATUS)) {
 
@@ -237,10 +254,7 @@ public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInter
             int rowsAffected = preparedStatement.executeUpdate();
             if (rowsAffected > 0) {
                 // System.out.println("Booking cancelled successfully!");
-                Bookings booking = getBooking(bookingId);
-                int gymId = booking.getGymId();
-                int startTime = booking.getTime();
-                return flipFitGymOwnerDAOImplementation.updateSeatCount(gymId, startTime, 1);
+                isBookingCancelled = true;
             } else {
                 throw new BookingCancellationFailedException();
             }
@@ -251,6 +265,13 @@ public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInter
             // System.out.println(e.getMessage());
             return false;
         }
+        if (isBookingCancelled) {
+            Bookings booking = getBooking(bookingId);
+            gymId = booking.getGymId();
+            startTime = booking.getTime();
+            return flipFitGymOwnerDAOImplementation.updateSeatCount(gymId, startTime, 1);
+        } else
+            return false;
     }
 
     public Bookings getBooking(int bookingId) {
@@ -291,9 +312,6 @@ public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInter
                 if (resultSet.next()) {
                     return true;
                 }
-            } catch (SQLException e) {
-                System.out.println("SQL Error: " + e.getMessage());
-                return false;
             }
         } catch (SQLException e) {
             System.out.println("SQL Error: " + e.getMessage());
@@ -306,7 +324,8 @@ public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInter
     public boolean createUser(User user) {
         try (Connection conn = DatabaseConnector.getConnection();
              PreparedStatement preparedStatement = conn.prepareStatement(SQLConstants.INSERT_USER)) {
-            //Set values for the placeholder in the prepared statement
+
+            // Set values for the placeholder in the prepared statement
             preparedStatement.setString(1, user.getUserName());
             preparedStatement.setString(2, user.getEmail());
             preparedStatement.setString(3, user.getPassword());
@@ -331,17 +350,12 @@ public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInter
     }
 
     public boolean updateUserDetails(User user) {
-        conn = DatabaseConnector.getConnection();
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-
-        try {
-            preparedStatement = conn.prepareStatement(SQLConstants.UPDATE_USER);
+        try (Connection conn = DatabaseConnector.getConnection();
+             PreparedStatement preparedStatement = conn.prepareStatement(SQLConstants.UPDATE_USER);
+        ) {
             preparedStatement.setString(1, user.getUserName());
             preparedStatement.setString(2, user.getPhoneNumber());
             preparedStatement.setString(3, user.getEmail());
-
-            preparedStatement.executeUpdate();
 
             int rowsUpdated = preparedStatement.executeUpdate();
             if (rowsUpdated > 0) {
@@ -360,18 +374,17 @@ public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInter
     }
 
     public int getUserIdByEmail(String email) {
-        conn = DatabaseConnector.getConnection();
-        ResultSet resultSet = null;
-        PreparedStatement preparedStatement = null;
         int userId = -1;
 
-        try {
-            preparedStatement = conn.prepareStatement(SQLConstants.GET_USER_ID_BY_EMAIL);
+        try (Connection conn = DatabaseConnector.getConnection();
+             PreparedStatement preparedStatement = conn.prepareStatement(SQLConstants.GET_USER_ID_BY_EMAIL);
+        ) {
             preparedStatement.setString(1, email);
 
-            resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                userId = resultSet.getInt("userId");
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    userId = resultSet.getInt("userId");
+                }
             }
         } catch (SQLException e) {
             System.out.println("SQL Error: " + e.getMessage());
