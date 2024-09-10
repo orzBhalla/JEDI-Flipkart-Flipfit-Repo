@@ -1,7 +1,5 @@
 package com.flipkart.bean;
 
-package com.flipkart.bean;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
