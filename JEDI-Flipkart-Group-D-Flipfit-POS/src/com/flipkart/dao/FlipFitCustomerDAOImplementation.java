@@ -128,7 +128,7 @@ public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInter
             preparedStatement.setInt(4, slotId);
             preparedStatement.setInt(5, gymId);
 
-            if (!(cancelOverlappingBookingIfExists(gymId, startTime, userId, 0) && cancelOverlappingBookingIfExists(gymId, startTime, userId, 1))) {
+            if (! (cancelOverlappingBookingIfExists(gymId, startTime, userId, 0) && cancelOverlappingBookingIfExists(gymId, startTime, userId, 1))) {
                 System.out.println("Unable to cancel the overlapping booking. Please try again");
                 return false;
             }
@@ -136,7 +136,6 @@ public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInter
             int rowsInserted = preparedStatement.executeUpdate();
 
             if (rowsInserted > 0) {
-                // System.out.println("Record inserted successfully!");
                 return flipFitGymOwnerDAOImplementation.updateSeatCount(gymId, startTime, -1);
             }
         } catch (SQLException e) {
