@@ -48,7 +48,7 @@ public class FlipFitGymOwnerClientMenu {
             System.out.println("Press 2 to update gym details");
             System.out.println("Press 3 to view all gyms");
             System.out.println("Press 4 to add slots");
-            System.out.println("Press 5 to update seat count");
+            System.out.println("Press 5 to update seat count by");
             System.out.println("Press 6 to update your details");
             System.out.println("Press 7 to logout" + ANSI_RESET);
 
