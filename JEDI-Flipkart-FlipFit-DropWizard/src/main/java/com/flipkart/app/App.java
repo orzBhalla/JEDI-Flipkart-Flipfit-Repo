@@ -1,5 +1,7 @@
 package com.flipkart.app;
 
+import com.flipkart.business.UserServiceOperations;
+import com.flipkart.rest.CustomerController;
 import com.flipkart.rest.GymOwnerController;
 import com.flipkart.rest.HelloController;
 import com.flipkart.rest.AdminController;
@@ -34,7 +36,7 @@ public class App extends Application<Configuration> {
         e.jersey().register(new HelloController());
         e.jersey().register(new AdminController(new AdminServiceOperations()));
         e.jersey().register(new GymOwnerController(new GymOwnerServiceOperations()));
-        // e.jersey().register(new CustomerController(e.getValidator(), new UserServiceOperations()));
+        e.jersey().register(new CustomerController(new UserServiceOperations()));
     }
 
     public static void main(String[] args) throws Exception {

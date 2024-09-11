@@ -169,4 +169,16 @@ public class CustomerController {
             return Response.ok("Customer updated successfully!").build();
         return Response.status(Response.Status.NOT_FOUND).build();
     }
+
+//    GET localhost:8080/customer/getUserIdByEmail/adarsh@flipkart.com
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/getUserIdByEmail/{email}")
+    public Response getUserIdByEmail(@PathParam("email") String email) {
+        int userId = userServiceOperations.getUserIdByEmail(email);
+        if (userId != -1)
+            return Response.ok("User ID: " + userId).build();
+        else return Response.status(Response.Status.NOT_FOUND).build();
+    }
 }

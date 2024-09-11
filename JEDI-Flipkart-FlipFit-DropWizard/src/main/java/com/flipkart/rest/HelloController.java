@@ -6,7 +6,7 @@ import javax.ws.rs.core.MediaType;
 
 @Path("/check")
 @Produces(MediaType.APPLICATION_JSON)
-public class DemoController {
+public class HelloController {
 
     @GET
     public String isServerUp() {
