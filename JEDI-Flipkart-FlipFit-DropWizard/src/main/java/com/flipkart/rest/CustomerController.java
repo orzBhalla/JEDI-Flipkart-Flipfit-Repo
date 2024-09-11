@@ -150,4 +150,23 @@ public class CustomerController {
             return Response.ok("Seat count: " + seatCount).build();
         return Response.status(Response.Status.NOT_FOUND).build();
     }
+
+//    POST localhost:8080/customer/updateCustomer
+//    {
+//        "userName": "Adarsh Kumar",
+//            "phoneNumber": "8299735167",
+//            "address": JP Nagar",
+//            "location": "Bengaluru",
+//            "email": "adarsh@flipkart.com"
+//    }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/updateCustomer")
+    public Response updateUserDetails(User user) {
+        boolean success = userServiceOperations.updateUserDetails(user);
+        if (success)
+            return Response.ok("Customer updated successfully!").build();
+        return Response.status(Response.Status.NOT_FOUND).build();
+    }
 }
