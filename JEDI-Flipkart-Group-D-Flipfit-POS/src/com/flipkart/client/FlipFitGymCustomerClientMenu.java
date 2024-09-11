@@ -12,13 +12,11 @@ import static com.flipkart.utils.DateAndTime.displayCurrentDate;
 
 import java.util.Scanner;
 
-/**
- * Handles the customer menu operations for the FlipFit application.
- * Provides functionality for user login, viewing and managing gym slots, bookings,
- * and updating user details.
- *
- * @author: Navratana, Adarsh
- */
+/// Handles the customer menu operations for the FlipFit application.
+/// Provides functionality for user login, viewing and managing gym slots, bookings,
+/// and updating user details.
+///
+/// @author: Navratana, Adarsh
 public class FlipFitGymCustomerClientMenu {
 
     /**
@@ -287,11 +285,9 @@ public class FlipFitGymCustomerClientMenu {
         return userServiceOperations.cancelSlot(bookingId);
     }
 
-    /**
-     * Displays all bookings made by the user.
-     *
-     * @param email User's email address.
-     */
+    /// Displays all bookings made by the user.
+    ///
+    /// @param email User's email address.
     public boolean viewAllBookings(String email) {
         System.out.println(ANSI_BOLD + ANSI_RED + "My Bookings: " + ANSI_RESET);
         int userId = userServiceOperations.getUserIdByEmail(email);
@@ -317,19 +313,15 @@ public class FlipFitGymCustomerClientMenu {
         return true;
     }
 
-    /**
-     * Retrieves the list of all gyms by a specified area.
-     *
-     * @param location Location to filter gyms.
-     * @return List of gyms in the specified area.
-     */
+    /// Retrieves the list of all gyms by a specified area.
+    ///
+    /// @param location Location to filter gyms.
+    /// @return List of gyms in the specified area.
     List<Gym> viewAllGymsByArea(String location) {
         return userServiceOperations.viewAllGymsByArea(location);
     }
 
-    /**
-     * Creates a new customer account.
-     */
+    /// Creates a new customer account.
     public void createCustomer() {
         System.out.println(ANSI_BLUE + "Enter customer details: " + ANSI_RESET);
         System.out.println("Email: ");
@@ -380,11 +372,9 @@ public class FlipFitGymCustomerClientMenu {
             System.out.println("User not created!");
     }
 
-    /**
-     * Updates the details of an existing user.
-     *
-     * @return true if user details are updated successfully, false otherwise.
-     */
+    /// Updates the details of an existing user.
+    ///
+    /// @return true if user details are updated successfully, false otherwise.
     public boolean updateUserDetails() {
         System.out.println(ANSI_PURPLE + "Enter customer details: " + ANSI_RESET);
         System.out.println(ANSI_PURPLE + "Email: " + ANSI_RESET);
@@ -410,14 +400,12 @@ public class FlipFitGymCustomerClientMenu {
         return userServiceOperations.updateUserDetails(user);
     }
 
-    /**
-     * Updates the password of a user.
-     *
-     * @param userMail        User's email address.
-     * @param password        Current password.
-     * @param updatedPassword New password.
-     * @return true if password is updated successfully, false otherwise.
-     */
+    /// Updates the password of a user.
+    ///
+    /// @param userMail        User's email address.
+    /// @param password        Current password.
+    /// @param updatedPassword New password.
+    /// @return true if password is updated successfully, false otherwise.
     public boolean updatePassword(String userMail, String password, String updatedPassword) {
         return userServiceOperations.updateGymUserPassword(userMail, password, updatedPassword);
     }

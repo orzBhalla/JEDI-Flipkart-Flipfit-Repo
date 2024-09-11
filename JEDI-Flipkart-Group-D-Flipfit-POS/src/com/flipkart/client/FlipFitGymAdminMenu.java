@@ -11,13 +11,11 @@ import java.util.List;
 import static com.flipkart.constants.ColorConstants.ANSI_CYAN;
 import static com.flipkart.constants.ColorConstants.ANSI_RESET;
 
-/**
- * Handles the menu operations for the admin in the FlipFit application.
- * Provides functionality for viewing gyms, gym owners, and unverified entities,
- * as well as verifying gyms, gym owners, and admin credentials.
- *
- * @author: Adarsh
- */
+/// Handles the menu operations for the admin in the FlipFit application.
+/// Provides functionality for viewing gyms, gym owners, and unverified entities,
+/// as well as verifying gyms, gym owners, and admin credentials.
+///
+/// @author: Adarsh
 public class FlipFitGymAdminMenu {
 
     /**
@@ -30,12 +28,10 @@ public class FlipFitGymAdminMenu {
      */
     AdminCredentials adminCredentials = new AdminCredentials();
 
-    /**
-     * Displays a list of gyms.
-     * Calls the viewGyms method from AdminServiceOperations.
-     *
-     * @author: Adarsh
-     */
+    /// Displays a list of gyms.
+    /// Calls the viewGyms method from AdminServiceOperations.
+    ///
+    /// @author: Adarsh
     public void viewGyms() {
         List<Gym> gyms = adminServiceOperations.viewGyms();
         if (gyms.isEmpty()) {
@@ -55,12 +51,10 @@ public class FlipFitGymAdminMenu {
 
     }
 
-    /**
-     * Displays a list of users.
-     * Calls the viewUsers method from AdminServiceOperations.
-     *
-     * @author: Adarsh
-     */
+    /// Displays a list of users.
+    /// Calls the viewUsers method from AdminServiceOperations.
+    ///
+    /// @author: Adarsh
     public void viewUsers() {
         List<User> users = adminServiceOperations.viewUsers();
         if (users.isEmpty()) {
@@ -79,12 +73,10 @@ public class FlipFitGymAdminMenu {
         System.out.format("+----------+----------------------+-------------------------------+---------------+--------------------+--------------------------------------+%n");
     }
 
-    /**
-     * Displays a list of gym owners.
-     * Calls the viewGymOwners method from AdminServiceOperations.
-     *
-     * @author: Adarsh
-     */
+    /// Displays a list of gym owners.
+    /// Calls the viewGymOwners method from AdminServiceOperations.
+    ///
+    /// @author: Adarsh
     public void viewGymOwners() {
         List<GymOwner> gymOwners = adminServiceOperations.viewGymOwners();
         if (gymOwners.isEmpty()) {
@@ -104,34 +96,28 @@ public class FlipFitGymAdminMenu {
 
     }
 
-    /**
-     * Verifies a gym by its ID.
-     *
-     * @param gymId ID of the gym to be verified.
-     * @return true if the gym is verified, false otherwise.
-     * @author: Adarsh
-     */
+    /// Verifies a gym by its ID.
+    ///
+    /// @param gymId ID of the gym to be verified.
+    /// @return true if the gym is verified, false otherwise.
+    /// @author: Adarsh
     public boolean verifyGym(int gymId) {
         return adminServiceOperations.verifyGym(gymId);
     }
 
-    /**
-     * Verifies a gym owner by their ID.
-     *
-     * @param gymOwnerId ID of the gym owner to be verified.
-     * @return true if the gym owner is verified, false otherwise.
-     * @author: Adarsh
-     */
+    /// Verifies a gym owner by their ID.
+    ///
+    /// @param gymOwnerId ID of the gym owner to be verified.
+    /// @return true if the gym owner is verified, false otherwise.
+    /// @author: Adarsh
     public boolean verifyGymOwner(int gymOwnerId) {
         return adminServiceOperations.verifyGymOwner(gymOwnerId);
     }
 
-    /**
-     * Displays a list of unverified gyms.
-     * Calls getUnverifiedGyms from AdminServiceOperations and formats the output for display.
-     *
-     * @author: Adarsh
-     */
+    /// Displays a list of unverified gyms.
+    /// Calls getUnverifiedGyms from AdminServiceOperations and formats the output for display.
+    ///
+    /// @author: Adarsh
     public void viewUnverifiedGyms() {
         List<Gym> gyms = adminServiceOperations.getUnverifiedGyms();
         if (gyms.isEmpty()) {
@@ -152,12 +138,10 @@ public class FlipFitGymAdminMenu {
         System.out.format("+-------+----------------------+--------+------------------------------------------+----------------------+------------------+%n");
     }
 
-    /**
-     * Displays a list of unverified gym owners.
-     * Calls getUnverifiedGymOwners from AdminServiceOperations and formats the output for display.
-     *
-     * @author: Chahat
-     */
+    /// Displays a list of unverified gym owners.
+    /// Calls getUnverifiedGymOwners from AdminServiceOperations and formats the output for display.
+    ///
+    /// @author: Chahat
     public void viewUnverifiedGymOwners() {
         List<GymOwner> gymOwnerList = adminServiceOperations.getUnverifiedGymOwners();
         if (gymOwnerList.isEmpty()) {
@@ -178,14 +162,12 @@ public class FlipFitGymAdminMenu {
         System.out.format("+-------+----------+----------------------+----------------------+------------------+%n");
     }
 
-    /**
-     * Verifies admin credentials.
-     *
-     * @param userMail Email of the admin.
-     * @param password Password of the admin.
-     * @return true if credentials match the predefined admin credentials, false otherwise.
-     * @author: Chahat
-     */
+    /// Verifies admin credentials.
+    ///
+    /// @param userMail Email of the admin.
+    /// @param password Password of the admin.
+    /// @return true if credentials match the predefined admin credentials, false otherwise.
+    /// @author: Chahat
     public boolean verifyAdminCredentials(String userMail, String password) {
         try {
             return userMail.equals(AdminCredentials.ADMIN_EMAIL) && password.equals(AdminCredentials.ADMIN_PASSWORD);

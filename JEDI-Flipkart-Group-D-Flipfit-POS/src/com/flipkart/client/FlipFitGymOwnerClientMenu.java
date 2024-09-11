@@ -20,22 +20,18 @@ public class FlipFitGymOwnerClientMenu {
     private ValidateCredential validateCredential = new ValidateCredential();
     private ValidateIdentity validateIdentity = new ValidateIdentity();
 
-    /**
-     * Verifies if the provided email and password match a registered gym owner.
-     * @param email Gym owner's email address.
-     * @param password Gym owner's password.
-     * @return true if the credentials are valid, false otherwise.
-     */
+    /// Verifies if the provided email and password match a registered gym owner.
+    /// @param email Gym owner's email address.
+    /// @param password Gym owner's password.
+    /// @return true if the credentials are valid, false otherwise.
     boolean verifyGymOwner(String email, String password) {
         return gymOwnerServiceOperations.validateGymOwner(email, password);
     }
 
-    /**
-     * Handles the gym owner login process and displays the menu options.
-     * @param email Gym owner's email address.
-     * @param password Gym owner's password.
-     * @return true if logout is successful, false otherwise.
-     */
+    /// Handles the gym owner login process and displays the menu options.
+    /// @param email Gym owner's email address.
+    /// @param password Gym owner's password.
+    /// @return true if logout is successful, false otherwise.
     public boolean gymOwnerLogin(String email, String password) {
         if (!verifyGymOwner(email, password)) {
             return false;
@@ -84,10 +80,8 @@ public class FlipFitGymOwnerClientMenu {
         }
     }
 
-    /**
-     * Adds a new gym to the system.
-     * @param email Gym owner's email address (used to fetch the owner ID).
-     */
+    /// Adds a new gym to the system.
+    /// @param email Gym owner's email address (used to fetch the owner ID).
     private void addGym(String email) {
         Gym gym = new Gym();
         int gymOwnerId = gymOwnerServiceOperations.getGymOwnerIdByEmail(email);
@@ -265,10 +259,8 @@ public class FlipFitGymOwnerClientMenu {
         }
     }
 
-    /**
-     * Updates the details of an existing gym owner.
-     * @return true if the update is successful, false otherwise.
-     */
+    /// Updates the details of an existing gym owner.
+    /// @return true if the update is successful, false otherwise.
     private boolean updateGymOwnerDetails() {
         System.out.println(ANSI_BLUE + ANSI_BOLD + "Enter gym owner details:" + ANSI_RESET);
         System.out.println(ANSI_BLUE + "Email: " + ANSI_RESET);
@@ -294,21 +286,17 @@ public class FlipFitGymOwnerClientMenu {
         return gymOwnerServiceOperations.updateGymOwner(gymOwner);
     }
 
-    /**
-     * Updates the gym owner's password.
-     * @param userMail Gym owner's email address.
-     * @param password Current password.
-     * @param updatedPassword New password.
-     * @return true if the password update is successful, false otherwise.
-     */
+    /// Updates the gym owner's password.
+    /// @param userMail Gym owner's email address.
+    /// @param password Current password.
+    /// @param updatedPassword New password.
+    /// @return true if the password update is successful, false otherwise.
     public boolean updatePassword(String userMail, String password, String updatedPassword) {
         return gymOwnerServiceOperations.updateGymOwnerPassword(userMail, password, updatedPassword);
     }
 
-    /**
-     * Displays all gyms owned by the logged-in gym owner.
-     * @param email Gym owner's email address.
-     */
+    /// Displays all gyms owned by the logged-in gym owner.
+    /// @param email Gym owner's email address.
     private void displayGyms(String email) {
         int gymOwnerId = gymOwnerServiceOperations.getGymOwnerIdByEmail(email);
         if (gymOwnerId == -1) {

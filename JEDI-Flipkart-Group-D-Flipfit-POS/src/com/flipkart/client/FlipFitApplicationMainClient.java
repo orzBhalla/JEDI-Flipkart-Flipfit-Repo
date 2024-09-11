@@ -7,11 +7,9 @@ import static com.flipkart.utils.DateAndTime.displayCurrentDate;
 
 import com.flipkart.validator.*;
 
-/**
- * Main client class for the FlipFit application, handling user interactions
- * and providing a menu-driven interface for login, registration, and password management.
- * @author: Shreya K
- */
+/// Main client class for the FlipFit application, handling user interactions
+/// and providing a menu-driven interface for login, registration, and password management.
+/// @author: Shreya K
 public class FlipFitApplicationMainClient {
 
     /**
@@ -39,11 +37,9 @@ public class FlipFitApplicationMainClient {
      */
     static ValidateCredential validateCredential = new ValidateCredential();
 
-    /**
-     * Entry point of the application. Handles the main menu and user interactions.
-     * @param args Command line arguments (not used)
-     * @author: Shriya
-     */
+    /// Entry point of the application. Handles the main menu and user interactions.
+    /// @param args Command line arguments (not used)
+    /// @author: Shriya
     public static void main(String[] args) {
         System.out.println(ANSI_BOLD + ANSI_CYAN + "-----------------------------------------------------------------------------------");
         System.out.println("-----------------------Welcome to FlipFit: Your Fitness Partner--------------------");
