@@ -4,12 +4,13 @@ package com.flipkart.bean;
 public class FlipFitSlot {
 
     private int slotsId;
+    private int startTime;
 
 
     private int seatCount;
 
 
-    public Slots(int slotsId, int startTime, int seatCount) {
+    public void Slots(int slotsId, int startTime, int seatCount) {
         this.setSlotsId(slotsId);
         this.setStartTime(startTime);
         this.setSeatCount(seatCount);

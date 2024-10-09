@@ -3,7 +3,7 @@ package com.flipkart.client;
 import java.util.Scanner;
 
 public class GymFlipFitApplication {
-   static GymFlipFitCustomer GymFlipFitCustomer =new GymFlipFitApplication();
+   static GymFlipFitCustomerMenu GymFlipFitCustomer = new GymFlipFitCustomerMenu();
     static GymFlipFitAdminMenu GymFlipFitAdminMenu =new GymFlipFitAdminMenu();
     static GymFlipFitOwnerMenu GymFlipFitOwnerMenu =new GymFlipFitOwnerMenu();
 
@@ -14,7 +14,7 @@ public class GymFlipFitApplication {
 
         System.out.println("Welcome to Flipfit application:");
 
-        do {
+//        do {
             displayMainMenu();
             choice = scanner.nextInt();
 
@@ -40,7 +40,7 @@ public class GymFlipFitApplication {
                 default:
                     System.out.println("Invalid choice. Please try again.");
             }
-        } while (choice != 5);
+//        } while (choice != 5);
 
         scanner.close();
     }
@@ -59,9 +59,8 @@ public class GymFlipFitApplication {
         String username = scanner.next();
         System.out.print("Password: ");
         String password = scanner.next();
-
-        // Simulated role check
-        String role = checkRole(username, password); // Placeholder for actual role-check logic
+        System.out.println("Enter your Role: ");
+        String role = scanner.next();
 
         switch (role) {
             case "Admin":
@@ -81,7 +80,4 @@ public class GymFlipFitApplication {
         }
 
     }
-
-
-
 }

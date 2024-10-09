@@ -17,7 +17,7 @@ public class FlipFitGymOwner {
 
     private String GST;
 
-    private List<Gym> gyms;
+    private List<FlipFitGym> gyms;
 
     private String PAN;
 
@@ -87,11 +87,11 @@ public class FlipFitGymOwner {
         this.GST = GST;
     }
 
-    public List<Gym> getGyms() {
+    public List<FlipFitGym> getGyms() {
         return gyms;
     }
 
-    public void setGyms(List<Gym> gyms) {
+    public void setGyms(List<FlipFitGym> gyms) {
         this.gyms = gyms;
     }
 

@@ -12,7 +12,7 @@ public class FlipFitGym {
 
     private String location;
 
-    private List<Slots> slots;
+    private List<FlipFitSlot> slots;
 
     private int ownerId;
 
@@ -34,11 +34,11 @@ public class FlipFitGym {
         Status = status;
     }
 
-    public List<Slots> getSlots() {
+    public List<FlipFitSlot> getSlots() {
         return slots;
     }
 
-    public void setSlots(List<Slots> slots) {
+    public void setSlots(List<FlipFitSlot> slots) {
         this.slots = slots;
     }
 
