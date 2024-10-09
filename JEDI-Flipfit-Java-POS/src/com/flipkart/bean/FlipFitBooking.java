@@ -61,6 +61,7 @@ public class FlipFitBooking {
         return date;
     }
 
+<<<<<<< HEAD
     /**
      * Sets the date of the booking.
      *
@@ -212,5 +213,35 @@ public class FlipFitBooking {
      */
     public void setBookingStatus(int bookingStatus) {
         this.bookingStatus = bookingStatus;
+=======
+    public FlipFitBooking(String bookingID, String userID, String scheduleID) {
+        this.bookingID = bookingID;
+        this.userID = userID;
+        this.scheduleID = scheduleID;
+    }
+
+    public String getBookingID() {
+        return bookingID;
+    }
+
+    public void setBookingID(String bookingID) {
+        this.bookingID = bookingID;
+    }
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
+    public String getScheduleID() {
+        return scheduleID;
+    }
+
+    public void setScheduleID(String scheduleID) {
+        this.scheduleID = scheduleID;
+>>>>>>> 79cbc81 (try)
     }
 }
