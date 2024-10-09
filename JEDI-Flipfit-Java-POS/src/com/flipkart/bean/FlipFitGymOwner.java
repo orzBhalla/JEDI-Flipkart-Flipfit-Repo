@@ -1,4 +1,4 @@
 package com.flipkart.bean;
 
-public class FlipFitGymOwner {
+public class FlipFitGymOwner extends FlipFitUser {
 }

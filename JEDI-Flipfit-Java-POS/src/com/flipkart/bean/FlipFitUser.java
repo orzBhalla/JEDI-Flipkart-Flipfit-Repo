@@ -35,16 +35,7 @@ public class FlipFitUser {
         this.password = password;
     }
 
-    public FlipFitRole getRole() {
-        return role;
-    }
-
-    public void setRole(FlipFitRole role) {
-        this.role = role;
-    }
-
     private String userName;
     private String email;
     private String password;
-    private FlipFitRole role;
 }
