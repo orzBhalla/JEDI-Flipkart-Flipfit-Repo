@@ -3,7 +3,9 @@ package com.flipkart.client;
 import java.util.Scanner;
 
 public class GymFlipFitApplication {
-//    static GymFlipFitCustomer ins=new GymFlipFitApplication(
+   static GymFlipFitCustomer GymFlipFitCustomer =new GymFlipFitApplication();
+    static GymFlipFitAdminMenu GymFlipFitAdminMenu =new GymFlipFitAdminMenu();
+    static GymFlipFitOwnerMenu GymFlipFitOwnerMenu =new GymFlipFitOwnerMenu();
 
 
     public static void main(String[] args) {
