@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/JEDI-Flipkart-Group-D-Flipfit.iml" filepath="$PROJECT_DIR$/.idea/JEDI-Flipkart-Group-D-Flipfit.iml" />
-      <module fileurl="file://$PROJECT_DIR$/JEDI-Flipkart-Group-D-Flipfit-POS/JEDI-Flipkart-Group-D-Flipfit-POS.iml" filepath="$PROJECT_DIR$/JEDI-Flipkart-Group-D-Flipfit-POS/JEDI-Flipkart-Group-D-Flipfit-POS.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/JEDI-Flipkart-Group-A-Flipfit.iml" filepath="$PROJECT_DIR$/.idea/JEDI-Flipkart-Group-A-Flipfit.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JEDI-Flipkart-Group-A-Flipfit-POS/JEDI-Flipkart-Group-A-Flipfit-POS.iml" filepath="$PROJECT_DIR$/JEDI-Flipkart-Group-A-Flipfit-POS/JEDI-Flipkart-Group-A-Flipfit-POS.iml" />
     </modules>
   </component>
 </project>
