@@ -7,13 +7,8 @@ import static com.flipkart.utils.DateAndTime.displayCurrentDate;
 
 import com.flipkart.validator.*;
 
-/// Main client class for the FlipFit application, handling user interactions
-/// and providing a menu-driven interface for login, registration, and password management.
 public class FlipFitApplicationMainClient {
 
-    /**
-     * Scanner object to read input from the console.
-     */
     static Scanner scanner = new Scanner(System.in);
 
     /**
